@@ -83,17 +83,81 @@ CMakeFiles/InventoryGame.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InventoryGame.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/main.cpp -o CMakeFiles/InventoryGame.dir/src/main.cpp.s
 
+CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o: CMakeFiles/InventoryGame.dir/flags.make
+CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o: src/Inventory.cpp
+CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o: CMakeFiles/InventoryGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o -MF CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o.d -o CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o -c /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/Inventory.cpp
+
+CMakeFiles/InventoryGame.dir/src/Inventory.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/InventoryGame.dir/src/Inventory.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/Inventory.cpp > CMakeFiles/InventoryGame.dir/src/Inventory.cpp.i
+
+CMakeFiles/InventoryGame.dir/src/Inventory.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InventoryGame.dir/src/Inventory.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/Inventory.cpp -o CMakeFiles/InventoryGame.dir/src/Inventory.cpp.s
+
+CMakeFiles/InventoryGame.dir/src/Item.cpp.o: CMakeFiles/InventoryGame.dir/flags.make
+CMakeFiles/InventoryGame.dir/src/Item.cpp.o: src/Item.cpp
+CMakeFiles/InventoryGame.dir/src/Item.cpp.o: CMakeFiles/InventoryGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/InventoryGame.dir/src/Item.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/InventoryGame.dir/src/Item.cpp.o -MF CMakeFiles/InventoryGame.dir/src/Item.cpp.o.d -o CMakeFiles/InventoryGame.dir/src/Item.cpp.o -c /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/Item.cpp
+
+CMakeFiles/InventoryGame.dir/src/Item.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/InventoryGame.dir/src/Item.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/Item.cpp > CMakeFiles/InventoryGame.dir/src/Item.cpp.i
+
+CMakeFiles/InventoryGame.dir/src/Item.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InventoryGame.dir/src/Item.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/Item.cpp -o CMakeFiles/InventoryGame.dir/src/Item.cpp.s
+
+CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o: CMakeFiles/InventoryGame.dir/flags.make
+CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o: src/UIElement.cpp
+CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o: CMakeFiles/InventoryGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o -MF CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o.d -o CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o -c /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/UIElement.cpp
+
+CMakeFiles/InventoryGame.dir/src/UIElement.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/InventoryGame.dir/src/UIElement.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/UIElement.cpp > CMakeFiles/InventoryGame.dir/src/UIElement.cpp.i
+
+CMakeFiles/InventoryGame.dir/src/UIElement.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InventoryGame.dir/src/UIElement.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/UIElement.cpp -o CMakeFiles/InventoryGame.dir/src/UIElement.cpp.s
+
+CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o: CMakeFiles/InventoryGame.dir/flags.make
+CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o: src/UIButton.cpp
+CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o: CMakeFiles/InventoryGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o -MF CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o.d -o CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o -c /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/UIButton.cpp
+
+CMakeFiles/InventoryGame.dir/src/UIButton.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/InventoryGame.dir/src/UIButton.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/UIButton.cpp > CMakeFiles/InventoryGame.dir/src/UIButton.cpp.i
+
+CMakeFiles/InventoryGame.dir/src/UIButton.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InventoryGame.dir/src/UIButton.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/UIButton.cpp -o CMakeFiles/InventoryGame.dir/src/UIButton.cpp.s
+
 # Object files for target InventoryGame
 InventoryGame_OBJECTS = \
-"CMakeFiles/InventoryGame.dir/src/main.cpp.o"
+"CMakeFiles/InventoryGame.dir/src/main.cpp.o" \
+"CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o" \
+"CMakeFiles/InventoryGame.dir/src/Item.cpp.o" \
+"CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o" \
+"CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o"
 
 # External object files for target InventoryGame
 InventoryGame_EXTERNAL_OBJECTS =
 
 bin/InventoryGame: CMakeFiles/InventoryGame.dir/src/main.cpp.o
+bin/InventoryGame: CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o
+bin/InventoryGame: CMakeFiles/InventoryGame.dir/src/Item.cpp.o
+bin/InventoryGame: CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o
+bin/InventoryGame: CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o
 bin/InventoryGame: CMakeFiles/InventoryGame.dir/build.make
 bin/InventoryGame: CMakeFiles/InventoryGame.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable bin/InventoryGame"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable bin/InventoryGame"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/InventoryGame.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

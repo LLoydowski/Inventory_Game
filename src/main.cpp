@@ -1,17 +1,35 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
+#include <Inventory.hpp>
+#include <Item.hpp>
+#include <UIElement.hpp>
+#include <UIButton.hpp>
+
 int main()
 {
+    int windowWidth = 800;
+    int windowHeight = 500;
+
     SDL_Init(SDL_INIT_VIDEO);
 
-    SDL_Window *window = SDL_CreateWindow("Inventory Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
+    SDL_Window *window = SDL_CreateWindow("Inventory Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, 0);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     SDL_Event e;
 
+    Inventory inv(5, 3);
+    inv.displayCLI();
+
+    std::cout << std::endl;
+
+    Item *item = new Item("Armor", common, 30);
+    inv.addItem(item);
+    inv.displayCLI();
+
     bool isRunning = true;
 
+    //? Game loop
     while (isRunning)
     {
         while (SDL_PollEvent(&e))
@@ -23,12 +41,10 @@ int main()
             }
         }
 
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+        SDL_SetRenderDrawColor(renderer, 74, 94, 224, SDL_ALPHA_OPAQUE); //? Sets background color
         SDL_RenderClear(renderer);
 
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-        SDL_Rect r{0, 0, 100, 100};
-        SDL_RenderFillRect(renderer, &r);
+        inv.displaySDL(renderer, windowWidth, windowHeight);
 
         SDL_RenderPresent(renderer);
     }

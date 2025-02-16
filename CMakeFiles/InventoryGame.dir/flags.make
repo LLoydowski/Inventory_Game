@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/inc
+CXX_INCLUDES = -I/mnt/e/Projekty/Programowanie/C++/InventoryGame/inc
 
 CXX_FLAGS = -std=gnu++11
 

@@ -129,6 +129,102 @@ InventoryGame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/build
 .PHONY : InventoryGame/fast
 
+src/Inventory.o: src/Inventory.cpp.o
+.PHONY : src/Inventory.o
+
+# target to build an object file
+src/Inventory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o
+.PHONY : src/Inventory.cpp.o
+
+src/Inventory.i: src/Inventory.cpp.i
+.PHONY : src/Inventory.i
+
+# target to preprocess a source file
+src/Inventory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/src/Inventory.cpp.i
+.PHONY : src/Inventory.cpp.i
+
+src/Inventory.s: src/Inventory.cpp.s
+.PHONY : src/Inventory.s
+
+# target to generate assembly for a file
+src/Inventory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/src/Inventory.cpp.s
+.PHONY : src/Inventory.cpp.s
+
+src/Item.o: src/Item.cpp.o
+.PHONY : src/Item.o
+
+# target to build an object file
+src/Item.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/src/Item.cpp.o
+.PHONY : src/Item.cpp.o
+
+src/Item.i: src/Item.cpp.i
+.PHONY : src/Item.i
+
+# target to preprocess a source file
+src/Item.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/src/Item.cpp.i
+.PHONY : src/Item.cpp.i
+
+src/Item.s: src/Item.cpp.s
+.PHONY : src/Item.s
+
+# target to generate assembly for a file
+src/Item.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/src/Item.cpp.s
+.PHONY : src/Item.cpp.s
+
+src/UIButton.o: src/UIButton.cpp.o
+.PHONY : src/UIButton.o
+
+# target to build an object file
+src/UIButton.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o
+.PHONY : src/UIButton.cpp.o
+
+src/UIButton.i: src/UIButton.cpp.i
+.PHONY : src/UIButton.i
+
+# target to preprocess a source file
+src/UIButton.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/src/UIButton.cpp.i
+.PHONY : src/UIButton.cpp.i
+
+src/UIButton.s: src/UIButton.cpp.s
+.PHONY : src/UIButton.s
+
+# target to generate assembly for a file
+src/UIButton.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/src/UIButton.cpp.s
+.PHONY : src/UIButton.cpp.s
+
+src/UIElement.o: src/UIElement.cpp.o
+.PHONY : src/UIElement.o
+
+# target to build an object file
+src/UIElement.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o
+.PHONY : src/UIElement.cpp.o
+
+src/UIElement.i: src/UIElement.cpp.i
+.PHONY : src/UIElement.i
+
+# target to preprocess a source file
+src/UIElement.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/src/UIElement.cpp.i
+.PHONY : src/UIElement.cpp.i
+
+src/UIElement.s: src/UIElement.cpp.s
+.PHONY : src/UIElement.s
+
+# target to generate assembly for a file
+src/UIElement.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/src/UIElement.cpp.s
+.PHONY : src/UIElement.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +258,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... InventoryGame"
+	@echo "... src/Inventory.o"
+	@echo "... src/Inventory.i"
+	@echo "... src/Inventory.s"
+	@echo "... src/Item.o"
+	@echo "... src/Item.i"
+	@echo "... src/Item.s"
+	@echo "... src/UIButton.o"
+	@echo "... src/UIButton.i"
+	@echo "... src/UIButton.s"
+	@echo "... src/UIElement.o"
+	@echo "... src/UIElement.i"
+	@echo "... src/UIElement.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

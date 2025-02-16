@@ -8,6 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/mnt/e/Projekty/Programowanie/C++/InventoryGame/src/Inventory.cpp" "CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o" "gcc" "CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o.d"
+  "/mnt/e/Projekty/Programowanie/C++/InventoryGame/src/Item.cpp" "CMakeFiles/InventoryGame.dir/src/Item.cpp.o" "gcc" "CMakeFiles/InventoryGame.dir/src/Item.cpp.o.d"
+  "/mnt/e/Projekty/Programowanie/C++/InventoryGame/src/UIButton.cpp" "CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o" "gcc" "CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o.d"
+  "/mnt/e/Projekty/Programowanie/C++/InventoryGame/src/UIElement.cpp" "CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o" "gcc" "CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o.d"
   "/mnt/e/Projekty/Programowanie/C++/InventoryGame/src/main.cpp" "CMakeFiles/InventoryGame.dir/src/main.cpp.o" "gcc" "CMakeFiles/InventoryGame.dir/src/main.cpp.o.d"
   )
 
