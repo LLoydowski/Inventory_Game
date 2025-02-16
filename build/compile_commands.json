@@ -1,0 +1,8 @@
+[
+{
+  "directory": "E:/Projekty/Programowanie/C++/InventoryGame/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/InventoryGame.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles\\InventoryGame.dir\\src\\main.cpp.obj -c E:\\Projekty\\Programowanie\\C++\\InventoryGame\\src\\main.cpp",
+  "file": "E:/Projekty/Programowanie/C++/InventoryGame/src/main.cpp",
+  "output": "CMakeFiles/InventoryGame.dir/src/main.cpp.obj"
+}
+]

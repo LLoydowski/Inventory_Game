@@ -1,0 +1,3 @@
+/mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles/InventoryGame.dir
+/mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles/edit_cache.dir
+/mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles/rebuild_cache.dir
