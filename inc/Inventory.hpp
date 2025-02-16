@@ -2,18 +2,28 @@
 
 #include <Item.hpp>
 #include <SDL2/SDL.h>
+#include <UIButton.hpp>
+#include <UIElement.hpp>
 
 class Inventory
 {
 private:
+    //? Logic Stuff
     int rows, cols;
     Item ***items;
 
+    //? UI Stuff
+    UIElement inventoryBG;
+    UIElement *UIInventorySlots;
+
+    const int PADDING = 25;
+    const int SLOT_SIZE = 50;
+
 public:
-    Inventory(int rows, int cols);
+    Inventory(int rows, int cols, int windowWidth, int windowHeight);
     ~Inventory();
     void displayCLI();
-    void displaySDL(SDL_Renderer *rend, int windowWidth, int windowHeight);
+    void displaySDL(SDL_Renderer *rend);
     bool addItem(Item *item);
 
     int getCols();

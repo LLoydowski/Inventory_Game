@@ -1,7 +1,7 @@
 CMakeFiles/InventoryGame.dir/src/Item.cpp.o: \
- /mnt/e/Projekty/Programowanie/C++/InventoryGameWindows/src/Item.cpp \
+ /mnt/e/Projekty/Programowanie/C++/InventoryGame/src/Item.cpp \
  /usr/include/stdc-predef.h \
- /mnt/e/Projekty/Programowanie/C++/InventoryGameWindows/inc/Item.hpp \
+ /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
  /usr/include/c++/12/string \
  /usr/include/x86_64-linux-gnu/c++/12/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/12/bits/os_defines.h \

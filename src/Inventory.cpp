@@ -1,9 +1,12 @@
 #include <Inventory.hpp>
 #include <SDL2/SDL.h>
 #include <UIElement.hpp>
+#include <UIButton.hpp>
 
-Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}
+Inventory::Inventory(int rows, int cols, int windowWidth, int windowHeight) : rows{rows}, cols{cols}
 {
+
+    // Generating item 2D array
     items = new Item **[rows];
 
     for (int i = 0; i < rows; i++)
@@ -13,6 +16,35 @@ Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}
         {
             items[i][j] = nullptr;
         }
+    }
+
+    // Generating UI objects
+    const SDL_Color inventoryBGColor = {116, 117, 125, SDL_ALPHA_OPAQUE};
+
+    const int width = (cols * (PADDING + SLOT_SIZE)) + PADDING;
+    const int height = (rows * (PADDING + SLOT_SIZE)) + PADDING;
+
+    const int bgPosX = (windowWidth / 2) - (width / 2);
+    const int bgPosY = (windowHeight / 2) - (height / 2);
+
+    inventoryBG = UIElement(width, height, bgPosX, bgPosY, inventoryBGColor);
+
+    UIInventorySlots = new UIElement[rows * cols];
+    SDL_Color slotColor = {149, 150, 163, SDL_ALPHA_OPAQUE};
+
+    int wholeOffsetY = inventoryBG.getY() + PADDING;
+    int iterationCounter = 0;
+    for (int row = 0; row < rows; row++)
+    {
+        int wholeOffsetX = inventoryBG.getX() + PADDING;
+        for (int col = 0; col < cols; col++)
+        {
+            UIInventorySlots[iterationCounter] = UIElement(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, slotColor);
+
+            iterationCounter += 1;
+            wholeOffsetX += PADDING + SLOT_SIZE;
+        }
+        wholeOffsetY += PADDING + SLOT_SIZE;
     }
 }
 Inventory::~Inventory()
@@ -29,6 +61,8 @@ Inventory::~Inventory()
         delete[] items[i];
     }
     delete[] items;
+
+    delete[] UIInventorySlots;
 }
 void Inventory::displayCLI()
 {
@@ -52,36 +86,13 @@ void Inventory::displayCLI()
     }
 }
 
-void Inventory::displaySDL(SDL_Renderer *rend, int windowWidth, int windowHeight)
+void Inventory::displaySDL(SDL_Renderer *rend)
 {
-    const SDL_Color inventoryBGColor = {116, 117, 125, SDL_ALPHA_OPAQUE};
-
-    const int PADDING = 25;
-    const int SLOT_SIZE = 50;
-
-        const int width = (cols * (PADDING + SLOT_SIZE)) + PADDING;
-    const int height = (rows * (PADDING + SLOT_SIZE)) + PADDING;
-
-    const int bgPosX = (windowWidth / 2) - (width / 2);
-    const int bgPosY = (windowHeight / 2) - (height / 2);
-
-    UIElement inventoryBG(width, height, bgPosX, bgPosY, inventoryBGColor);
-
     inventoryBG.display(rend);
 
-    SDL_SetRenderDrawColor(rend, 149, 150, 163, SDL_ALPHA_OPAQUE);
-    int wholeOffsetY = bgPosY + PADDING;
-    for (int row = 0; row < rows; row++)
+    for (int i = 0; i < rows * cols; i++)
     {
-        int wholeOffsetX = bgPosX + PADDING;
-        for (int col = 0; col < cols; col++)
-        {
-            SDL_Rect _rect = {wholeOffsetX, wholeOffsetY, SLOT_SIZE, SLOT_SIZE};
-            SDL_RenderFillRect(rend, &_rect);
-
-            wholeOffsetX += PADDING + SLOT_SIZE;
-        }
-        wholeOffsetY += PADDING + SLOT_SIZE;
+        UIInventorySlots[i].display(rend);
     }
 }
 

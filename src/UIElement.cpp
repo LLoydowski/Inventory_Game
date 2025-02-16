@@ -27,3 +27,23 @@ void UIElement::display(SDL_Renderer *rend)
     SDL_SetRenderDrawColor(rend, color.r, color.g, color.b, color.a);
     SDL_RenderFillRect(rend, &rect);
 }
+
+int UIElement::getWidth()
+{
+    return width;
+}
+
+int UIElement::getHeight()
+{
+    return height;
+}
+
+int UIElement::getX()
+{
+    return posX;
+}
+
+int UIElement::getY()
+{
+    return posY;
+}

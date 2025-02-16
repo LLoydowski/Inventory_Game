@@ -16,4 +16,9 @@ public:
     UIElement(int width, int height, int posX, int posY, SDL_Color color, std::string text, SDL_Color textColor);
 
     void display(SDL_Renderer *rend);
+
+    int getWidth();
+    int getHeight();
+    int getX();
+    int getY();
 };

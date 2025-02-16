@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
     SDL_Event e;
 
-    Inventory inv(5, 3);
+    Inventory inv(2, 6, windowWidth, windowHeight);
     inv.displayCLI();
 
     std::cout << std::endl;
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
         SDL_SetRenderDrawColor(renderer, 74, 94, 224, SDL_ALPHA_OPAQUE); //? Sets background color
         SDL_RenderClear(renderer);
 
-        inv.displaySDL(renderer, windowWidth, windowHeight);
+        inv.displaySDL(renderer);
 
         SDL_RenderPresent(renderer);
     }
