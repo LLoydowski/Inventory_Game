@@ -6,7 +6,7 @@
 #include <UIElement.hpp>
 #include <UIButton.hpp>
 
-int main()
+int main(int argc, char *argv[])
 {
     int windowWidth = 800;
     int windowHeight = 500;
