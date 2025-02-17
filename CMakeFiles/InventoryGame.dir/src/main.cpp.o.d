@@ -106,6 +106,8 @@ CMakeFiles/InventoryGame.dir/src/main.cpp.o: \
  /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_version.h \
  /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_locale.h \
  /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_misc.h \
+ /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_ttf.h \
+ /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL.h \
  /usr/include/c++/12/iostream /usr/include/c++/12/ostream \
  /usr/include/c++/12/ios /usr/include/c++/12/iosfwd \
  /usr/include/c++/12/bits/stringfwd.h \

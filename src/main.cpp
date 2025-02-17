@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 
 #include <Inventory.hpp>
@@ -11,14 +12,17 @@ int main(int argc, char *argv[])
     int windowWidth = 800;
     int windowHeight = 500;
 
+    //? SDL2 initialization
     SDL_Init(SDL_INIT_VIDEO);
 
     SDL_Window *window = SDL_CreateWindow("Inventory Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, 0);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    SDL_Event e;
+    //? SDL2_TTF initialization
 
-    Inventory inv(2, 6, windowWidth, windowHeight);
+    TTF_Init();
+
+    Inventory inv(2, 6, windowWidth, windowHeight, renderer);
     inv.displayCLI();
 
     std::cout << std::endl;
@@ -27,9 +31,10 @@ int main(int argc, char *argv[])
     inv.addItem(item);
     inv.displayCLI();
 
-    bool isRunning = true;
-
     //? Game loop
+    bool isRunning = true;
+    SDL_Event e;
+
     while (isRunning)
     {
         while (SDL_PollEvent(&e))
@@ -44,11 +49,12 @@ int main(int argc, char *argv[])
         SDL_SetRenderDrawColor(renderer, 74, 94, 224, SDL_ALPHA_OPAQUE); //? Sets background color
         SDL_RenderClear(renderer);
 
-        inv.displaySDL(renderer);
+        inv.displaySDL();
 
         SDL_RenderPresent(renderer);
     }
 
+    TTF_Quit();
     SDL_Quit();
     return 0;
 }

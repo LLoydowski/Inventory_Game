@@ -3,9 +3,11 @@
 #include <UIElement.hpp>
 #include <UIButton.hpp>
 
-Inventory::Inventory(int rows, int cols, int windowWidth, int windowHeight) : rows{rows}, cols{cols}
-{
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
+Inventory::Inventory(int rows, int cols, int windowWidth, int windowHeight, SDL_Renderer *rend) : rows{rows}, cols{cols}, rend{rend}
+{
     // Generating item 2D array
     items = new Item **[rows];
 
@@ -27,19 +29,19 @@ Inventory::Inventory(int rows, int cols, int windowWidth, int windowHeight) : ro
     const int bgPosX = (windowWidth / 2) - (width / 2);
     const int bgPosY = (windowHeight / 2) - (height / 2);
 
-    inventoryBG = UIElement(width, height, bgPosX, bgPosY, inventoryBGColor);
+    inventoryBG = new UIElement(width, height, bgPosX, bgPosY, inventoryBGColor);
 
-    UIInventorySlots = new UIElement[rows * cols];
+    UIInventorySlots = new UIElement *[rows * cols];
     SDL_Color slotColor = {149, 150, 163, SDL_ALPHA_OPAQUE};
 
-    int wholeOffsetY = inventoryBG.getY() + PADDING;
+    int wholeOffsetY = inventoryBG->getY() + PADDING;
     int iterationCounter = 0;
     for (int row = 0; row < rows; row++)
     {
-        int wholeOffsetX = inventoryBG.getX() + PADDING;
+        int wholeOffsetX = inventoryBG->getX() + PADDING;
         for (int col = 0; col < cols; col++)
         {
-            UIInventorySlots[iterationCounter] = UIElement(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, slotColor);
+            UIInventorySlots[iterationCounter] = new UIElement(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, slotColor);
 
             iterationCounter += 1;
             wholeOffsetX += PADDING + SLOT_SIZE;
@@ -62,6 +64,11 @@ Inventory::~Inventory()
     }
     delete[] items;
 
+    delete inventoryBG;
+    for (int i = 0; i < rows * cols; i++)
+    {
+        delete UIInventorySlots[i];
+    }
     delete[] UIInventorySlots;
 }
 void Inventory::displayCLI()
@@ -70,7 +77,6 @@ void Inventory::displayCLI()
     {
         for (int j = 0; j < cols; j++)
         {
-
             std::cout << "[";
             if (items[i][j] != nullptr)
             {
@@ -86,13 +92,13 @@ void Inventory::displayCLI()
     }
 }
 
-void Inventory::displaySDL(SDL_Renderer *rend)
+void Inventory::displaySDL()
 {
-    inventoryBG.display(rend);
+    inventoryBG->display(rend);
 
     for (int i = 0; i < rows * cols; i++)
     {
-        UIInventorySlots[i].display(rend);
+        UIInventorySlots[i]->display(rend);
     }
 }
 
@@ -100,11 +106,12 @@ bool Inventory::addItem(Item *item)
 {
     for (int i = 0; i < rows; i++)
     {
-        for (int j = 0; j < rows; j++)
+        for (int j = 0; j < cols; j++)
         {
             if (items[i][j] == nullptr)
             {
                 items[i][j] = item;
+
                 return true;
             }
         }

@@ -13,17 +13,19 @@ private:
     Item ***items;
 
     //? UI Stuff
-    UIElement inventoryBG;
-    UIElement *UIInventorySlots;
+    SDL_Renderer *rend;
+
+    UIElement *inventoryBG;
+    UIElement **UIInventorySlots;
 
     const int PADDING = 25;
     const int SLOT_SIZE = 50;
 
 public:
-    Inventory(int rows, int cols, int windowWidth, int windowHeight);
+    Inventory(int rows, int cols, int windowWidth, int windowHeight, SDL_Renderer *rend);
     ~Inventory();
     void displayCLI();
-    void displaySDL(SDL_Renderer *rend);
+    void displaySDL();
     bool addItem(Item *item);
 
     int getCols();

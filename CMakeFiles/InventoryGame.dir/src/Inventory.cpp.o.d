@@ -208,4 +208,6 @@ CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o: \
  /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_locale.h \
  /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_misc.h \
  /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/UIButton.hpp \
- /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/UIELement.hpp
+ /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/UIELement.hpp \
+ /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_ttf.h \
+ /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL.h
