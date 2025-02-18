@@ -98,22 +98,37 @@ void Inventory::displaySDL()
 
     for (int i = 0; i < rows * cols; i++)
     {
-        UIInventorySlots[i]->display(rend);
+        if (UIInventorySlots[i] != nullptr)
+        {
+            UIInventorySlots[i]->display(rend);
+        }
     }
 }
 
 bool Inventory::addItem(Item *item)
 {
+    int interationCounter = 0;
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
         {
             if (items[i][j] == nullptr)
             {
+                TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 24);
                 items[i][j] = item;
+                std::string itemName = item->getName();
+
+                char firstLetter = itemName[0];
+                std::string text = "";
+                text.push_back(firstLetter);
+
+                UIInventorySlots[interationCounter]->setText(text, font, rend);
 
                 return true;
+                TTF_CloseFont(font);
             }
+
+            interationCounter++;
         }
     }
     return false;

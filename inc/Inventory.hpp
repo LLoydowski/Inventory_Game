@@ -34,7 +34,7 @@ public:
 
 //? https://www.youtube.com/watch?v=OjNpRbNdR7E
 
-//! Krzychu aproved
+//! Krzychu approved
 
 // Tiānshàng tàiyang hóng ya hóngtōngtōng ēi
 // Xīnzhōng de tàiyang shì máozédōng ēi

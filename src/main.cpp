@@ -22,14 +22,15 @@ int main(int argc, char *argv[])
 
     TTF_Init();
 
-    Inventory inv(2, 6, windowWidth, windowHeight, renderer);
-    inv.displayCLI();
-
-    std::cout << std::endl;
+    Inventory inv(4, 5, windowWidth, windowHeight, renderer);
+    // inv.displayCLI();
 
     Item *item = new Item("Armor", common, 30);
+    Item *item2 = new Item("New Armor", common, 30);
     inv.addItem(item);
-    inv.displayCLI();
+    inv.addItem(item2);
+
+    // inv.displayCLI();
 
     //? Game loop
     bool isRunning = true;

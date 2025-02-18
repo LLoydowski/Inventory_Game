@@ -1,6 +1,6 @@
 CMakeFiles/InventoryGame.dir/src/Item.cpp.obj: \
- E:\Projekty\Programowanie\C++\InventoryGameWindows\src\Item.cpp \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/Item.hpp \
+ E:\Projekty\Programowanie\C++\InventoryGame\src\Item.cpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
  C:/msys64/mingw64/include/c++/14.2.0/string \
  C:/msys64/mingw64/include/c++/14.2.0/bits/requires_hosted.h \
  C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++config.h \
