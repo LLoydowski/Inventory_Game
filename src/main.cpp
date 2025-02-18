@@ -31,6 +31,14 @@ int main(int argc, char *argv[])
     inv.addItem(item2);
 
     // inv.displayCLI();
+    SDL_Color btnColor = {189, 189, 189};
+
+    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 72);
+
+    UIButton btn(200, 100, 100, 100, btnColor, "Wybierz gracza", font, renderer);
+    UIButton btn2(200, 100, 100, 225, btnColor, "Pokaż graczy", font, renderer);
+
+    TTF_CloseFont(font);
 
     //? Game loop
     bool isRunning = true;
@@ -50,7 +58,9 @@ int main(int argc, char *argv[])
         SDL_SetRenderDrawColor(renderer, 74, 94, 224, SDL_ALPHA_OPAQUE); //? Sets background color
         SDL_RenderClear(renderer);
 
-        inv.displaySDL();
+        // inv.displaySDL();
+        btn.display(renderer);
+        btn2.display(renderer);
 
         SDL_RenderPresent(renderer);
     }
