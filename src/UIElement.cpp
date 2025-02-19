@@ -52,6 +52,12 @@ bool UIElement::generateTexture(TTF_Font *font, SDL_Renderer *rend)
 {
     SDL_Color color = {0, 0, 0};
 
+    if (text == "")
+    {
+        std::cout << "Text cnnot be empty" << std::endl;
+        return false;
+    }
+
     if (font == nullptr)
     {
         std::cout << "Font is nullptr. Cannot render text." << std::endl;

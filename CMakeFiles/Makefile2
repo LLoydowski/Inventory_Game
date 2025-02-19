@@ -81,12 +81,12 @@ clean: CMakeFiles/InventoryGame.dir/clean
 CMakeFiles/InventoryGame.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/InventoryGame.dir/build.make CMakeFiles/InventoryGame.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target InventoryGame"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target InventoryGame"
 .PHONY : CMakeFiles/InventoryGame.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/InventoryGame.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/InventoryGame.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/e/Projekty/Programowanie/C++/InventoryGame/CMakeFiles 0
 .PHONY : CMakeFiles/InventoryGame.dir/rule

@@ -20,17 +20,22 @@ int main(int argc, char *argv[])
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     //? SDL2_TTF initialization
+    TTF_Init();
 
-    Player player;
+    // Player *player = new Player("Jasiu", 100.0, 20.0);
 
-    // inv.displayCLI();
+    Inventory *inv = new Inventory(3, 4);
+    inv->setWindowParams(windowWidth, windowHeight, renderer);
+    inv->generateUIElements();
+    Item *item = new Item("Skibidi", rare, 100);
+    inv->addItem(item);
+    inv->displayCLI();
+
     SDL_Color btnColor = {189, 189, 189};
 
     TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 72);
-
     UIButton btn(200, 100, 100, 100, btnColor, "Wybierz gracza", font, renderer);
     UIButton btn2(200, 100, 100, 225, btnColor, "Pokaż graczy", font, renderer);
-
     TTF_CloseFont(font);
 
     //? Game loop
@@ -64,9 +69,12 @@ int main(int argc, char *argv[])
 
         btn.display(renderer);
         btn2.display(renderer);
+        inv->displaySDL(renderer);
 
         SDL_RenderPresent(renderer);
     }
+
+    delete inv;
 
     TTF_Quit();
     SDL_Quit();

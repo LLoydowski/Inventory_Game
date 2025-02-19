@@ -14,4 +14,5 @@ private:
 public:
     Player();
     Player(std::string name, float HP, float gold);
+    ~Player();
 };

@@ -7,7 +7,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-Inventory::Inventory(int rows, int cols, int windowWidth, int windowHeight, SDL_Renderer *rend) : rows{rows}, cols{cols}, rend{rend}
+Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}
 {
     // Generating item 2D array
     items = new Item **[rows];
@@ -21,34 +21,8 @@ Inventory::Inventory(int rows, int cols, int windowWidth, int windowHeight, SDL_
         }
     }
 
-    // Generating UI objects
-    const SDL_Color inventoryBGColor = {116, 117, 125, SDL_ALPHA_OPAQUE};
-
-    const int width = (cols * (PADDING + SLOT_SIZE)) + PADDING;
-    const int height = (rows * (PADDING + SLOT_SIZE)) + PADDING;
-
-    const int bgPosX = (windowWidth / 2) - (width / 2);
-    const int bgPosY = (windowHeight / 2) - (height / 2);
-
-    inventoryBG = new UIElement(width, height, bgPosX, bgPosY, inventoryBGColor);
-
-    UIInventorySlots = new UIElement *[rows * cols];
-    SDL_Color slotColor = {149, 150, 163, SDL_ALPHA_OPAQUE};
-
-    int wholeOffsetY = inventoryBG->getY() + PADDING;
-    int iterationCounter = 0;
-    for (int row = 0; row < rows; row++)
-    {
-        int wholeOffsetX = inventoryBG->getX() + PADDING;
-        for (int col = 0; col < cols; col++)
-        {
-            UIInventorySlots[iterationCounter] = new UIElement(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, slotColor);
-
-            iterationCounter += 1;
-            wholeOffsetX += PADDING + SLOT_SIZE;
-        }
-        wholeOffsetY += PADDING + SLOT_SIZE;
-    }
+    windowWidth = -1;
+    windowHeight = -1;
 }
 Inventory::~Inventory()
 {
@@ -92,8 +66,14 @@ void Inventory::displayCLI()
         std::cout << std::endl;
     }
 }
-void Inventory::displaySDL()
+void Inventory::displaySDL(SDL_Renderer *rend)
 {
+    if (windowHeight == -1 || windowHeight == -1)
+    {
+        std::cout << "You need to set width and height first ( setWindowParams(width, height); )" << std::endl;
+        return;
+    }
+
     inventoryBG->display(rend);
 
     for (int i = 0; i < rows * cols; i++)
@@ -102,6 +82,36 @@ void Inventory::displaySDL()
         {
             UIInventorySlots[i]->display(rend);
         }
+    }
+}
+void Inventory::generateUIElements()
+{
+    const SDL_Color inventoryBGColor = {116, 117, 125, SDL_ALPHA_OPAQUE};
+
+    const int width = (cols * (PADDING + SLOT_SIZE)) + PADDING;
+    const int height = (rows * (PADDING + SLOT_SIZE)) + PADDING;
+
+    const int bgPosX = (windowWidth / 2) - (width / 2);
+    const int bgPosY = (windowHeight / 2) - (height / 2);
+
+    inventoryBG = new UIElement(width, height, bgPosX, bgPosY, inventoryBGColor);
+
+    UIInventorySlots = new UIElement *[rows * cols];
+    SDL_Color slotColor = {149, 150, 163, SDL_ALPHA_OPAQUE};
+
+    int wholeOffsetY = inventoryBG->getY() + PADDING;
+    int iterationCounter = 0;
+    for (int row = 0; row < rows; row++)
+    {
+        int wholeOffsetX = inventoryBG->getX() + PADDING;
+        for (int col = 0; col < cols; col++)
+        {
+            UIInventorySlots[iterationCounter] = new UIElement(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, slotColor);
+
+            iterationCounter += 1;
+            wholeOffsetX += PADDING + SLOT_SIZE;
+        }
+        wholeOffsetY += PADDING + SLOT_SIZE;
     }
 }
 
@@ -142,4 +152,12 @@ int Inventory::getCols()
 int Inventory::getRows()
 {
     return rows;
+}
+
+void Inventory::setWindowParams(int windowWidth, int windowHeight, SDL_Renderer *rend)
+{
+    this->windowWidth = windowWidth;
+    this->windowHeight = windowHeight;
+    this->rend = rend;
+    generateUIElements();
 }

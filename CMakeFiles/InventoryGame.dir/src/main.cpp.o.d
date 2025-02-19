@@ -207,6 +207,7 @@ CMakeFiles/InventoryGame.dir/src/main.cpp.o: \
  /usr/include/c++/12/bits/ostream.tcc /usr/include/c++/12/istream \
  /usr/include/c++/12/bits/istream.tcc \
  /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/Inventory.hpp \
- /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
  /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/UIButton.hpp \
- /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/UIELement.hpp
+ /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/UIELement.hpp \
+ /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
+ /mnt/e/Projekty/Programowanie/C++/InventoryGame/inc/Player.hpp

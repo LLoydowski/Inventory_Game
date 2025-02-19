@@ -16,6 +16,8 @@ private:
     //? UI Stuff
     SDL_Renderer *rend;
 
+    int windowWidth, windowHeight;
+
     UIElement *inventoryBG;
     UIElement **UIInventorySlots;
 
@@ -23,14 +25,16 @@ private:
     const int SLOT_SIZE = 50;
 
 public:
-    Inventory(int rows, int cols, int windowWidth, int windowHeight, SDL_Renderer *rend);
+    Inventory(int rows, int cols);
     ~Inventory();
     void displayCLI();
-    void displaySDL();
+    void displaySDL(SDL_Renderer *rend);
+    void generateUIElements();
     bool addItem(Item *item);
 
     int getCols();
     int getRows();
+    void setWindowParams(int windowWidth, int windowHeight, SDL_Renderer *rend);
 };
 
 //? https://www.youtube.com/watch?v=OjNpRbNdR7E
