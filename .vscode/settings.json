@@ -1,4 +1,9 @@
 {
-    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "*.ejs": "html",
+        "xstring": "cpp"
+    }
     // "C_Cpp.errorSquiggles": "disabled"
 }

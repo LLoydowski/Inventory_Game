@@ -5,6 +5,7 @@
 #include <Item.hpp>
 #include <UIElement.hpp>
 #include <UIButton.hpp>
+#include <Player.hpp>
 
 int main(int argc, char *argv[])
 {
@@ -18,14 +19,7 @@ int main(int argc, char *argv[])
 
     SDL_Event e;
 
-    Inventory inv(5, 3);
-    inv.displayCLI();
-
-    std::cout << std::endl;
-
-    Item *item = new Item("Armor", common, 30);
-    inv.addItem(item);
-    inv.displayCLI();
+    Player player;
 
     bool isRunning = true;
 
@@ -43,8 +37,6 @@ int main(int argc, char *argv[])
 
         SDL_SetRenderDrawColor(renderer, 74, 94, 224, SDL_ALPHA_OPAQUE); //? Sets background color
         SDL_RenderClear(renderer);
-
-        inv.displaySDL(renderer, windowWidth, windowHeight);
 
         SDL_RenderPresent(renderer);
     }

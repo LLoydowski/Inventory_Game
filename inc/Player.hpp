@@ -1,0 +1,17 @@
+#include <string>
+#include <Inventory.hpp>
+
+class Player
+{
+private:
+    int INVENTORY_ROWS = 3;
+    int INVENTORY_COLS = 4;
+
+    std::string name;
+    float HP, gold;
+    Inventory *inventory;
+
+public:
+    Player();
+    Player(std::string name, float HP, float gold);
+};

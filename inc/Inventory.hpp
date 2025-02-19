@@ -1,7 +1,8 @@
 #pragma once
 
-#include <Item.hpp>
 #include <SDL2/SDL.h>
+
+#include <Item.hpp>
 
 class Inventory
 {

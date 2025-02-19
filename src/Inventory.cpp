@@ -1,5 +1,6 @@
-#include <Inventory.hpp>
 #include <SDL2/SDL.h>
+
+#include <Inventory.hpp>
 #include <UIElement.hpp>
 
 Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}
@@ -59,7 +60,7 @@ void Inventory::displaySDL(SDL_Renderer *rend, int windowWidth, int windowHeight
     const int PADDING = 25;
     const int SLOT_SIZE = 50;
 
-        const int width = (cols * (PADDING + SLOT_SIZE)) + PADDING;
+    const int width = (cols * (PADDING + SLOT_SIZE)) + PADDING;
     const int height = (rows * (PADDING + SLOT_SIZE)) + PADDING;
 
     const int bgPosX = (windowWidth / 2) - (width / 2);
