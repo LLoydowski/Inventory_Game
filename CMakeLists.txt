@@ -20,9 +20,10 @@ if(WIN32)
         mingw32
         "${CMAKE_BINARY_DIR}/lib/libSDL2main.a"
         "${CMAKE_BINARY_DIR}/lib/libSDL2.dll.a"
+        "${CMAKE_BINARY_DIR}/lib/libSDL2_ttf.dll.a"
     )
 else()
     include_directories("${CMAKE_BINARY_DIR}/inc")
     link_directories("/lib")
-    target_link_libraries(${P_NAME} SDL2)
+    target_link_libraries(${P_NAME} SDL2 SDL2_ttf)
 endif()

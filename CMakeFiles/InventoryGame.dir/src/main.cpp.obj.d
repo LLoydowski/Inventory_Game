@@ -1,13 +1,13 @@
 CMakeFiles/InventoryGame.dir/src/main.cpp.obj: \
- E:\Projekty\Programowanie\C++\InventoryGameWindows\src\main.cpp \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_main.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_stdinc.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_config.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_platform.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/begin_code.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/close_code.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_config_windows.h \
+ E:\Projekty\Programowanie\C++\InventoryGame\src\main.cpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_main.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_stdinc.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_config.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_platform.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/begin_code.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/close_code.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_config_windows.h \
  C:/msys64/mingw64/include/winsdkver.h \
  C:/msys64/mingw64/include/winapifamily.h \
  C:/msys64/mingw64/include/sdkddkver.h \
@@ -23,20 +23,20 @@ CMakeFiles/InventoryGame.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/_mingw_stdarg.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h \
  C:/msys64/mingw64/include/stdint.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_assert.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_atomic.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_audio.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_error.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_endian.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_mutex.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_thread.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_assert.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_atomic.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_audio.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_error.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_endian.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_mutex.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_thread.h \
  C:/msys64/mingw64/include/process.h \
  C:/msys64/mingw64/include/corecrt_startup.h \
  C:/msys64/mingw64/include/sys/types.h \
  C:/msys64/mingw64/include/_mingw_off_t.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_rwops.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_clipboard.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_cpuinfo.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_rwops.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_clipboard.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_cpuinfo.h \
  C:/msys64/mingw64/include/intrin.h C:/msys64/mingw64/include/setjmp.h \
  C:/msys64/mingw64/include/psdk_inc/intrin-impl.h \
  C:/msys64/mingw64/include/c++/14.2.0/stdlib.h \
@@ -159,39 +159,41 @@ CMakeFiles/InventoryGame.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/ammintrin.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xopintrin.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/cpuid.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_events.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_video.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_pixels.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_rect.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_surface.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_blendmode.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_keyboard.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_keycode.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_scancode.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_mouse.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_joystick.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_guid.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_gamecontroller.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_sensor.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_quit.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_gesture.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_touch.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_filesystem.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_haptic.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_hidapi.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_hints.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_loadso.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_log.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_messagebox.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_metal.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_power.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_render.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_shape.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_system.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_timer.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_version.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_locale.h \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/SDL2/SDL_misc.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_events.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_video.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_pixels.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_rect.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_surface.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_blendmode.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_keyboard.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_keycode.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_scancode.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_mouse.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_joystick.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_guid.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_gamecontroller.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_sensor.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_quit.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_gesture.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_touch.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_filesystem.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_haptic.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_hidapi.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_hints.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_loadso.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_log.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_messagebox.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_metal.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_power.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_render.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_shape.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_system.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_timer.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_version.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_locale.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_misc.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_ttf.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL.h \
  C:/msys64/mingw64/include/c++/14.2.0/iostream \
  C:/msys64/mingw64/include/c++/14.2.0/bits/requires_hosted.h \
  C:/msys64/mingw64/include/c++/14.2.0/ostream \
@@ -295,7 +297,7 @@ CMakeFiles/InventoryGame.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/ostream.tcc \
  C:/msys64/mingw64/include/c++/14.2.0/istream \
  C:/msys64/mingw64/include/c++/14.2.0/bits/istream.tcc \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/Inventory.hpp \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/Item.hpp \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/UIElement.hpp \
- E:/Projekty/Programowanie/C++/InventoryGameWindows/inc/UIButton.hpp
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/Inventory.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIButton.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIELement.hpp

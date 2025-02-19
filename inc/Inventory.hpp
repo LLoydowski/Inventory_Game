@@ -1,20 +1,32 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <UIButton.hpp>
+#include <UIElement.hpp>
 
 #include <Item.hpp>
 
 class Inventory
 {
 private:
+    //? Logic Stuff
     int rows, cols;
     Item ***items;
 
+    //? UI Stuff
+    SDL_Renderer *rend;
+
+    UIElement *inventoryBG;
+    UIElement **UIInventorySlots;
+
+    const int PADDING = 25;
+    const int SLOT_SIZE = 50;
+
 public:
-    Inventory(int rows, int cols);
+    Inventory(int rows, int cols, int windowWidth, int windowHeight, SDL_Renderer *rend);
     ~Inventory();
     void displayCLI();
-    void displaySDL(SDL_Renderer *rend, int windowWidth, int windowHeight);
+    void displaySDL();
     bool addItem(Item *item);
 
     int getCols();
@@ -23,7 +35,7 @@ public:
 
 //? https://www.youtube.com/watch?v=OjNpRbNdR7E
 
-//! Krzychu aproved
+//! Krzychu approved
 
 // Tiānshàng tàiyang hóng ya hóngtōngtōng ēi
 // Xīnzhōng de tàiyang shì máozédōng ēi

@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 
 #include <Inventory.hpp>
@@ -12,18 +13,30 @@ int main(int argc, char *argv[])
     int windowWidth = 800;
     int windowHeight = 500;
 
+    //? SDL2 initialization
     SDL_Init(SDL_INIT_VIDEO);
 
     SDL_Window *window = SDL_CreateWindow("Inventory Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, 0);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    SDL_Event e;
+    //? SDL2_TTF initialization
 
     Player player;
 
-    bool isRunning = true;
+    // inv.displayCLI();
+    SDL_Color btnColor = {189, 189, 189};
+
+    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 72);
+
+    UIButton btn(200, 100, 100, 100, btnColor, "Wybierz gracza", font, renderer);
+    UIButton btn2(200, 100, 100, 225, btnColor, "Pokaż graczy", font, renderer);
+
+    TTF_CloseFont(font);
 
     //? Game loop
+    bool isRunning = true;
+    SDL_Event e;
+
     while (isRunning)
     {
         while (SDL_PollEvent(&e))
@@ -33,14 +46,29 @@ int main(int argc, char *argv[])
                 isRunning = false;
                 break;
             }
+            else if (e.type == SDL_MOUSEBUTTONDOWN)
+            {
+                if (btn.checkMouseCollision())
+                {
+                    std::cout << "Button 1 pressed" << std::endl;
+                }
+                else if (btn2.checkMouseCollision())
+                {
+                    std::cout << "Button 2 pressed" << std::endl;
+                }
+            }
         }
 
         SDL_SetRenderDrawColor(renderer, 74, 94, 224, SDL_ALPHA_OPAQUE); //? Sets background color
         SDL_RenderClear(renderer);
 
+        btn.display(renderer);
+        btn2.display(renderer);
+
         SDL_RenderPresent(renderer);
     }
 
+    TTF_Quit();
     SDL_Quit();
     return 0;
 }
