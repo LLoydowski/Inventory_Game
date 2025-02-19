@@ -53,6 +53,17 @@ int main(int argc, char *argv[])
                 isRunning = false;
                 break;
             }
+            else if (e.type == SDL_MOUSEBUTTONDOWN)
+            {
+                if (btn.checkMouseCollision())
+                {
+                    std::cout << "Button 1 pressed" << std::endl;
+                }
+                else if (btn2.checkMouseCollision())
+                {
+                    std::cout << "Button 2 pressed" << std::endl;
+                }
+            }
         }
 
         SDL_SetRenderDrawColor(renderer, 74, 94, 224, SDL_ALPHA_OPAQUE); //? Sets background color
