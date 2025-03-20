@@ -31,6 +31,13 @@ public:
     void displaySDL(SDL_Renderer *rend);
     void generateUIElements();
     bool addItem(Item *item);
+    void sortItems();
+    bool moveItems();
+    void removeItem();
+    void equipItem();
+    void unequipItem();
+    void toggleFavourite();
+
 
     int getCols();
     int getRows();
