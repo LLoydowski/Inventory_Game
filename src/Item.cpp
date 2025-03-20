@@ -22,3 +22,13 @@ std::string Item::getName()
 {
     return name;
 }
+
+float Item::getPrice()
+{
+    return price;
+}
+
+Rarities Item::getRarity()
+{
+    return rarity;
+}

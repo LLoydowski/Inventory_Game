@@ -26,4 +26,6 @@ public:
 
     // Getters
     std::string getName();
+    float getPrice();
+    Rarities getRarity();
 };

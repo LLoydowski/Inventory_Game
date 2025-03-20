@@ -144,6 +144,26 @@ bool Inventory::addItem(Item *item)
     return false;
 }
 
+void Inventory::removeItem(int row, int col)
+{
+    delete items[row][col];
+    items[row][col] = nullptr;
+}
+
+bool Inventory::moveItems(int oldRow, int oldCol, int newRow, int newCol)
+{
+
+    if(oldRow < 0 || oldRow > rows || newRow < 0 || newRow > rows || oldCol < 0 || oldCol > cols || newCol < 0 || newCol > cols) {
+        return false;
+    }
+
+    Item* tempItem = items[oldRow][oldCol];
+    items[oldRow][oldCol] = items[newRow][newCol];
+    items[newRow][newCol] = tempItem;
+    return true;
+}
+
+
 int Inventory::getCols()
 {
     return cols;
