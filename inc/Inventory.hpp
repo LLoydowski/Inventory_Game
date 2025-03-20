@@ -31,12 +31,12 @@ public:
     void displaySDL(SDL_Renderer *rend);
     void generateUIElements();
     bool addItem(Item *item);
-    void sortItems();
-    bool moveItems();
-    void removeItem();
-    void equipItem();
-    void unequipItem();
-    void toggleFavourite();
+    void sortItems(char parameter);
+    bool moveItems(int oldRow, int oldCol, int newRow, int newCol);
+    void removeItem(int row, int col);
+    void equipItem(int row, int col);
+    void unequipItem(int row, int col);
+    void toggleFavourite(int row, int col);
 
 
     int getCols();
