@@ -7,6 +7,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
+#include <vector>
+
 Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}
 {
     // Generating item 2D array
@@ -161,6 +163,43 @@ bool Inventory::moveItems(int oldRow, int oldCol, int newRow, int newCol)
     items[oldRow][oldCol] = items[newRow][newCol];
     items[newRow][newCol] = tempItem;
     return true;
+}
+
+
+void Inventory::sortItems(char parameter)
+{
+    std::vector<Item*> itemList;
+
+    for(int i = 0; i < rows; i ++) {
+        for(int j = 0; j < cols; j ++) {
+            if(items[i][j] != nullptr) {
+                itemList.push_back(items[i][j]);
+            }
+        }
+    }
+
+    int n = itemList.size();
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            bool shouldSwap = false;
+
+            if (parameter == 'p') {
+                shouldSwap = itemList[j]->getPrice() > itemList[j + 1]->getPrice();
+            }
+            else if (parameter == 'n') {
+                shouldSwap = itemList[j]->getName() > itemList[j + 1]->getName();
+            }
+            else if (parameter == 'r') {
+                shouldSwap = itemList[j]->getRarity() > itemList[j + 1]->getRarity();
+            }
+
+            if (shouldSwap) {
+                std::swap(itemList[j], itemList[j + 1]);
+            }
+        }
+    }
+    
 }
 
 
