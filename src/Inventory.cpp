@@ -193,6 +193,9 @@ void Inventory::sortItems(char parameter)
             else if (parameter == 'r') {
                 shouldSwap = itemList[j]->getRarity() > itemList[j + 1]->getRarity();
             }
+            else if (parameter == 'f') {
+                shouldSwap = !itemList[j]->getFavourite() && itemList[j + 1]->getFavourite();
+            }
 
             if (shouldSwap) {
                 std::swap(itemList[j], itemList[j + 1]);

@@ -17,6 +17,7 @@ private:
     std::string name;
     Rarities rarity;
     float price;
+    bool favourite;
 
 public:
     Item();
@@ -28,4 +29,5 @@ public:
     std::string getName();
     float getPrice();
     Rarities getRarity();
+    bool getFavourite();
 };
