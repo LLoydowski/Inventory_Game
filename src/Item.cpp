@@ -38,3 +38,8 @@ bool Item::getFavourite()
 {
 
 }
+
+void Item::setFavourite(bool optoion)
+{
+    favourite = optoion;
+}

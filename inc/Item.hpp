@@ -30,4 +30,7 @@ public:
     float getPrice();
     Rarities getRarity();
     bool getFavourite();
+
+    //setters
+    void setFavourite(bool optoion);
 };

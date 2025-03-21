@@ -205,6 +205,20 @@ void Inventory::sortItems(char parameter)
     
 }
 
+bool Inventory::toggleFavourite(int row, int col)
+{      
+    if (dynamic_cast<Item*>(items[col][row]) == nullptr) {
+        return false;
+    }
+
+    if(items[row][col]->getFavourite()) {
+        items[row][col]->setFavourite(true);
+    } else {
+        items[row][col]->setFavourite(false);
+    }
+    return true;
+}
+
 
 int Inventory::getCols()
 {
