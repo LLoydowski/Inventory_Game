@@ -8,16 +8,21 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/e/Projekty/Programowanie/C++/InventoryGame/src/Inventory.cpp" "CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o" "gcc" "CMakeFiles/InventoryGame.dir/src/Inventory.cpp.o.d"
-  "/mnt/e/Projekty/Programowanie/C++/InventoryGame/src/Item.cpp" "CMakeFiles/InventoryGame.dir/src/Item.cpp.o" "gcc" "CMakeFiles/InventoryGame.dir/src/Item.cpp.o.d"
-  "/mnt/e/Projekty/Programowanie/C++/InventoryGame/src/Player.cpp" "CMakeFiles/InventoryGame.dir/src/Player.cpp.o" "gcc" "CMakeFiles/InventoryGame.dir/src/Player.cpp.o.d"
-  "/mnt/e/Projekty/Programowanie/C++/InventoryGame/src/UIButton.cpp" "CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o" "gcc" "CMakeFiles/InventoryGame.dir/src/UIButton.cpp.o.d"
-  "/mnt/e/Projekty/Programowanie/C++/InventoryGame/src/UIElement.cpp" "CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o" "gcc" "CMakeFiles/InventoryGame.dir/src/UIElement.cpp.o.d"
-  "/mnt/e/Projekty/Programowanie/C++/InventoryGame/src/main.cpp" "CMakeFiles/InventoryGame.dir/src/main.cpp.o" "gcc" "CMakeFiles/InventoryGame.dir/src/main.cpp.o.d"
+  "E:/Projekty/Programowanie/C++/InventoryGame/src/Inventory.cpp" "CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj" "gcc" "CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj.d"
+  "E:/Projekty/Programowanie/C++/InventoryGame/src/Item.cpp" "CMakeFiles/InventoryGame.dir/src/Item.cpp.obj" "gcc" "CMakeFiles/InventoryGame.dir/src/Item.cpp.obj.d"
+  "E:/Projekty/Programowanie/C++/InventoryGame/src/Player.cpp" "CMakeFiles/InventoryGame.dir/src/Player.cpp.obj" "gcc" "CMakeFiles/InventoryGame.dir/src/Player.cpp.obj.d"
+  "E:/Projekty/Programowanie/C++/InventoryGame/src/UIButton.cpp" "CMakeFiles/InventoryGame.dir/src/UIButton.cpp.obj" "gcc" "CMakeFiles/InventoryGame.dir/src/UIButton.cpp.obj.d"
+  "E:/Projekty/Programowanie/C++/InventoryGame/src/UIElement.cpp" "CMakeFiles/InventoryGame.dir/src/UIElement.cpp.obj" "gcc" "CMakeFiles/InventoryGame.dir/src/UIElement.cpp.obj.d"
+  "E:/Projekty/Programowanie/C++/InventoryGame/src/UIImage.cpp" "CMakeFiles/InventoryGame.dir/src/UIImage.cpp.obj" "gcc" "CMakeFiles/InventoryGame.dir/src/UIImage.cpp.obj.d"
+  "E:/Projekty/Programowanie/C++/InventoryGame/src/main.cpp" "CMakeFiles/InventoryGame.dir/src/main.cpp.obj" "gcc" "CMakeFiles/InventoryGame.dir/src/main.cpp.obj.d"
   )
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

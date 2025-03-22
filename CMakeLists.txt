@@ -11,19 +11,21 @@ endif()
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
-add_executable(${P_NAME} "src/main.cpp" "src/Inventory.cpp" "src/Item.cpp" "src/UIElement.cpp" "src/UIButton.cpp" "src/Player.cpp")
+add_executable(${P_NAME} "src/main.cpp" "src/Inventory.cpp" "src/Item.cpp" "src/UIElement.cpp" "src/UIButton.cpp" "src/Player.cpp" "src/UIImage.cpp")
 
 if(WIN32)
     include_directories("${CMAKE_BINARY_DIR}/inc/")
     link_directories("/lib")
-    target_link_libraries(${P_NAME}
+    target_link_libraries(${P_NAME} PRIVATE
         mingw32
         "${CMAKE_BINARY_DIR}/lib/libSDL2main.a"
         "${CMAKE_BINARY_DIR}/lib/libSDL2.dll.a"
         "${CMAKE_BINARY_DIR}/lib/libSDL2_ttf.dll.a"
+        "${CMAKE_BINARY_DIR}/lib/libSDL2_image.dll.a"
     )
+    target_compile_options(${P_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror -g -O0)
 else()
     include_directories("${CMAKE_BINARY_DIR}/inc")
     link_directories("/lib")
-    target_link_libraries(${P_NAME} SDL2 SDL2_ttf)
+    target_link_libraries(${P_NAME} SDL2 SDL2_ttf SDL2_image)
 endif()

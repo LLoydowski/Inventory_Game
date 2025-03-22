@@ -55,7 +55,8 @@ UIButton::UIButton(int width, int height, int posX, int posY, SDL_Color color)
     hoverColor.g = g;
     hoverColor.b = b;
 }
-UIButton::UIButton(int width, int height, int posX, int posY, SDL_Color color, std::string text, TTF_Font *font, SDL_Renderer *rend) : UIElement(width, height, posX, posY, color, text, font, rend)
+UIButton::UIButton(int width, int height, int posX, int posY, SDL_Color color, std::string text, TTF_Font *font, SDL_Renderer *rend)
+    : UIElement(width, height, posX, posY, color, text, font, rend)
 {
 
     int r, g, b;

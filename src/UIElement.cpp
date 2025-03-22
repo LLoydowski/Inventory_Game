@@ -9,7 +9,11 @@ UIElement::UIElement() : width{250}, height{100}, posX{0}, posY{0}, text{"Test b
 {
     color = {255, 255, 255, 255};
 }
-
+UIElement::UIElement(int width, int height, int posX, int posY)
+    : width{width}, height{height}, posX{posX}, posY{posY}
+{
+    color = {255, 255, 255, 255};
+}
 UIElement::UIElement(int width, int height, int posX, int posY, SDL_Color color)
     : width{width}, height{height}, posX{posX}, posY{posY}, color{color}, text{""}, textTexture{nullptr}
 {
@@ -50,7 +54,7 @@ void UIElement::display(SDL_Renderer *rend)
 }
 bool UIElement::generateTexture(TTF_Font *font, SDL_Renderer *rend)
 {
-    SDL_Color color = {0, 0, 0};
+    SDL_Color color = {0, 0, 0, 0};
 
     if (text == "")
     {
