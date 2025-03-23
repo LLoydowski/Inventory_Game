@@ -2,6 +2,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
+#include <vector>
 
 #include <Inventory.hpp>
 #include <Item.hpp>
@@ -61,6 +62,16 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    //? Loading textures
+
+    SDL_Texture *placeholderTexture = NULL;
+    SDL_Surface *testSurface = IMG_Load("gfx/placeholder.png");
+    if (testSurface)
+    {
+        placeholderTexture = SDL_CreateTextureFromSurface(renderer, testSurface);
+        SDL_FreeSurface(testSurface);
+    }
+
     //? Game Logic
 
     // Player *player = new Player("Jasiu", 100.0, 20.0);
@@ -68,25 +79,19 @@ int main(int argc, char *argv[])
     Inventory *inv = new Inventory(6, 3);
     inv->setWindowParams(windowWidth, windowHeight, renderer);
     inv->generateUIElements();
-    Item *item = new Item("Skibidi", rare, 100);
+    Item *item = new Item("Skibidi", rare, 100, placeholderTexture);
     inv->addItem(item);
     // inv->displayCLI();
 
     //? UI ELEMENTS
+    std::vector<UIElement *> UI;
 
     SDL_Color btnColor = {189, 189, 189, 255};
-    SDL_Texture *testTexture = NULL;
-    SDL_Surface *testSurface = IMG_Load("gfx/placeholder.png");
-    if (testSurface)
-    {
-        testTexture = SDL_CreateTextureFromSurface(renderer, testSurface);
-        SDL_FreeSurface(testSurface);
-    }
 
     UIButton *btn = new UIButton(200, 100, 100, 100, btnColor, "Wybierz gracza", font, renderer);
+    UI.push_back(btn);
     UIButton *btn2 = new UIButton(200, 100, 100, 225, btnColor, "Pokaż graczy", font, renderer);
-
-    UIImage *image = new UIImage(300, 300, 500, 200, testTexture);
+    UI.push_back(btn2);
 
     //? Game loop
     bool isRunning = true;
@@ -118,9 +123,11 @@ int main(int argc, char *argv[])
 
         // TODO FIX Disabled buttons
 
-        image->display(renderer);
-        btn->display(renderer);
-        btn2->display(renderer);
+        for (UIElement *element : UI)
+        {
+            element->display(renderer);
+        }
+
         inv->displaySDL(renderer);
 
         SDL_RenderPresent(renderer);

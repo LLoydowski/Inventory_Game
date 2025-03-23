@@ -3,11 +3,15 @@
 #include <string>
 #include <iostream>
 
-Item::Item() : name{"Scrap"}, rarity{common}, price{0.1}
+Item::Item() : name{"Scrap"}, rarity{common}, price{0.1}, texture{nullptr}
 {
 }
 
-Item::Item(std::string name, Rarities rarity, float price) : name{name}, rarity{rarity}, price{price}
+Item::Item(std::string name, Rarities rarity, float price) : name{name}, rarity{rarity}, price{price}, texture{nullptr}
+{
+}
+
+Item::Item(std::string name, Rarities rarity, float price, SDL_Texture *texture) : name{name}, rarity{rarity}, price{price}, texture{texture}
 {
 }
 
@@ -21,4 +25,14 @@ void Item::display()
 std::string Item::getName()
 {
     return name;
+}
+
+SDL_Texture *Item::getTexture()
+{
+    return texture;
+}
+
+void Item::setTexture(SDL_Texture *texture)
+{
+    this->texture = texture;
 }
