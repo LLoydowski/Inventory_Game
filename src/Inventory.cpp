@@ -9,7 +9,7 @@
 
 #include <vector>
 
-Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}
+Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedArmor{nullptr}, equipedWeapon{nullptr}, equipedTrinket{nullptr}
 {
     // Generating item 2D array
     items = new Item **[rows];

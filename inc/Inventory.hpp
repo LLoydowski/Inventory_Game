@@ -12,6 +12,9 @@ private:
     //? Logic Stuff
     int rows, cols;
     Item ***items;
+    Item* equipedWeapon;
+    Item* equipedArmor;
+    Item* equipedTrinket;
 
     //? UI Stuff
     SDL_Renderer *rend;
