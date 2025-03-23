@@ -3,6 +3,7 @@
 #include <Inventory.hpp>
 #include <UIElement.hpp>
 #include <UIButton.hpp>
+#include <UIImage.hpp>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -128,13 +129,28 @@ bool Inventory::addItem(Item *item)
             {
                 TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 24);
                 items[i][j] = item;
-                std::string itemName = item->getName();
 
-                char firstLetter = itemName[0];
-                std::string text = "";
-                text.push_back(firstLetter);
+                if (item->getTexture() == nullptr)
+                {
+                    std::string itemName = item->getName();
+                    char firstLetter = itemName[0];
+                    std::string text = "";
+                    text.push_back(firstLetter);
 
-                UIInventorySlots[interationCounter]->setText(text, font, rend);
+                    UIInventorySlots[interationCounter]->setText(text, font, rend);
+                }
+                else
+                {
+                    SDL_Texture *texture = item->getTexture();
+
+                    int width = UIInventorySlots[interationCounter]->getWidth();
+                    int height = UIInventorySlots[interationCounter]->getHeight();
+                    int posX = UIInventorySlots[interationCounter]->getX();
+                    int posY = UIInventorySlots[interationCounter]->getY();
+
+                    delete UIInventorySlots[interationCounter];
+                    UIInventorySlots[interationCounter] = new UIImage(width, height, posX, posY, texture);
+                }
 
                 return true;
                 TTF_CloseFont(font);

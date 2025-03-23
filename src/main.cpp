@@ -1,42 +1,97 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 #include <iostream>
+#include <vector>
 
 #include <Inventory.hpp>
 #include <Item.hpp>
 #include <UIElement.hpp>
 #include <UIButton.hpp>
+#include <UIImage.hpp>
 #include <Player.hpp>
 
 int main(int argc, char *argv[])
 {
+    (void)argc; // Mark argc as unused
+    (void)argv; // Mark argv as unused
     int windowWidth = 800;
     int windowHeight = 500;
 
     //? SDL2 initialization
-    SDL_Init(SDL_INIT_VIDEO);
+    if (SDL_Init(SDL_INIT_VIDEO) != 0)
+    {
+        std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
+        return 1;
+    }
 
     SDL_Window *window = SDL_CreateWindow("Inventory Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, 0);
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    if (window == nullptr)
+    {
+        std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
+        SDL_Quit();
+        return 1;
+    }
 
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    if (renderer == nullptr)
+    {
+        std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
     //? SDL2_TTF initialization
-    TTF_Init();
+    if (TTF_Init() != 0)
+    {
+        std::cerr << "TTF_Init Error: " << TTF_GetError() << std::endl;
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
+
+    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 72);
+    if (font == nullptr)
+    {
+        std::cerr << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        TTF_Quit();
+        SDL_Quit();
+        return 1;
+    }
+
+    //? Loading textures
+
+    SDL_Texture *placeholderTexture = NULL;
+    SDL_Surface *testSurface = IMG_Load("gfx/placeholder.png");
+    if (testSurface)
+    {
+        placeholderTexture = SDL_CreateTextureFromSurface(renderer, testSurface);
+        SDL_FreeSurface(testSurface);
+    }
+
+    //? Game Logic
 
     // Player *player = new Player("Jasiu", 100.0, 20.0);
 
-    Inventory *inv = new Inventory(3, 4);
+    Inventory *inv = new Inventory(6, 3);
     inv->setWindowParams(windowWidth, windowHeight, renderer);
     inv->generateUIElements();
-    Item *item = new Item("Skibidi", rare, 100);
+    Item *item = new Item("Skibidi", rare, 100, placeholderTexture);
     inv->addItem(item);
-    inv->displayCLI();
+    // inv->displayCLI();
 
-    SDL_Color btnColor = {189, 189, 189};
+    //? UI ELEMENTS
+    std::vector<UIElement *> UI;
 
-    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 72);
-    UIButton btn(200, 100, 100, 100, btnColor, "Wybierz gracza", font, renderer);
-    UIButton btn2(200, 100, 100, 225, btnColor, "Pokaż graczy", font, renderer);
-    TTF_CloseFont(font);
+    SDL_Color btnColor = {189, 189, 189, 255};
+
+    UIButton *btn = new UIButton(200, 100, 100, 100, btnColor, "Wybierz gracza", font, renderer);
+    UI.push_back(btn);
+    UIButton *btn2 = new UIButton(200, 100, 100, 225, btnColor, "Pokaż graczy", font, renderer);
+    UI.push_back(btn2);
 
     //? Game loop
     bool isRunning = true;
@@ -49,15 +104,14 @@ int main(int argc, char *argv[])
             if (e.type == SDL_QUIT)
             {
                 isRunning = false;
-                break;
             }
             else if (e.type == SDL_MOUSEBUTTONDOWN)
             {
-                if (btn.checkMouseCollision())
+                if (btn->checkMouseCollision())
                 {
                     std::cout << "Button 1 pressed" << std::endl;
                 }
-                else if (btn2.checkMouseCollision())
+                else if (btn2->checkMouseCollision())
                 {
                     std::cout << "Button 2 pressed" << std::endl;
                 }
@@ -67,14 +121,27 @@ int main(int argc, char *argv[])
         SDL_SetRenderDrawColor(renderer, 74, 94, 224, SDL_ALPHA_OPAQUE); //? Sets background color
         SDL_RenderClear(renderer);
 
-        btn.display(renderer);
-        btn2.display(renderer);
+        // TODO FIX Disabled buttons
+
+        for (UIElement *element : UI)
+        {
+            element->display(renderer);
+        }
+
         inv->displaySDL(renderer);
 
         SDL_RenderPresent(renderer);
     }
 
     delete inv;
+
+    delete btn;
+    delete btn2;
+
+    TTF_CloseFont(font);
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
 
     TTF_Quit();
     SDL_Quit();

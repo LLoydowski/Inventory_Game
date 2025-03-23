@@ -194,6 +194,7 @@ CMakeFiles/InventoryGame.dir/src/main.cpp.obj: \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_misc.h \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_ttf.h \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_image.h \
  C:/msys64/mingw64/include/c++/14.2.0/iostream \
  C:/msys64/mingw64/include/c++/14.2.0/bits/requires_hosted.h \
  C:/msys64/mingw64/include/c++/14.2.0/ostream \
@@ -297,7 +298,14 @@ CMakeFiles/InventoryGame.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/ostream.tcc \
  C:/msys64/mingw64/include/c++/14.2.0/istream \
  C:/msys64/mingw64/include/c++/14.2.0/bits/istream.tcc \
+ C:/msys64/mingw64/include/c++/14.2.0/vector \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_vector.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/vector.tcc \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/Inventory.hpp \
- E:/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/UIButton.hpp \
- E:/Projekty/Programowanie/C++/InventoryGame/inc/UIELement.hpp
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIELement.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIImage.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/Player.hpp
