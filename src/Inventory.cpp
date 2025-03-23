@@ -219,6 +219,11 @@ bool Inventory::toggleFavourite(int row, int col)
     return true;
 }
 
+void Inventory::equipItem(int row, int col)
+{
+    
+}
+
 
 int Inventory::getCols()
 {

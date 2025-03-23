@@ -40,7 +40,7 @@ public:
     void equipItem(int row, int col);
     void unequipItem(int row, int col);
     bool toggleFavourite(int row, int col);
-
+    void equipItem(int row, int col);
 
     int getCols();
     int getRows();
