@@ -306,6 +306,6 @@ CMakeFiles/InventoryGame.dir/src/main.cpp.obj: \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/Inventory.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/UIButton.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/UIELement.hpp \
- E:/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/UIImage.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/Player.hpp

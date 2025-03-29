@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include <UIButton.hpp>
 #include <UIElement.hpp>
+#include <UIImage.hpp>
 
 #include <Item.hpp>
 
@@ -12,27 +13,33 @@ private:
     //? Logic Stuff
     int rows, cols;
     Item ***items;
-    Item* equipedWeapon;
-    Item* equipedArmor;
-    Item* equipedTrinket;
+    Item *equipedWeapon;
+    Item *equipedArmor;
+    Item *equipedTrinket;
 
     //? UI Stuff
     SDL_Renderer *rend;
+    SDL_Texture *nullTexture;
+    SDL_Texture *blankSlotTexture;
+    const SDL_Color inventoryBGColor = {116, 117, 125, SDL_ALPHA_OPAQUE};
 
-    int windowWidth, windowHeight;
+    int posX, posY;
 
     UIElement *inventoryBG;
-    UIElement **UIInventorySlots;
+    UIImage ***UIInventorySlots;
 
-    const int PADDING = 25;
+    const int PADDING = 10;
     const int SLOT_SIZE = 50;
+    const int SLOT_PADDING = 1;
 
 public:
     Inventory(int rows, int cols);
     ~Inventory();
+
     void displayCLI();
     void displaySDL(SDL_Renderer *rend);
     void generateUIElements();
+
     bool addItem(Item *item);
     void sortItems(char parameter);
     bool moveItems(int oldRow, int oldCol, int newRow, int newCol);
@@ -40,11 +47,11 @@ public:
     void equipItem(int row, int col);
     void unequipItem(int row, int col);
     bool toggleFavourite(int row, int col);
-    void equipItem(int row, int col);
 
     int getCols();
     int getRows();
-    void setWindowParams(int windowWidth, int windowHeight, SDL_Renderer *rend);
+    void setPos(int posX, int posY, SDL_Renderer *rend);
+    void setNullTexture(SDL_Texture *texture);
 };
 
 //? https://www.youtube.com/watch?v=OjNpRbNdR7E

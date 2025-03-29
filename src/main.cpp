@@ -72,16 +72,22 @@ int main(int argc, char *argv[])
         SDL_FreeSurface(testSurface);
     }
 
+    SDL_Texture *sword01Texture = NULL;
+    SDL_Surface *sword01Surf = IMG_Load("gfx/Sword01.png");
+    if (sword01Surf)
+    {
+        sword01Texture = SDL_CreateTextureFromSurface(renderer, sword01Surf);
+        SDL_FreeSurface(sword01Surf);
+    }
+
     //? Game Logic
 
     // Player *player = new Player("Jasiu", 100.0, 20.0);
 
     Inventory *inv = new Inventory(6, 3);
-    inv->setWindowParams(windowWidth, windowHeight, renderer);
-    inv->generateUIElements();
-    Item *item = new Item("Skibidi", rare, 100, placeholderTexture);
+    inv->setPos(10, 10, renderer);
+    Item *item = new Item("Skibidi", rare, 100, sword01Texture);
     inv->addItem(item);
-    // inv->displayCLI();
 
     //? UI ELEMENTS
     std::vector<UIElement *> UI;
@@ -123,10 +129,10 @@ int main(int argc, char *argv[])
 
         // TODO FIX Disabled buttons
 
-        for (UIElement *element : UI)
-        {
-            element->display(renderer);
-        }
+        // for (UIElement *element : UI)
+        // {
+        //     element->display(renderer);
+        // }
 
         inv->displaySDL(renderer);
 
@@ -139,6 +145,9 @@ int main(int argc, char *argv[])
     delete btn2;
 
     TTF_CloseFont(font);
+
+    SDL_DestroyTexture(placeholderTexture);
+    SDL_DestroyTexture(sword01Texture);
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

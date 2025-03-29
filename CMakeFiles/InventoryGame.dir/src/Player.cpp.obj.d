@@ -262,6 +262,7 @@ CMakeFiles/InventoryGame.dir/src/Player.cpp.obj: \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/UIELement.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_ttf.h \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIImage.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
  C:/msys64/mingw64/include/c++/14.2.0/iostream \
  C:/msys64/mingw64/include/c++/14.2.0/ostream \

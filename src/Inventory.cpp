@@ -1,5 +1,3 @@
-#include <SDL2/SDL.h>
-
 #include <Inventory.hpp>
 #include <UIElement.hpp>
 #include <UIButton.hpp>
@@ -7,11 +5,13 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 
 #include <vector>
 
-Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedArmor{nullptr}, equipedWeapon{nullptr}, equipedTrinket{nullptr}
+Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedWeapon{nullptr}, equipedArmor{nullptr}, equipedTrinket{nullptr}
 {
+
     // Generating item 2D array
     items = new Item **[rows];
 
@@ -24,8 +24,19 @@ Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedArmor{
         }
     }
 
-    windowWidth = -1;
-    windowHeight = -1;
+    UIInventorySlots = new UIImage **[rows];
+
+    for (int i = 0; i < rows; i++)
+    {
+        UIInventorySlots[i] = new UIImage *[cols];
+        for (int j = 0; j < cols; j++)
+        {
+            UIInventorySlots[i][j] = nullptr;
+        }
+    }
+
+    posX = -1;
+    posY = -1;
 }
 Inventory::~Inventory()
 {
@@ -43,11 +54,20 @@ Inventory::~Inventory()
     delete[] items;
 
     delete inventoryBG;
-    for (int i = 0; i < rows * cols; i++)
+    for (int i = 0; i < rows; i++)
     {
-        delete UIInventorySlots[i];
+        for (int j = 0; j < cols; j++)
+        {
+            if (UIInventorySlots[i][j] != nullptr)
+            {
+                delete UIInventorySlots[i][j];
+            }
+        }
+        delete[] UIInventorySlots[i];
     }
     delete[] UIInventorySlots;
+
+    SDL_DestroyTexture(nullTexture);
 }
 void Inventory::displayCLI()
 {
@@ -71,47 +91,78 @@ void Inventory::displayCLI()
 }
 void Inventory::displaySDL(SDL_Renderer *rend)
 {
-    if (windowHeight == -1 || windowHeight == -1)
+    if (posX == -1 || posY == -1)
     {
-        std::cout << "You need to set width and height first ( setWindowParams(width, height); )" << std::endl;
+        std::cout << "You need to set position first ( setPos(posX, posY); )" << std::endl;
         return;
     }
 
     inventoryBG->display(rend);
 
-    for (int i = 0; i < rows * cols; i++)
+    for (int i = 0; i < rows; i++)
     {
-        if (UIInventorySlots[i] != nullptr)
+        for (int j = 0; j < cols; j++)
         {
-            UIInventorySlots[i]->display(rend);
+            if (UIInventorySlots[i][j] != nullptr)
+            {
+                UIInventorySlots[i][j]->display(rend, PADDING);
+            }
         }
     }
 }
 void Inventory::generateUIElements()
 {
-    const SDL_Color inventoryBGColor = {116, 117, 125, SDL_ALPHA_OPAQUE};
+
+    if (!rend)
+    {
+        std::cout << "[Inventory] ERROR: No renderer set." << std::endl;
+        return;
+    }
 
     const int width = (cols * (PADDING + SLOT_SIZE)) + PADDING;
     const int height = (rows * (PADDING + SLOT_SIZE)) + PADDING;
 
-    const int bgPosX = (windowWidth / 2) - (width / 2);
-    const int bgPosY = (windowHeight / 2) - (height / 2);
+    inventoryBG = new UIElement(width, height, posX, posY, inventoryBGColor);
 
-    inventoryBG = new UIElement(width, height, bgPosX, bgPosY, inventoryBGColor);
-
-    UIInventorySlots = new UIElement *[rows * cols];
-    SDL_Color slotColor = {149, 150, 163, SDL_ALPHA_OPAQUE};
-
-    int wholeOffsetY = inventoryBG->getY() + PADDING;
-    int iterationCounter = 0;
-    for (int row = 0; row < rows; row++)
+    nullTexture = NULL;
+    SDL_Surface *nullSurf = IMG_Load("gfx/placeholder.png");
+    if (nullSurf)
     {
-        int wholeOffsetX = inventoryBG->getX() + PADDING;
-        for (int col = 0; col < cols; col++)
-        {
-            UIInventorySlots[iterationCounter] = new UIElement(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, slotColor);
+        nullTexture = SDL_CreateTextureFromSurface(rend, nullSurf);
+        SDL_FreeSurface(nullSurf);
+    }
 
-            iterationCounter += 1;
+    // blankSlotTexture = NULL;
+    // SDL_Surface *blankSLotSurface = IMG_Load("gfx/placeholder.png");
+    // if (!blankSLotSurface)
+    // {
+    //     std::cerr << "Failed to load image: " << IMG_GetError() << std::endl;
+    //     return;
+    // }
+
+    // blankSlotTexture = SDL_CreateTextureFromSurface(rend, blankSLotSurface);
+    // SDL_FreeSurface(blankSLotSurface);
+
+    // if (!blankSlotTexture)
+    // {
+    //     std::cerr << "Failed to create texture from surface: " << SDL_GetError() << std::endl;
+    //     return;
+    // }
+
+    int wholeOffsetY = posY + PADDING;
+    for (int i = 0; i < rows; i++)
+    {
+        int wholeOffsetX = posX + PADDING;
+        for (int j = 0; j < cols; j++)
+        {
+            if (UIInventorySlots[i][j] != nullptr)
+            {
+                delete UIInventorySlots[i][j];
+            }
+
+            SDL_Color bgColor = {153, 154, 158, SDL_ALPHA_OPAQUE};
+            UIInventorySlots[i][j] = new UIImage(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, nullTexture, bgColor);
+
             wholeOffsetX += PADDING + SLOT_SIZE;
         }
         wholeOffsetY += PADDING + SLOT_SIZE;
@@ -120,43 +171,25 @@ void Inventory::generateUIElements()
 
 bool Inventory::addItem(Item *item)
 {
-    int interationCounter = 0;
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
         {
             if (items[i][j] == nullptr)
             {
-                TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 24);
                 items[i][j] = item;
 
-                if (item->getTexture() == nullptr)
+                SDL_Texture *texture = nullTexture;
+                SDL_Texture *itemTexture = item->getTexture();
+                if (itemTexture != nullptr)
                 {
-                    std::string itemName = item->getName();
-                    char firstLetter = itemName[0];
-                    std::string text = "";
-                    text.push_back(firstLetter);
-
-                    UIInventorySlots[interationCounter]->setText(text, font, rend);
+                    texture = itemTexture;
                 }
-                else
-                {
-                    SDL_Texture *texture = item->getTexture();
 
-                    int width = UIInventorySlots[interationCounter]->getWidth();
-                    int height = UIInventorySlots[interationCounter]->getHeight();
-                    int posX = UIInventorySlots[interationCounter]->getX();
-                    int posY = UIInventorySlots[interationCounter]->getY();
-
-                    delete UIInventorySlots[interationCounter];
-                    UIInventorySlots[interationCounter] = new UIImage(width, height, posX, posY, texture);
-                }
+                UIInventorySlots[i][j]->setTexture(texture);
 
                 return true;
-                TTF_CloseFont(font);
             }
-
-            interationCounter++;
         }
     }
     return false;
@@ -171,24 +204,27 @@ void Inventory::removeItem(int row, int col)
 bool Inventory::moveItems(int oldRow, int oldCol, int newRow, int newCol)
 {
 
-    if(oldRow < 0 || oldRow > rows || newRow < 0 || newRow > rows || oldCol < 0 || oldCol > cols || newCol < 0 || newCol > cols) {
+    if (oldRow < 0 || oldRow > rows || newRow < 0 || newRow > rows || oldCol < 0 || oldCol > cols || newCol < 0 || newCol > cols)
+    {
         return false;
     }
 
-    Item* tempItem = items[oldRow][oldCol];
+    Item *tempItem = items[oldRow][oldCol];
     items[oldRow][oldCol] = items[newRow][newCol];
     items[newRow][newCol] = tempItem;
     return true;
 }
 
-
 void Inventory::sortItems(char parameter)
 {
-    std::vector<Item*> itemList;
+    std::vector<Item *> itemList;
 
-    for(int i = 0; i < rows; i ++) {
-        for(int j = 0; j < cols; j ++) {
-            if(items[i][j] != nullptr) {
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            if (items[i][j] != nullptr)
+            {
                 itemList.push_back(items[i][j]);
             }
         }
@@ -196,40 +232,50 @@ void Inventory::sortItems(char parameter)
 
     int n = itemList.size();
 
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
             bool shouldSwap = false;
 
-            if (parameter == 'p') {
+            if (parameter == 'p')
+            {
                 shouldSwap = itemList[j]->getPrice() > itemList[j + 1]->getPrice();
             }
-            else if (parameter == 'n') {
+            else if (parameter == 'n')
+            {
                 shouldSwap = itemList[j]->getName() > itemList[j + 1]->getName();
             }
-            else if (parameter == 'r') {
+            else if (parameter == 'r')
+            {
                 shouldSwap = itemList[j]->getRarity() > itemList[j + 1]->getRarity();
             }
-            else if (parameter == 'f') {
+            else if (parameter == 'f')
+            {
                 shouldSwap = !itemList[j]->getFavourite() && itemList[j + 1]->getFavourite();
             }
 
-            if (shouldSwap) {
+            if (shouldSwap)
+            {
                 std::swap(itemList[j], itemList[j + 1]);
             }
         }
     }
-    
 }
 
 bool Inventory::toggleFavourite(int row, int col)
-{      
-    if (dynamic_cast<Item*>(items[col][row]) == nullptr) {
+{
+    if (dynamic_cast<Item *>(items[col][row]) == nullptr)
+    {
         return false;
     }
 
-    if(items[row][col]->getFavourite()) {
+    if (items[row][col]->getFavourite())
+    {
         items[row][col]->setFavourite(true);
-    } else {
+    }
+    else
+    {
         items[row][col]->setFavourite(false);
     }
     return true;
@@ -237,9 +283,9 @@ bool Inventory::toggleFavourite(int row, int col)
 
 void Inventory::equipItem(int row, int col)
 {
-    
+    (void)row; //! Remove when modfying this function
+    (void)col; //! ---||---
 }
-
 
 int Inventory::getCols()
 {
@@ -251,10 +297,10 @@ int Inventory::getRows()
     return rows;
 }
 
-void Inventory::setWindowParams(int windowWidth, int windowHeight, SDL_Renderer *rend)
+void Inventory::setPos(int posX, int posY, SDL_Renderer *rend)
 {
-    this->windowWidth = windowWidth;
-    this->windowHeight = windowHeight;
+    this->posX = posX;
+    this->posY = posY;
     this->rend = rend;
     generateUIElements();
 }

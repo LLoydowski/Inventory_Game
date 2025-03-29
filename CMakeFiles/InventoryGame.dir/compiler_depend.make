@@ -50,16 +50,20 @@ CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj: src/Inventory.cpp \
   C:/msys64/mingw64/include/c++/14.2.0/bits/requires_hosted.h \
   C:/msys64/mingw64/include/c++/14.2.0/bits/std_abs.h \
   C:/msys64/mingw64/include/c++/14.2.0/bits/stl_algobase.h \
+  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
   C:/msys64/mingw64/include/c++/14.2.0/bits/stl_construct.h \
   C:/msys64/mingw64/include/c++/14.2.0/bits/stl_function.h \
   C:/msys64/mingw64/include/c++/14.2.0/bits/stl_iterator.h \
   C:/msys64/mingw64/include/c++/14.2.0/bits/stl_iterator_base_funcs.h \
   C:/msys64/mingw64/include/c++/14.2.0/bits/stl_iterator_base_types.h \
   C:/msys64/mingw64/include/c++/14.2.0/bits/stl_pair.h \
+  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
+  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_vector.h \
   C:/msys64/mingw64/include/c++/14.2.0/bits/streambuf.tcc \
   C:/msys64/mingw64/include/c++/14.2.0/bits/streambuf_iterator.h \
   C:/msys64/mingw64/include/c++/14.2.0/bits/stringfwd.h \
   C:/msys64/mingw64/include/c++/14.2.0/bits/utility.h \
+  C:/msys64/mingw64/include/c++/14.2.0/bits/vector.tcc \
   C:/msys64/mingw64/include/c++/14.2.0/bits/version.h \
   C:/msys64/mingw64/include/c++/14.2.0/cctype \
   C:/msys64/mingw64/include/c++/14.2.0/cerrno \
@@ -90,6 +94,7 @@ CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj: src/Inventory.cpp \
   C:/msys64/mingw64/include/c++/14.2.0/system_error \
   C:/msys64/mingw64/include/c++/14.2.0/type_traits \
   C:/msys64/mingw64/include/c++/14.2.0/typeinfo \
+  C:/msys64/mingw64/include/c++/14.2.0/vector \
   C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++allocator.h \
   C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++config.h \
@@ -273,6 +278,7 @@ CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj: src/Inventory.cpp \
   inc/SDL2/SDL_haptic.h \
   inc/SDL2/SDL_hidapi.h \
   inc/SDL2/SDL_hints.h \
+  inc/SDL2/SDL_image.h \
   inc/SDL2/SDL_joystick.h \
   inc/SDL2/SDL_keyboard.h \
   inc/SDL2/SDL_keycode.h \
@@ -921,7 +927,8 @@ CMakeFiles/InventoryGame.dir/src/Player.cpp.obj: src/Player.cpp \
   inc/SDL2/begin_code.h \
   inc/SDL2/close_code.h \
   inc/UIButton.hpp \
-  inc/UIElement.hpp
+  inc/UIElement.hpp \
+  inc/UIImage.hpp
 
 CMakeFiles/InventoryGame.dir/src/UIButton.cpp.obj: src/UIButton.cpp \
   C:/msys64/mingw64/include/_mingw.h \
@@ -2125,8 +2132,6 @@ src/Inventory.cpp:
 
 C:/msys64/mingw64/include/c++/14.2.0/bits/stl_iterator_base_funcs.h:
 
-C:/msys64/mingw64/include/c++/14.2.0/clocale:
-
 C:/msys64/mingw64/include/c++/14.2.0/bits/stl_algobase.h:
 
 C:/msys64/mingw64/include/c++/14.2.0/bits/streambuf_iterator.h:
@@ -2177,13 +2182,13 @@ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/amxfp16intrin.h:
 
 C:/msys64/mingw64/include/c++/14.2.0/backward/binders.h:
 
-C:/msys64/mingw64/include/c++/14.2.0/bits/postypes.h:
-
-C:/msys64/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h:
-
 C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h:
 
 C:/msys64/mingw64/include/c++/14.2.0/bits/ios_base.h:
+
+C:/msys64/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h:
+
+C:/msys64/mingw64/include/c++/14.2.0/bits/postypes.h:
 
 C:/msys64/mingw64/include/c++/14.2.0/bits/alloc_traits.h:
 
@@ -2271,6 +2276,8 @@ C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/os_defines.h:
 
 C:/msys64/mingw64/include/c++/14.2.0/bits/locale_classes.tcc:
 
+C:/msys64/mingw64/include/c++/14.2.0/bits/stl_vector.h:
+
 C:/msys64/mingw64/include/c++/14.2.0/bits/locale_facets.h:
 
 C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mmintrin.h:
@@ -2281,9 +2288,15 @@ C:/msys64/mingw64/include/c++/14.2.0/bits/locale_facets.tcc:
 
 C:/msys64/mingw64/include/c++/14.2.0/bits/memoryfwd.h:
 
+C:/msys64/mingw64/include/errno.h:
+
+C:/msys64/mingw64/include/c++/14.2.0/bits/stl_bvector.h:
+
 C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/prfchwintrin.h:
 
 C:/msys64/mingw64/include/c++/14.2.0/bits/move.h:
+
+C:/msys64/mingw64/include/c++/14.2.0/bits/vector.tcc:
 
 C:/msys64/mingw64/include/c++/14.2.0/bits/nested_exception.h:
 
@@ -2299,10 +2312,6 @@ C:/msys64/mingw64/include/process.h:
 
 C:/msys64/mingw64/include/c++/14.2.0/bits/stl_iterator_base_types.h:
 
-inc/SDL2/SDL_messagebox.h:
-
-C:/msys64/mingw64/include/c++/14.2.0/cstdio:
-
 C:/msys64/mingw64/include/c++/14.2.0/bits/streambuf.tcc:
 
 C:/msys64/mingw64/include/c++/14.2.0/bits/version.h:
@@ -2310,6 +2319,12 @@ C:/msys64/mingw64/include/c++/14.2.0/bits/version.h:
 C:/msys64/mingw64/include/c++/14.2.0/cctype:
 
 C:/msys64/mingw64/include/c++/14.2.0/cerrno:
+
+C:/msys64/mingw64/include/c++/14.2.0/clocale:
+
+inc/SDL2/SDL_messagebox.h:
+
+C:/msys64/mingw64/include/c++/14.2.0/cstdio:
 
 inc/UIImage.hpp:
 
@@ -2381,6 +2396,8 @@ C:/msys64/mingw64/include/c++/14.2.0/type_traits:
 
 C:/msys64/mingw64/include/c++/14.2.0/typeinfo:
 
+C:/msys64/mingw64/include/c++/14.2.0/vector:
+
 inc/SDL2/SDL_haptic.h:
 
 C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/atomic_word.h:
@@ -2416,10 +2433,6 @@ C:/msys64/mingw64/include/corecrt_startup.h:
 C:/msys64/mingw64/include/corecrt_stdio_config.h:
 
 C:/msys64/mingw64/include/ctype.h:
-
-C:/msys64/mingw64/include/c++/14.2.0/bits/stl_bvector.h:
-
-C:/msys64/mingw64/include/errno.h:
 
 C:/msys64/mingw64/include/intrin.h:
 
@@ -2697,6 +2710,8 @@ inc/SDL2/SDL_joystick.h:
 
 inc/SDL2/SDL_hints.h:
 
+inc/SDL2/SDL_image.h:
+
 inc/SDL2/SDL_shape.h:
 
 inc/SDL2/SDL_keyboard.h:
@@ -2748,11 +2763,3 @@ src/Player.cpp:
 src/UIButton.cpp:
 
 src/UIImage.cpp:
-
-C:/msys64/mingw64/include/c++/14.2.0/bits/stl_vector.h:
-
-C:/msys64/mingw64/include/c++/14.2.0/bits/vector.tcc:
-
-C:/msys64/mingw64/include/c++/14.2.0/vector:
-
-inc/SDL2/SDL_image.h:

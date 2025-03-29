@@ -3,6 +3,8 @@
         "*.embeddedhtml": "html",
         "*.ejs": "html",
         "system_error": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "iostream": "cpp",
+        "xiosbase": "cpp"
     }
 }
