@@ -24,7 +24,7 @@ if(WIN32)
         "${CMAKE_BINARY_DIR}/lib/libSDL2_image.dll.a"
     )
     target_compile_options(${P_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror -g -O0)
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     include_directories("${CMAKE_BINARY_DIR}/inc")
     find_package(SDL2 REQUIRED)
     find_package(SDL2_ttf REQUIRED)
