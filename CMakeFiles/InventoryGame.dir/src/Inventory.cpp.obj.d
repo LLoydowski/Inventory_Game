@@ -260,6 +260,11 @@ CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/functional_hash.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/hash_bytes.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.tcc \
+ C:/msys64/mingw64/include/c++/14.2.0/functional \
+ C:/msys64/mingw64/include/c++/14.2.0/tuple \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/uses_allocator.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/std_function.h \
+ C:/msys64/mingw64/include/c++/14.2.0/typeinfo \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/UIImage.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
  C:/msys64/mingw64/include/c++/14.2.0/iostream \
@@ -268,7 +273,6 @@ CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/exception \
  C:/msys64/mingw64/include/c++/14.2.0/bits/exception_ptr.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/cxxabi_init_exception.h \
- C:/msys64/mingw64/include/c++/14.2.0/typeinfo \
  C:/msys64/mingw64/include/c++/14.2.0/bits/nested_exception.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/ios_base.h \
  C:/msys64/mingw64/include/c++/14.2.0/ext/atomicity.h \

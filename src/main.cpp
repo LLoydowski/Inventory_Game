@@ -12,6 +12,11 @@
 #include <UIImage.hpp>
 #include <Player.hpp>
 
+void doSth()
+{
+    std::cout << "Skibadi Action to a butotn" << std::endl;
+}
+
 int main(int argc, char *argv[])
 {
     (void)argc; // Mark argc as unused
@@ -100,9 +105,8 @@ int main(int argc, char *argv[])
     SDL_Color btnColor = {189, 189, 189, 255};
 
     UIButton *btn = new UIButton(200, 100, 100, 100, btnColor, "Wybierz gracza", font, renderer);
+    btn->setAction(doSth);
     UI.push_back(btn);
-    UIButton *btn2 = new UIButton(200, 100, 100, 225, btnColor, "Pokaż graczy", font, renderer);
-    UI.push_back(btn2);
 
     //? Game loop
     bool isRunning = true;
@@ -120,11 +124,7 @@ int main(int argc, char *argv[])
             {
                 if (btn->checkMouseCollision())
                 {
-                    std::cout << "Button 1 pressed" << std::endl;
-                }
-                else if (btn2->checkMouseCollision())
-                {
-                    std::cout << "Button 2 pressed" << std::endl;
+                    btn->callAction();
                 }
             }
         }
@@ -134,10 +134,10 @@ int main(int argc, char *argv[])
 
         // TODO FIX Disabled buttons
 
-        // for (UIElement *element : UI)
-        // {
-        //     element->display(renderer);
-        // }
+        for (UIElement *element : UI)
+        {
+            element->display(renderer);
+        }
 
         inv->displaySDL(renderer);
         shop->displaySDL(renderer);
@@ -149,7 +149,6 @@ int main(int argc, char *argv[])
     delete shop;
 
     delete btn;
-    delete btn2;
 
     TTF_CloseFont(font);
 

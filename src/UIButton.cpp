@@ -1,7 +1,9 @@
-#include <UIButton.hpp>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <functional>
 #include <iostream>
+
+#include <UIButton.hpp>
 
 UIButton::UIButton() : UIElement()
 {
@@ -107,6 +109,11 @@ void UIButton::display(SDL_Renderer *rend)
     }
 }
 
+void UIButton::callAction()
+{
+    action();
+}
+
 bool UIButton::checkMouseCollision()
 {
     int mouseX, mouseY;
@@ -119,4 +126,9 @@ bool UIButton::checkMouseCollision()
     }
 
     return false;
+}
+
+void UIButton::setAction(std::function<void()> action)
+{
+    this->action = action;
 }
