@@ -200,6 +200,30 @@ src/Player.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Player.cpp.s
 .PHONY : src/Player.cpp.s
 
+src/Shop.obj: src/Shop.cpp.obj
+.PHONY : src/Shop.obj
+
+# target to build an object file
+src/Shop.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Shop.cpp.obj
+.PHONY : src/Shop.cpp.obj
+
+src/Shop.i: src/Shop.cpp.i
+.PHONY : src/Shop.i
+
+# target to preprocess a source file
+src/Shop.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Shop.cpp.i
+.PHONY : src/Shop.cpp.i
+
+src/Shop.s: src/Shop.cpp.s
+.PHONY : src/Shop.s
+
+# target to generate assembly for a file
+src/Shop.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Shop.cpp.s
+.PHONY : src/Shop.cpp.s
+
 src/UIButton.obj: src/UIButton.cpp.obj
 .PHONY : src/UIButton.obj
 
@@ -314,6 +338,9 @@ help:
 	@echo ... src/Player.obj
 	@echo ... src/Player.i
 	@echo ... src/Player.s
+	@echo ... src/Shop.obj
+	@echo ... src/Shop.i
+	@echo ... src/Shop.s
 	@echo ... src/UIButton.obj
 	@echo ... src/UIButton.i
 	@echo ... src/UIButton.s

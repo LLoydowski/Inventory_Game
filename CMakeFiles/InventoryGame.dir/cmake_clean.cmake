@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/InventoryGame.dir/src/Item.cpp.obj.d"
   "CMakeFiles/InventoryGame.dir/src/Player.cpp.obj"
   "CMakeFiles/InventoryGame.dir/src/Player.cpp.obj.d"
+  "CMakeFiles/InventoryGame.dir/src/Shop.cpp.obj"
+  "CMakeFiles/InventoryGame.dir/src/Shop.cpp.obj.d"
   "CMakeFiles/InventoryGame.dir/src/UIButton.cpp.obj"
   "CMakeFiles/InventoryGame.dir/src/UIButton.cpp.obj.d"
   "CMakeFiles/InventoryGame.dir/src/UIElement.cpp.obj"

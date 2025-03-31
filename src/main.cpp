@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <Inventory.hpp>
+#include <Shop.hpp>
 #include <Item.hpp>
 #include <UIElement.hpp>
 #include <UIButton.hpp>
@@ -89,8 +90,12 @@ int main(int argc, char *argv[])
     Item *item = new Item("Skibidi", rare, 100, sword01Texture);
     inv->addItem(item);
 
+    Shop *shop = new Shop(2, 2);
+    shop->setPos(500, 0, renderer);
+
     //? UI ELEMENTS
-    std::vector<UIElement *> UI;
+    std::vector<UIElement *>
+        UI;
 
     SDL_Color btnColor = {189, 189, 189, 255};
 
@@ -135,11 +140,13 @@ int main(int argc, char *argv[])
         // }
 
         inv->displaySDL(renderer);
+        shop->displaySDL(renderer);
 
         SDL_RenderPresent(renderer);
     }
 
     delete inv;
+    delete shop;
 
     delete btn;
     delete btn2;

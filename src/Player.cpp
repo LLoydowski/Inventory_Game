@@ -14,3 +14,21 @@ Player::~Player()
 {
     delete inventory;
 }
+
+int Player::getGold()
+{
+    return gold;
+}
+
+bool Player::hasFreeSlot()
+{
+    return inventory->hasFreeSlot();
+}
+
+void Player::addItemToInv(Item *item)
+{
+    if (inventory->hasFreeSlot())
+    {
+        inventory->addItem(item);
+    }
+}

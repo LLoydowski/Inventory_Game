@@ -125,12 +125,12 @@ void Inventory::generateUIElements()
     inventoryBG = new UIElement(width, height, posX, posY, inventoryBGColor);
 
     nullTexture = NULL;
-    SDL_Surface *nullSurf = IMG_Load("gfx/placeholder.png");
-    if (nullSurf)
-    {
-        nullTexture = SDL_CreateTextureFromSurface(rend, nullSurf);
-        SDL_FreeSurface(nullSurf);
-    }
+    // SDL_Surface *nullSurf = IMG_Load("gfx/placeholder.png");
+    // if (nullSurf)
+    // {
+    //     nullTexture = SDL_CreateTextureFromSurface(rend, nullSurf);
+    //     SDL_FreeSurface(nullSurf);
+    // }
 
     // blankSlotTexture = NULL;
     // SDL_Surface *blankSLotSurface = IMG_Load("gfx/placeholder.png");
@@ -303,4 +303,19 @@ void Inventory::setPos(int posX, int posY, SDL_Renderer *rend)
     this->posY = posY;
     this->rend = rend;
     generateUIElements();
+}
+
+bool Inventory::hasFreeSlot()
+{
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            if (items[i][j] == nullptr)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
 }

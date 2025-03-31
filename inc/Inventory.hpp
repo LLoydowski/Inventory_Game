@@ -9,7 +9,7 @@
 
 class Inventory
 {
-private:
+protected:
     //? Logic Stuff
     int rows, cols;
     Item ***items;
@@ -52,6 +52,8 @@ public:
     int getRows();
     void setPos(int posX, int posY, SDL_Renderer *rend);
     void setNullTexture(SDL_Texture *texture);
+
+    bool hasFreeSlot();
 };
 
 //? https://www.youtube.com/watch?v=OjNpRbNdR7E

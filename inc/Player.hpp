@@ -17,4 +17,10 @@ public:
     Player();
     Player(std::string name, float HP, float gold);
     ~Player();
+
+    bool hasFreeSlot();
+    void addItemToInv(Item *item);
+
+    //? Getters
+    int getGold();
 };
