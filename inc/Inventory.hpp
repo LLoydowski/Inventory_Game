@@ -4,8 +4,11 @@
 #include <UIButton.hpp>
 #include <UIElement.hpp>
 #include <UIImage.hpp>
+#include <UIButton.hpp>
 
 #include <Item.hpp>
+
+#include <vector>
 
 class Inventory
 {
@@ -19,9 +22,9 @@ protected:
 
     //? UI Stuff
     SDL_Renderer *rend;
-    SDL_Texture *nullTexture;
-    SDL_Texture *blankSlotTexture;
     const SDL_Color inventoryBGColor = {116, 117, 125, SDL_ALPHA_OPAQUE};
+
+    std::vector<UIButton *> *buttonGroup = nullptr;
 
     int posX, posY;
 
@@ -32,6 +35,8 @@ protected:
     const int SLOT_SIZE = 50;
     const int SLOT_PADDING = 1;
 
+    void DefaultAction();
+
 public:
     Inventory(int rows, int cols);
     ~Inventory();
@@ -39,6 +44,8 @@ public:
     void displayCLI();
     void displaySDL(SDL_Renderer *rend);
     void generateUIElements();
+    void generateUIImages();
+    void generateUIButtons();
 
     bool addItem(Item *item);
     void sortItems(char parameter);
@@ -51,7 +58,7 @@ public:
     int getCols();
     int getRows();
     void setPos(int posX, int posY, SDL_Renderer *rend);
-    void setNullTexture(SDL_Texture *texture);
+    void setPosAndUIParent(int posX, int posY, SDL_Renderer *rend, std::vector<UIButton *> *buttonGroup);
 
     bool hasFreeSlot();
 };

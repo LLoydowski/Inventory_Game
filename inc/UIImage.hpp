@@ -5,9 +5,9 @@
 
 #include <UIElement.hpp>
 
-class UIImage : public UIElement
+class UIImage : public virtual UIElement
 {
-private:
+protected:
     SDL_Texture *texture;
 
 public:

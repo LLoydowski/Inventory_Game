@@ -4,9 +4,9 @@
 #include <UIELement.hpp>
 #include <functional>
 
-class UIButton : public UIElement
+class UIButton : public virtual UIElement
 {
-private:
+protected:
     SDL_Color hoverColor;
     std::function<void()> action;
 

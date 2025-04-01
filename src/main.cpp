@@ -11,8 +11,9 @@
 #include <UIButton.hpp>
 #include <UIImage.hpp>
 #include <Player.hpp>
+#include <UIButtonImage.hpp>
 
-void doSth()
+void doSth() //! To be removed
 {
     std::cout << "Skibadi Action to a butotn" << std::endl;
 }
@@ -90,8 +91,11 @@ int main(int argc, char *argv[])
 
     // Player *player = new Player("Jasiu", 100.0, 20.0);
 
+    std::vector<UIButton *> buttons;
+
     Inventory *inv = new Inventory(6, 3);
-    inv->setPos(10, 10, renderer);
+    inv->setPosAndUIParent(10, 10, renderer, &buttons);
+    // inv->setPos(10, 10, renderer);
     Item *item = new Item("Skibidi", rare, 100, sword01Texture);
     inv->addItem(item);
 
@@ -99,14 +103,9 @@ int main(int argc, char *argv[])
     shop->setPos(500, 0, renderer);
 
     //? UI ELEMENTS
-    std::vector<UIElement *>
-        UI;
+    std::vector<UIElement *> UI;
 
-    SDL_Color btnColor = {189, 189, 189, 255};
-
-    UIButton *btn = new UIButton(200, 100, 100, 100, btnColor, "Wybierz gracza", font, renderer);
-    btn->setAction(doSth);
-    UI.push_back(btn);
+    // SDL_Color btnColor = {189, 189, 189, 255};
 
     //? Game loop
     bool isRunning = true;
@@ -122,9 +121,12 @@ int main(int argc, char *argv[])
             }
             else if (e.type == SDL_MOUSEBUTTONDOWN)
             {
-                if (btn->checkMouseCollision())
+                for (UIButton *button : buttons)
                 {
-                    btn->callAction();
+                    if (button->checkMouseCollision())
+                    {
+                        button->callAction();
+                    }
                 }
             }
         }
@@ -134,21 +136,19 @@ int main(int argc, char *argv[])
 
         // TODO FIX Disabled buttons
 
-        for (UIElement *element : UI)
-        {
-            element->display(renderer);
-        }
-
         inv->displaySDL(renderer);
         shop->displaySDL(renderer);
+
+        // for (UIElement *element : UI)
+        // {
+        //     element->display(renderer);
+        // }
 
         SDL_RenderPresent(renderer);
     }
 
     delete inv;
     delete shop;
-
-    delete btn;
 
     TTF_CloseFont(font);
 

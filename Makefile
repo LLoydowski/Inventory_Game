@@ -248,6 +248,30 @@ src/UIButton.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIButton.cpp.s
 .PHONY : src/UIButton.cpp.s
 
+src/UIButtonImage.obj: src/UIButtonImage.cpp.obj
+.PHONY : src/UIButtonImage.obj
+
+# target to build an object file
+src/UIButtonImage.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIButtonImage.cpp.obj
+.PHONY : src/UIButtonImage.cpp.obj
+
+src/UIButtonImage.i: src/UIButtonImage.cpp.i
+.PHONY : src/UIButtonImage.i
+
+# target to preprocess a source file
+src/UIButtonImage.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIButtonImage.cpp.i
+.PHONY : src/UIButtonImage.cpp.i
+
+src/UIButtonImage.s: src/UIButtonImage.cpp.s
+.PHONY : src/UIButtonImage.s
+
+# target to generate assembly for a file
+src/UIButtonImage.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIButtonImage.cpp.s
+.PHONY : src/UIButtonImage.cpp.s
+
 src/UIElement.obj: src/UIElement.cpp.obj
 .PHONY : src/UIElement.obj
 
@@ -344,6 +368,9 @@ help:
 	@echo ... src/UIButton.obj
 	@echo ... src/UIButton.i
 	@echo ... src/UIButton.s
+	@echo ... src/UIButtonImage.obj
+	@echo ... src/UIButtonImage.i
+	@echo ... src/UIButtonImage.s
 	@echo ... src/UIElement.obj
 	@echo ... src/UIElement.i
 	@echo ... src/UIElement.s

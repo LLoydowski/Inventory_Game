@@ -2,12 +2,18 @@
 #include <UIElement.hpp>
 #include <UIButton.hpp>
 #include <UIImage.hpp>
+#include <UIButtonImage.hpp>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
 #include <vector>
+
+void Inventory::DefaultAction()
+{
+    std::cout << "[Inventory] Success: This is a default action\n";
+}
 
 Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedWeapon{nullptr}, equipedArmor{nullptr}, equipedTrinket{nullptr}
 {
@@ -66,8 +72,6 @@ Inventory::~Inventory()
         delete[] UIInventorySlots[i];
     }
     delete[] UIInventorySlots;
-
-    SDL_DestroyTexture(nullTexture);
 }
 void Inventory::displayCLI()
 {
@@ -112,7 +116,6 @@ void Inventory::displaySDL(SDL_Renderer *rend)
 }
 void Inventory::generateUIElements()
 {
-
     if (!rend)
     {
         std::cout << "[Inventory] ERROR: No renderer set." << std::endl;
@@ -124,29 +127,46 @@ void Inventory::generateUIElements()
 
     inventoryBG = new UIElement(width, height, posX, posY, inventoryBGColor);
 
-    nullTexture = NULL;
-    // SDL_Surface *nullSurf = IMG_Load("gfx/placeholder.png");
-    // if (nullSurf)
-    // {
-    //     nullTexture = SDL_CreateTextureFromSurface(rend, nullSurf);
-    //     SDL_FreeSurface(nullSurf);
-    // }
+    if (buttonGroup == nullptr)
+    {
+        generateUIImages();
+    }
+    else
+    {
+        generateUIButtons();
+    }
+}
 
-    // blankSlotTexture = NULL;
-    // SDL_Surface *blankSLotSurface = IMG_Load("gfx/placeholder.png");
-    // if (!blankSLotSurface)
-    // {
-    //     std::cerr << "Failed to load image: " << IMG_GetError() << std::endl;
-    //     return;
-    // }
+void Inventory::generateUIImages()
+{
+    int wholeOffsetY = posY + PADDING;
+    for (int i = 0; i < rows; i++)
+    {
+        int wholeOffsetX = posX + PADDING;
+        for (int j = 0; j < cols; j++)
+        {
+            if (UIInventorySlots[i][j] != nullptr)
+            {
+                delete UIInventorySlots[i][j];
+            }
 
-    // blankSlotTexture = SDL_CreateTextureFromSurface(rend, blankSLotSurface);
-    // SDL_FreeSurface(blankSLotSurface);
+            SDL_Color bgColor = {153, 154, 158, SDL_ALPHA_OPAQUE};
+            UIInventorySlots[i][j] = new UIImage(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, NULL, bgColor);
 
-    // if (!blankSlotTexture)
+            wholeOffsetX += PADDING + SLOT_SIZE;
+        }
+        wholeOffsetY += PADDING + SLOT_SIZE;
+    }
+}
+
+void Inventory::generateUIButtons()
+{
+    // SDL_Texture *placeholderTexture = NULL;
+    // SDL_Surface *testSurface = IMG_Load("gfx/placeholder.png");
+    // if (testSurface)
     // {
-    //     std::cerr << "Failed to create texture from surface: " << SDL_GetError() << std::endl;
-    //     return;
+    //     placeholderTexture = SDL_CreateTextureFromSurface(rend, testSurface);
+    //     SDL_FreeSurface(testSurface);
     // }
 
     int wholeOffsetY = posY + PADDING;
@@ -161,7 +181,11 @@ void Inventory::generateUIElements()
             }
 
             SDL_Color bgColor = {153, 154, 158, SDL_ALPHA_OPAQUE};
-            UIInventorySlots[i][j] = new UIImage(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, nullTexture, bgColor);
+            UIButtonImage *button = new UIButtonImage(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, NULL, bgColor);
+            button->setAction([this]()
+                              { DefaultAction(); });
+            UIInventorySlots[i][j] = button;
+            buttonGroup->push_back(button);
 
             wholeOffsetX += PADDING + SLOT_SIZE;
         }
@@ -179,7 +203,7 @@ bool Inventory::addItem(Item *item)
             {
                 items[i][j] = item;
 
-                SDL_Texture *texture = nullTexture;
+                SDL_Texture *texture = NULL;
                 SDL_Texture *itemTexture = item->getTexture();
                 if (itemTexture != nullptr)
                 {
@@ -302,6 +326,15 @@ void Inventory::setPos(int posX, int posY, SDL_Renderer *rend)
     this->posX = posX;
     this->posY = posY;
     this->rend = rend;
+    generateUIElements();
+}
+
+void Inventory::setPosAndUIParent(int posX, int posY, SDL_Renderer *rend, std::vector<UIButton *> *buttonGroup)
+{
+    this->posX = posX;
+    this->posY = posY;
+    this->rend = rend;
+    this->buttonGroup = buttonGroup;
     generateUIElements();
 }
 
