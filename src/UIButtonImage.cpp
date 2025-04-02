@@ -9,24 +9,29 @@ UIButtonImage::UIButtonImage()
 {
 }
 UIButtonImage::UIButtonImage(int width, int height, int posX, int posY, SDL_Texture *texture)
-    : UIImage(width, height, posX, posY, texture)
+    : UIElement(width, height, posX, posY), UIImage(width, height, posX, posY, texture)
 {
-    this->width = width;
-    this->height = height;
-    this->posX = posX;
-    this->posY = posY;
-    this->texture = texture;
 }
 UIButtonImage::UIButtonImage(int width, int height, int posX, int posY, SDL_Texture *texture, SDL_Color color)
-    : UIImage(width, height, posX, posY, texture, color)
+    : UIElement(width, height, posX, posY), UIImage(width, height, posX, posY, texture, color)
 {
-    //! I have no fucking idea why this constructor doesnt call, I mean it kinda does but doesnt assign the values.
-    this->width = width;
-    this->height = height;
-    this->posX = posX;
-    this->posY = posY;
-    this->texture = texture;
     this->color = color;
+    text = "";
+    textTexture = nullptr;
+}
+
+UIButtonImage::~UIButtonImage()
+{
+    if (textTexture != nullptr && textTexture != NULL)
+    {
+        SDL_DestroyTexture(textTexture);
+        textTexture = nullptr;
+    }
+    if (texture != nullptr && texture != NULL)
+    {
+        SDL_DestroyTexture(texture);
+        texture = nullptr;
+    }
 }
 
 void UIButtonImage::display(SDL_Renderer *rend)
@@ -35,4 +40,13 @@ void UIButtonImage::display(SDL_Renderer *rend)
     SDL_SetRenderDrawColor(rend, color.r, color.g, color.b, color.a);
     SDL_RenderFillRect(rend, &dest);
     SDL_RenderCopy(rend, texture, NULL, &dest);
+}
+
+void UIButtonImage::display(SDL_Renderer *rend, int padding)
+{
+    SDL_Rect dest = {posX, posY, width, height};
+    SDL_Rect itemDest = {posX + padding / 2, posY + padding / 2, width - padding, height - padding};
+    SDL_SetRenderDrawColor(rend, color.r, color.g, color.b, color.a);
+    SDL_RenderFillRect(rend, &dest);
+    SDL_RenderCopy(rend, texture, NULL, &itemDest);
 }

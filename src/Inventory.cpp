@@ -20,23 +20,15 @@ Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedWeapon
 
     // Generating item 2D array
     items = new Item **[rows];
+    UIInventorySlots = new UIButtonImage **[rows];
 
     for (int i = 0; i < rows; i++)
     {
         items[i] = new Item *[cols];
+        UIInventorySlots[i] = new UIButtonImage *[cols];
         for (int j = 0; j < cols; j++)
         {
             items[i][j] = nullptr;
-        }
-    }
-
-    UIInventorySlots = new UIImage **[rows];
-
-    for (int i = 0; i < rows; i++)
-    {
-        UIInventorySlots[i] = new UIImage *[cols];
-        for (int j = 0; j < cols; j++)
-        {
             UIInventorySlots[i][j] = nullptr;
         }
     }
@@ -53,6 +45,7 @@ Inventory::~Inventory()
             if (items[i][j] != nullptr)
             {
                 delete items[i][j];
+                items[i][j] = nullptr;
             }
         }
         delete[] items[i];
@@ -60,6 +53,7 @@ Inventory::~Inventory()
     delete[] items;
 
     delete inventoryBG;
+    inventoryBG = nullptr;
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
@@ -67,11 +61,13 @@ Inventory::~Inventory()
             if (UIInventorySlots[i][j] != nullptr)
             {
                 delete UIInventorySlots[i][j];
+                UIInventorySlots[i][j] = nullptr;
             }
         }
-        delete[] UIInventorySlots[i];
     }
+
     delete[] UIInventorySlots;
+    UIInventorySlots = nullptr;
 }
 void Inventory::displayCLI()
 {
@@ -127,55 +123,13 @@ void Inventory::generateUIElements()
 
     inventoryBG = new UIElement(width, height, posX, posY, inventoryBGColor);
 
-    if (buttonGroup == nullptr)
-    {
-        generateUIImages();
-    }
-    else
-    {
-        generateUIButtons();
-    }
-}
-
-void Inventory::generateUIImages()
-{
     int wholeOffsetY = posY + PADDING;
     for (int i = 0; i < rows; i++)
     {
         int wholeOffsetX = posX + PADDING;
         for (int j = 0; j < cols; j++)
         {
-            if (UIInventorySlots[i][j] != nullptr)
-            {
-                delete UIInventorySlots[i][j];
-            }
-
-            SDL_Color bgColor = {153, 154, 158, SDL_ALPHA_OPAQUE};
-            UIInventorySlots[i][j] = new UIImage(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, NULL, bgColor);
-
-            wholeOffsetX += PADDING + SLOT_SIZE;
-        }
-        wholeOffsetY += PADDING + SLOT_SIZE;
-    }
-}
-
-void Inventory::generateUIButtons()
-{
-    // SDL_Texture *placeholderTexture = NULL;
-    // SDL_Surface *testSurface = IMG_Load("gfx/placeholder.png");
-    // if (testSurface)
-    // {
-    //     placeholderTexture = SDL_CreateTextureFromSurface(rend, testSurface);
-    //     SDL_FreeSurface(testSurface);
-    // }
-
-    int wholeOffsetY = posY + PADDING;
-    for (int i = 0; i < rows; i++)
-    {
-        int wholeOffsetX = posX + PADDING;
-        for (int j = 0; j < cols; j++)
-        {
-            if (UIInventorySlots[i][j] != nullptr)
+            if (UIInventorySlots[i][j] != nullptr && UIInventorySlots[i][j] != NULL)
             {
                 delete UIInventorySlots[i][j];
             }
@@ -185,10 +139,14 @@ void Inventory::generateUIButtons()
             button->setAction([this]()
                               { DefaultAction(); });
             UIInventorySlots[i][j] = button;
-            buttonGroup->push_back(button);
+            if (buttonGroup != nullptr)
+            {
+                buttonGroup->push_back(button); //! ERROR HERE (NOT THE MAIN ONE)
+            }
 
             wholeOffsetX += PADDING + SLOT_SIZE;
         }
+
         wholeOffsetY += PADDING + SLOT_SIZE;
     }
 }

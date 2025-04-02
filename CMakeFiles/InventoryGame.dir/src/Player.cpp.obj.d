@@ -268,6 +268,7 @@ CMakeFiles/InventoryGame.dir/src/Player.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/std_function.h \
  C:/msys64/mingw64/include/c++/14.2.0/typeinfo \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/UIImage.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIButtonImage.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
  C:/msys64/mingw64/include/c++/14.2.0/iostream \
  C:/msys64/mingw64/include/c++/14.2.0/ostream \

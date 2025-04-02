@@ -5,6 +5,7 @@
 #include <UIElement.hpp>
 #include <UIImage.hpp>
 #include <UIButton.hpp>
+#include <UIButtonImage.hpp>
 
 #include <Item.hpp>
 
@@ -29,7 +30,7 @@ protected:
     int posX, posY;
 
     UIElement *inventoryBG;
-    UIImage ***UIInventorySlots;
+    UIButtonImage ***UIInventorySlots;
 
     const int PADDING = 10;
     const int SLOT_SIZE = 50;
@@ -44,8 +45,6 @@ public:
     void displayCLI();
     void displaySDL(SDL_Renderer *rend);
     void generateUIElements();
-    void generateUIImages();
-    void generateUIButtons();
 
     bool addItem(Item *item);
     void sortItems(char parameter);

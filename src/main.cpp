@@ -95,12 +95,15 @@ int main(int argc, char *argv[])
 
     Inventory *inv = new Inventory(6, 3);
     inv->setPosAndUIParent(10, 10, renderer, &buttons);
-    // inv->setPos(10, 10, renderer);
     Item *item = new Item("Skibidi", rare, 100, sword01Texture);
     inv->addItem(item);
+    Item *item2 = new Item("Skibidi2", rare, 100, sword01Texture);
+    inv->addItem(item2);
+    Item *item3 = new Item("Skibidi3", rare, 100, sword01Texture);
+    inv->addItem(item3);
 
-    Shop *shop = new Shop(2, 2);
-    shop->setPos(500, 0, renderer);
+    // Shop *shop = new Shop(2, 2);
+    // shop->setPos(500, 0, renderer);
 
     //? UI ELEMENTS
     std::vector<UIElement *> UI;
@@ -137,7 +140,7 @@ int main(int argc, char *argv[])
         // TODO FIX Disabled buttons
 
         inv->displaySDL(renderer);
-        shop->displaySDL(renderer);
+        // shop->displaySDL(renderer);
 
         // for (UIElement *element : UI)
         // {
@@ -148,7 +151,13 @@ int main(int argc, char *argv[])
     }
 
     delete inv;
-    delete shop;
+    // delete shop;
+
+    for (int i = 0; i < int(buttons.size()); i++)
+    {
+        delete buttons[i];
+    }
+    buttons.clear();
 
     TTF_CloseFont(font);
 

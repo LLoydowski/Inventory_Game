@@ -85,6 +85,15 @@ UIButton::UIButton(int width, int height, int posX, int posY, SDL_Color color, s
     hoverColor.b = b;
 }
 
+UIButton::~UIButton()
+{
+    if (textTexture != nullptr && textTexture != NULL)
+    {
+        SDL_DestroyTexture(textTexture);
+        textTexture = nullptr;
+    }
+}
+
 void UIButton::display(SDL_Renderer *rend)
 {
     SDL_Rect rect = {posX, posY, width, height};

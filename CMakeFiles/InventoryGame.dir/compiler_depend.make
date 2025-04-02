@@ -941,6 +941,7 @@ CMakeFiles/InventoryGame.dir/src/Player.cpp.obj: src/Player.cpp \
   inc/SDL2/begin_code.h \
   inc/SDL2/close_code.h \
   inc/UIButton.hpp \
+  inc/UIButtonImage.hpp \
   inc/UIElement.hpp \
   inc/UIImage.hpp
 
@@ -1261,6 +1262,7 @@ CMakeFiles/InventoryGame.dir/src/Shop.cpp.obj: src/Shop.cpp \
   inc/SDL2/close_code.h \
   inc/Shop.hpp \
   inc/UIButton.hpp \
+  inc/UIButtonImage.hpp \
   inc/UIElement.hpp \
   inc/UIImage.hpp
 

@@ -266,6 +266,7 @@ CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/std_function.h \
  C:/msys64/mingw64/include/c++/14.2.0/typeinfo \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/UIImage.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIButtonImage.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
  C:/msys64/mingw64/include/c++/14.2.0/iostream \
  C:/msys64/mingw64/include/c++/14.2.0/ostream \
@@ -311,5 +312,4 @@ CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_vector.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/vector.tcc \
- E:/Projekty/Programowanie/C++/InventoryGame/inc/UIButtonImage.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_image.h
