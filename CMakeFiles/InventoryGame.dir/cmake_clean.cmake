@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/InventoryGame.dir/src/UIButtonImage.cpp.obj.d"
   "CMakeFiles/InventoryGame.dir/src/UIElement.cpp.obj"
   "CMakeFiles/InventoryGame.dir/src/UIElement.cpp.obj.d"
+  "CMakeFiles/InventoryGame.dir/src/UIGroup.cpp.obj"
+  "CMakeFiles/InventoryGame.dir/src/UIGroup.cpp.obj.d"
   "CMakeFiles/InventoryGame.dir/src/UIImage.cpp.obj"
   "CMakeFiles/InventoryGame.dir/src/UIImage.cpp.obj.d"
   "CMakeFiles/InventoryGame.dir/src/main.cpp.obj"

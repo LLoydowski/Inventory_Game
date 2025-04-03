@@ -87,7 +87,8 @@ UIButton::UIButton(int width, int height, int posX, int posY, SDL_Color color, s
 
 UIButton::~UIButton()
 {
-    if (textTexture != nullptr && textTexture != NULL)
+
+    if (textTexture != nullptr)
     {
         SDL_DestroyTexture(textTexture);
         textTexture = nullptr;
@@ -96,7 +97,15 @@ UIButton::~UIButton()
 
 void UIButton::display(SDL_Renderer *rend)
 {
-    SDL_Rect rect = {posX, posY, width, height};
+    int realX = posX;
+    int realY = posY;
+    if (hasParent)
+    {
+        realX += parentX;
+        realY += parentY;
+    }
+
+    SDL_Rect rect = {realX, realY, width, height};
 
     SDL_SetRenderDrawColor(rend, color.r, color.g, color.b, color.a);
 
@@ -111,7 +120,7 @@ void UIButton::display(SDL_Renderer *rend)
         int texWidth, texHeight;
         SDL_QueryTexture(textTexture, NULL, NULL, &texWidth, &texHeight);
 
-        SDL_Rect paddedRect = {posX + textPadding, posY + textPadding, width - 2 * textPadding, height - 2 * textPadding};
+        SDL_Rect paddedRect = {realX + textPadding, realY + textPadding, width - 2 * textPadding, height - 2 * textPadding};
         SDL_Rect textRect = {0, 0, texWidth, texHeight};
 
         SDL_RenderCopy(rend, textTexture, &textRect, &paddedRect);
@@ -128,7 +137,16 @@ bool UIButton::checkMouseCollision()
     int mouseX, mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
 
-    if ((mouseX >= posX && mouseX <= posX + width) && (mouseY >= posY && mouseY <= posY + height))
+    int realX = posX;
+    int realY = posY;
+
+    if (hasParent)
+    {
+        realX += parentX;
+        realY += parentY;
+    }
+
+    if ((mouseX >= realX && mouseX <= realX + width) && (mouseY >= realY && mouseY <= realY + height))
     {
 
         return true;

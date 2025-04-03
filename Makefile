@@ -296,6 +296,30 @@ src/UIElement.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIElement.cpp.s
 .PHONY : src/UIElement.cpp.s
 
+src/UIGroup.obj: src/UIGroup.cpp.obj
+.PHONY : src/UIGroup.obj
+
+# target to build an object file
+src/UIGroup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIGroup.cpp.obj
+.PHONY : src/UIGroup.cpp.obj
+
+src/UIGroup.i: src/UIGroup.cpp.i
+.PHONY : src/UIGroup.i
+
+# target to preprocess a source file
+src/UIGroup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIGroup.cpp.i
+.PHONY : src/UIGroup.cpp.i
+
+src/UIGroup.s: src/UIGroup.cpp.s
+.PHONY : src/UIGroup.s
+
+# target to generate assembly for a file
+src/UIGroup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIGroup.cpp.s
+.PHONY : src/UIGroup.cpp.s
+
 src/UIImage.obj: src/UIImage.cpp.obj
 .PHONY : src/UIImage.obj
 
@@ -374,6 +398,9 @@ help:
 	@echo ... src/UIElement.obj
 	@echo ... src/UIElement.i
 	@echo ... src/UIElement.s
+	@echo ... src/UIGroup.obj
+	@echo ... src/UIGroup.i
+	@echo ... src/UIGroup.s
 	@echo ... src/UIImage.obj
 	@echo ... src/UIImage.i
 	@echo ... src/UIImage.s

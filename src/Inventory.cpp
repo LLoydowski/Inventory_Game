@@ -10,9 +10,50 @@
 
 #include <vector>
 
-void Inventory::DefaultAction()
+void Inventory::defaultAction()
 {
-    std::cout << "[Inventory] Success: This is a default action\n";
+    // std::cout << "[Inventory] Success: This is a default action\n";
+
+    if (buttonGroup == nullptr)
+    {
+        std::cout << "[Inventory/defaultAction] Error: No button group set\n";
+        return;
+    }
+
+    int mouseX, mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
+
+    if (menu == nullptr)
+    {
+        menu = new UIGroup(mouseX, mouseY);
+
+        SDL_Color color = {200, 200, 200, 255};
+
+        UIElement *bg = new UIElement(100, 300, 0, 0, color);
+        menu->addElement(bg);
+
+        TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 72);
+        if (font == nullptr)
+        {
+            std::cerr << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
+            return;
+        }
+
+        UIButton *moveButton = new UIButton(100, 50, 0, 0, color, "Move item", font, rend);
+        moveButton->setAction([this]()
+                              { testAction(); });
+        buttonGroup->push_back(moveButton);
+        menu->addElement(moveButton);
+
+        TTF_CloseFont(font);
+    }
+
+    menu->setPos(mouseX, mouseY);
+}
+
+void Inventory::testAction()
+{
+    std::cout << "[Inventory] Success: This is a test action\n";
 }
 
 Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedWeapon{nullptr}, equipedArmor{nullptr}, equipedTrinket{nullptr}
@@ -68,6 +109,9 @@ Inventory::~Inventory()
 
     delete[] UIInventorySlots;
     UIInventorySlots = nullptr;
+
+    delete menu;
+    menu = nullptr;
 }
 void Inventory::displayCLI()
 {
@@ -109,6 +153,11 @@ void Inventory::displaySDL(SDL_Renderer *rend)
             }
         }
     }
+
+    if (menu != nullptr)
+    {
+        menu->display(rend);
+    }
 }
 void Inventory::generateUIElements()
 {
@@ -137,7 +186,7 @@ void Inventory::generateUIElements()
             SDL_Color bgColor = {153, 154, 158, SDL_ALPHA_OPAQUE};
             UIButtonImage *button = new UIButtonImage(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, NULL, bgColor);
             button->setAction([this]()
-                              { DefaultAction(); });
+                              { defaultAction(); });
             UIInventorySlots[i][j] = button;
             if (buttonGroup != nullptr)
             {

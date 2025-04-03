@@ -58,17 +58,6 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 72);
-    if (font == nullptr)
-    {
-        std::cerr << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        TTF_Quit();
-        SDL_Quit();
-        return 1;
-    }
-
     //? Loading textures
 
     SDL_Texture *placeholderTexture = NULL;
@@ -124,11 +113,12 @@ int main(int argc, char *argv[])
             }
             else if (e.type == SDL_MOUSEBUTTONDOWN)
             {
-                for (UIButton *button : buttons)
+                for (int i = buttons.size() - 1; i > 0; i--)
                 {
-                    if (button->checkMouseCollision())
+                    if (buttons[i]->checkMouseCollision())
                     {
-                        button->callAction();
+                        buttons[i]->callAction();
+                        break;
                     }
                 }
             }
@@ -152,14 +142,6 @@ int main(int argc, char *argv[])
 
     delete inv;
     // delete shop;
-
-    for (int i = 0; i < int(buttons.size()); i++)
-    {
-        delete buttons[i];
-    }
-    buttons.clear();
-
-    TTF_CloseFont(font);
 
     SDL_DestroyTexture(placeholderTexture);
     SDL_DestroyTexture(sword01Texture);

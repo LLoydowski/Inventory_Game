@@ -34,7 +34,15 @@ UIElement::~UIElement()
 
 void UIElement::display(SDL_Renderer *rend)
 {
-    SDL_Rect rect = {posX, posY, width, height};
+    int realX = posX;
+    int realY = posY;
+    if (hasParent)
+    {
+        realX += parentX;
+        realY += parentY;
+    }
+
+    SDL_Rect rect = {realX, realY, width, height};
 
     SDL_SetRenderDrawColor(rend, color.r, color.g, color.b, color.a);
 
@@ -47,7 +55,7 @@ void UIElement::display(SDL_Renderer *rend)
 
         SDL_Rect textRect = {0, 0, texWidth, texHeight};
 
-        SDL_Rect paddedRect = {posX + textPadding, posY + textPadding, width - 2 * textPadding, height - 2 * textPadding};
+        SDL_Rect paddedRect = {realX + textPadding, realY + textPadding, width - 2 * textPadding, height - 2 * textPadding};
 
         SDL_RenderCopy(rend, textTexture, &textRect, &paddedRect);
     }
@@ -130,4 +138,11 @@ void UIElement::setText(std::string text, TTF_Font *font, SDL_Renderer *rend)
 void UIElement::setTextPadding(int textPadding)
 {
     this->textPadding = textPadding;
+}
+
+void UIElement::setParentPos(int posX, int posY)
+{
+    this->parentX = posX;
+    this->parentY = posY;
+    this->hasParent = true;
 }
