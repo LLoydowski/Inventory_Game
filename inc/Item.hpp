@@ -25,6 +25,7 @@ public:
     Item();
     Item(std::string name, Rarities rarity, float price);
     Item(std::string name, Rarities rarity, float price, SDL_Texture *texture);
+    virtual ~Item(); 
 
     virtual void display();
 

@@ -15,6 +15,10 @@ Item::Item(std::string name, Rarities rarity, float price, SDL_Texture *texture)
 {
 }
 
+Item::~Item() {
+
+}
+
 void Item::display()
 {
     std::cout << "Name: " << this->name << std::endl;
