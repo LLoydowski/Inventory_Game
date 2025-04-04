@@ -3,6 +3,10 @@
 #include <UIButton.hpp>
 #include <UIImage.hpp>
 
+#include "Weapon.hpp"
+#include "Armor.hpp"
+#include "Trinket.hpp"
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
@@ -281,11 +285,48 @@ bool Inventory::toggleFavourite(int row, int col)
     return true;
 }
 
-void Inventory::equipItem(int row, int col)
-{
-    (void)row; //! Remove when modfying this function
-    (void)col; //! ---||---
+// -------------ITEM MUSI MIEĆ VIRTUAL FUNCTION (polimorfizm te sprawy)
+
+void Inventory::equipItem(int row, int col) {
+    if (row < 0 || row >= rows || col < 0 || col >= cols) {
+        return;
+    }
+
+    Item* item = items[row][col];
+
+    if (item == nullptr) {
+        return;
+    }
+
+    if (Weapon* weapon = dynamic_cast<Weapon*>(item)) {
+
+        if (equipedWeapon != nullptr) {
+            addItem(equipedWeapon);
+        }
+
+        equipedWeapon = weapon;
+        items[row][col] = nullptr;
+    }
+    else if (Armor* armor = dynamic_cast<Armor*>(item)) {
+
+        if (equipedArmor != nullptr) {
+            addItem(equipedArmor);
+        }
+
+        equipedArmor = armor;
+        items[row][col] = nullptr;
+    }
+    else if (Trinket* trinket = dynamic_cast<Trinket*>(item)) {
+
+        if (equipedTrinket != nullptr) {
+            addItem(equipedTrinket);
+        }
+
+        equipedTrinket = trinket;
+        items[row][col] = nullptr;
+    }
 }
+
 
 int Inventory::getCols()
 {
