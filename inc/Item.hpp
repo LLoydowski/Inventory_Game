@@ -26,7 +26,7 @@ public:
     Item(std::string name, Rarities rarity, float price);
     Item(std::string name, Rarities rarity, float price, SDL_Texture *texture);
 
-    void display();
+    virtual void display();
 
     // Getters
     std::string getName();
