@@ -285,7 +285,6 @@ bool Inventory::toggleFavourite(int row, int col)
     return true;
 }
 
-// -------------ITEM MUSI MIEĆ VIRTUAL FUNCTION (polimorfizm te sprawy)
 
 void Inventory::equipItem(int row, int col) {
     if (row < 0 || row >= rows || col < 0 || col >= cols) {
@@ -326,6 +325,45 @@ void Inventory::equipItem(int row, int col) {
         items[row][col] = nullptr;
     }
 }
+
+
+void Inventory::unequipItem(int row, int col) {
+    if (row < 0 || row >= rows || col < 0 || col >= cols) {
+        return;
+    }
+
+    Item* item = items[row][col];
+
+    if (item == nullptr) {
+        return;
+    }
+
+    if (Weapon* weapon = dynamic_cast<Weapon*>(item)) {
+        if (equipedWeapon != nullptr) {
+            addItem(equipedWeapon);
+        }
+
+        equipedWeapon = nullptr;
+        items[row][col] = nullptr;
+    }
+    else if (Armor* armor = dynamic_cast<Armor*>(item)) {
+        if (equipedArmor != nullptr) {
+            addItem(equipedArmor);
+        }
+
+        equipedArmor = nullptr;
+        items[row][col] = nullptr;
+    }
+    else if (Trinket* trinket = dynamic_cast<Trinket*>(item)) {
+        if (equipedTrinket != nullptr) {
+            addItem(equipedTrinket);
+        }
+
+        equipedTrinket = nullptr;
+        items[row][col] = nullptr;
+    }
+}
+
 
 
 int Inventory::getCols()
