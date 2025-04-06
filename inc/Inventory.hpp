@@ -26,7 +26,8 @@ protected:
     SDL_Renderer *rend;
     const SDL_Color inventoryBGColor = {116, 117, 125, SDL_ALPHA_OPAQUE};
 
-    std::vector<UIButton *> buttons;
+    std::vector<UIButton *> menuButtons;
+    std::vector<UIButton *> slotButtons;
 
     int posX, posY;
 
@@ -50,6 +51,7 @@ public:
     void generateUIElements();
 
     bool handleClickEvents();
+    bool removeMenu();
 
     bool addItem(Item *item);
     void sortItems(char parameter);

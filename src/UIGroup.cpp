@@ -12,7 +12,9 @@ UIGroup::~UIGroup()
     for (UIElement *element : elements)
     {
         delete element;
+        element = nullptr;
     }
+    elements.clear();
 };
 void UIGroup::addElement(UIElement *element)
 {
@@ -24,7 +26,10 @@ void UIGroup::display(SDL_Renderer *rend)
 {
     for (UIElement *element : elements)
     {
-        element->display(rend);
+        if (element != nullptr)
+        {
+            element->display(rend);
+        }
     }
 }
 

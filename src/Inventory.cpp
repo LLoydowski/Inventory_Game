@@ -36,7 +36,7 @@ void Inventory::defaultAction()
         UIButton *moveButton = new UIButton(100, 50, 0, 0, color, "Move item", font, rend);
         moveButton->setAction([this]()
                               { testAction(); });
-        buttons.push_back(moveButton);
+        menuButtons.push_back(moveButton);
         menu->addElement(moveButton);
 
         TTF_CloseFont(font);
@@ -182,7 +182,7 @@ void Inventory::generateUIElements()
             button->setAction([this]()
                               { defaultAction(); });
             UIInventorySlots[i][j] = button;
-            buttons.push_back(button); //! ERROR HERE (NOT THE MAIN ONE)
+            slotButtons.push_back(button);
 
             wholeOffsetX += PADDING + SLOT_SIZE;
         }
@@ -193,17 +193,56 @@ void Inventory::generateUIElements()
 
 bool Inventory::handleClickEvents()
 {
-    for (int i = buttons.size() - 1; i >= 0; i--)
+    bool wasActionCalled = false;
+
+    if (!wasActionCalled)
     {
-        if (buttons[i]->checkMouseCollision())
+        for (int i = menuButtons.size() - 1; i >= 0; i--)
         {
-            buttons[i]->callAction();
-            return true;
-            break;
+            if (menuButtons[i]->checkMouseCollision())
+            {
+                menuButtons[i]->callAction();
+                wasActionCalled = true;
+                return true;
+                break;
+            }
         }
     }
 
+    if (!wasActionCalled)
+    {
+        for (int i = slotButtons.size() - 1; i >= 0; i--)
+        {
+            if (slotButtons[i]->checkMouseCollision())
+            {
+                slotButtons[i]->callAction();
+                wasActionCalled = true;
+                return true;
+                break;
+            }
+        }
+    }
+
+    if (!wasActionCalled)
+    {
+        this->removeMenu();
+    }
+
     return false;
+}
+
+bool Inventory::removeMenu()
+{
+    if (!menu)
+    {
+        return false;
+    }
+
+    delete menu;
+    menu = nullptr;
+    menuButtons.clear();
+
+    return true;
 }
 
 bool Inventory::addItem(Item *item)
