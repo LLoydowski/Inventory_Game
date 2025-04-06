@@ -80,10 +80,8 @@ int main(int argc, char *argv[])
 
     // Player *player = new Player("Jasiu", 100.0, 20.0);
 
-    std::vector<UIButton *> buttons;
-
     Inventory *inv = new Inventory(6, 3);
-    inv->setPosAndUIParent(10, 10, renderer, &buttons);
+    inv->setPos(10, 10, renderer);
     Item *item = new Item("Skibidi", rare, 100, sword01Texture);
     inv->addItem(item);
     Item *item2 = new Item("Skibidi2", rare, 100, sword01Texture);
@@ -113,13 +111,10 @@ int main(int argc, char *argv[])
             }
             else if (e.type == SDL_MOUSEBUTTONDOWN)
             {
-                for (int i = buttons.size() - 1; i > 0; i--)
+                bool wasActionCalled = false;
+                if (!wasActionCalled)
                 {
-                    if (buttons[i]->checkMouseCollision())
-                    {
-                        buttons[i]->callAction();
-                        break;
-                    }
+                    wasActionCalled = inv->handleClickEvents();
                 }
             }
         }

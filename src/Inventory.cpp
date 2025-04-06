@@ -14,12 +14,6 @@ void Inventory::defaultAction()
 {
     // std::cout << "[Inventory] Success: This is a default action\n";
 
-    if (buttonGroup == nullptr)
-    {
-        std::cout << "[Inventory/defaultAction] Error: No button group set\n";
-        return;
-    }
-
     int mouseX, mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
 
@@ -42,7 +36,7 @@ void Inventory::defaultAction()
         UIButton *moveButton = new UIButton(100, 50, 0, 0, color, "Move item", font, rend);
         moveButton->setAction([this]()
                               { testAction(); });
-        buttonGroup->push_back(moveButton);
+        buttons.push_back(moveButton);
         menu->addElement(moveButton);
 
         TTF_CloseFont(font);
@@ -188,16 +182,28 @@ void Inventory::generateUIElements()
             button->setAction([this]()
                               { defaultAction(); });
             UIInventorySlots[i][j] = button;
-            if (buttonGroup != nullptr)
-            {
-                buttonGroup->push_back(button); //! ERROR HERE (NOT THE MAIN ONE)
-            }
+            buttons.push_back(button); //! ERROR HERE (NOT THE MAIN ONE)
 
             wholeOffsetX += PADDING + SLOT_SIZE;
         }
 
         wholeOffsetY += PADDING + SLOT_SIZE;
     }
+}
+
+bool Inventory::handleClickEvents()
+{
+    for (int i = buttons.size() - 1; i >= 0; i--)
+    {
+        if (buttons[i]->checkMouseCollision())
+        {
+            buttons[i]->callAction();
+            return true;
+            break;
+        }
+    }
+
+    return false;
 }
 
 bool Inventory::addItem(Item *item)
@@ -333,15 +339,6 @@ void Inventory::setPos(int posX, int posY, SDL_Renderer *rend)
     this->posX = posX;
     this->posY = posY;
     this->rend = rend;
-    generateUIElements();
-}
-
-void Inventory::setPosAndUIParent(int posX, int posY, SDL_Renderer *rend, std::vector<UIButton *> *buttonGroup)
-{
-    this->posX = posX;
-    this->posY = posY;
-    this->rend = rend;
-    this->buttonGroup = buttonGroup;
     generateUIElements();
 }
 
