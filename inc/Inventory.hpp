@@ -15,6 +15,14 @@
 
 #include <vector>
 
+
+enum ItemParameter
+{
+    weapon,
+    armor,
+    trinket
+};
+
 class Inventory
 {
 protected:
@@ -63,7 +71,7 @@ public:
     void equipItem(Weapon* weapon);
     void equipItem(Trinket* trinket);
     void equipItem(Armor* armor);
-    void unequipItem(int row, int col);
+    void unequipItem(ItemParameter parameter);
     void useItem(int row, int col);
     bool toggleFavourite(int row, int col);
 

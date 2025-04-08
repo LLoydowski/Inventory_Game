@@ -374,53 +374,18 @@ void Inventory::equipItem(Trinket* trinket)
 }
 
 
-void Inventory::unequipItem(int row, int col)
+void Inventory::unequipItem(ItemParameter parameter)
 {
-    if (row < 0 || row >= rows || col < 0 || col >= cols)
-    {
-        return;
-    }
-
-    Item *item = items[row][col];
-
-    if (item == nullptr)
-    {
-        return;
-    }
-
-    if (Weapon *weapon = dynamic_cast<Weapon *>(item))
-    {
-        if (equipedWeapon != nullptr)
-        {
-            addItem(equipedWeapon);
-        }
-
+    if(parameter == weapon) {
         equipedWeapon = nullptr;
-        items[row][col] = nullptr;
-        (void)weapon;
-    }
-    else if (Armor *armor = dynamic_cast<Armor *>(item))
-    {
-        if (equipedArmor != nullptr)
-        {
-            addItem(equipedArmor);
-        }
-
-        equipedArmor = nullptr;
-        items[row][col] = nullptr;
-        (void)armor;
-    }
-    else if (Trinket *trinket = dynamic_cast<Trinket *>(item))
-    {
-        if (equipedTrinket != nullptr)
-        {
-            addItem(equipedTrinket);
-        }
-
+    } else if (parameter == armor) {
+       equipedArmor = nullptr;
+    }  else if (parameter == trinket) {
         equipedTrinket = nullptr;
-        items[row][col] = nullptr;
-        (void)trinket;
+    } else {
+        std::cout << "how did you manage to do this (unequip parameter is not weapon/armor/trinket)" << endl;;
     }
+    
 }
 
 void Inventory::useItem(int row, int col)
