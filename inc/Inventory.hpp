@@ -9,6 +9,9 @@
 #include <UIGroup.hpp>
 
 #include <Item.hpp>
+#include <Weapon.hpp>
+#include <Armor.hpp>
+#include <Trinket.hpp>
 
 #include <vector>
 
@@ -57,9 +60,11 @@ public:
     void sortItems(char parameter);
     bool moveItems(int oldRow, int oldCol, int newRow, int newCol);
     void removeItem(int row, int col);
-    void equipItem(int row, int col);
+    void equipItem(Weapon* weapon);
+    void equipItem(Trinket* trinket);
+    void equipItem(Armor* armor);
     void unequipItem(int row, int col);
-    void useItem(int row, int col); //change to bool later i think?
+    void useItem(int row, int col);
     bool toggleFavourite(int row, int col);
 
     int getCols();

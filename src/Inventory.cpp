@@ -361,54 +361,18 @@ bool Inventory::toggleFavourite(int row, int col)
     return true;
 }
 
-void Inventory::equipItem(int row, int col)
-{
-    if (row < 0 || row >= rows || col < 0 || col >= cols)
-    {
-        return;
-    }
-
-    Item *item = items[row][col];
-
-    if (item == nullptr)
-    {
-        return;
-    }
-
-    if (Weapon *weapon = dynamic_cast<Weapon *>(item))
-    {
-
-        if (equipedWeapon != nullptr)
-        {
-            addItem(equipedWeapon);
-        }
-
-        equipedWeapon = weapon;
-        items[row][col] = nullptr;
-    }
-    else if (Armor *armor = dynamic_cast<Armor *>(item))
-    {
-
-        if (equipedArmor != nullptr)
-        {
-            addItem(equipedArmor);
-        }
-
-        equipedArmor = armor;
-        items[row][col] = nullptr;
-    }
-    else if (Trinket *trinket = dynamic_cast<Trinket *>(item))
-    {
-
-        if (equipedTrinket != nullptr)
-        {
-            addItem(equipedTrinket);
-        }
-
-        equipedTrinket = trinket;
-        items[row][col] = nullptr;
-    }
+void Inventory::equipItem(Weapon* weapon)
+{   
+    equipedWeapon = weapon;
 }
+void Inventory::equipItem(Armor* armor) {
+    equipedArmor = armor;
+}
+void Inventory::equipItem(Trinket* trinket)
+{
+    equipedTrinket = trinket;
+}
+
 
 void Inventory::unequipItem(int row, int col)
 {
