@@ -376,14 +376,17 @@ void Inventory::equipItem(Trinket* trinket)
 
 void Inventory::unequipItem(ItemParameter parameter)
 {
-    if(parameter == weapon) {
+    switch (parameter)
+    {
+    case weapon:
         equipedWeapon = nullptr;
-    } else if (parameter == armor) {
-       equipedArmor = nullptr;
-    }  else if (parameter == trinket) {
+        break;
+    case armor:
+        equipedArmor = nullptr;
+        break;
+    case trinket:
         equipedTrinket = nullptr;
-    } else {
-        std::cout << "how did you manage to do this (unequip parameter is not weapon/armor/trinket)" << endl;;
+        break;
     }
     
 }
