@@ -248,6 +248,30 @@ src/UIButton.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIButton.cpp.s
 .PHONY : src/UIButton.cpp.s
 
+src/UIButtonImage.obj: src/UIButtonImage.cpp.obj
+.PHONY : src/UIButtonImage.obj
+
+# target to build an object file
+src/UIButtonImage.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIButtonImage.cpp.obj
+.PHONY : src/UIButtonImage.cpp.obj
+
+src/UIButtonImage.i: src/UIButtonImage.cpp.i
+.PHONY : src/UIButtonImage.i
+
+# target to preprocess a source file
+src/UIButtonImage.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIButtonImage.cpp.i
+.PHONY : src/UIButtonImage.cpp.i
+
+src/UIButtonImage.s: src/UIButtonImage.cpp.s
+.PHONY : src/UIButtonImage.s
+
+# target to generate assembly for a file
+src/UIButtonImage.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIButtonImage.cpp.s
+.PHONY : src/UIButtonImage.cpp.s
+
 src/UIElement.obj: src/UIElement.cpp.obj
 .PHONY : src/UIElement.obj
 
@@ -271,6 +295,30 @@ src/UIElement.s: src/UIElement.cpp.s
 src/UIElement.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIElement.cpp.s
 .PHONY : src/UIElement.cpp.s
+
+src/UIGroup.obj: src/UIGroup.cpp.obj
+.PHONY : src/UIGroup.obj
+
+# target to build an object file
+src/UIGroup.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIGroup.cpp.obj
+.PHONY : src/UIGroup.cpp.obj
+
+src/UIGroup.i: src/UIGroup.cpp.i
+.PHONY : src/UIGroup.i
+
+# target to preprocess a source file
+src/UIGroup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIGroup.cpp.i
+.PHONY : src/UIGroup.cpp.i
+
+src/UIGroup.s: src/UIGroup.cpp.s
+.PHONY : src/UIGroup.s
+
+# target to generate assembly for a file
+src/UIGroup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIGroup.cpp.s
+.PHONY : src/UIGroup.cpp.s
 
 src/UIImage.obj: src/UIImage.cpp.obj
 .PHONY : src/UIImage.obj
@@ -344,9 +392,15 @@ help:
 	@echo ... src/UIButton.obj
 	@echo ... src/UIButton.i
 	@echo ... src/UIButton.s
+	@echo ... src/UIButtonImage.obj
+	@echo ... src/UIButtonImage.i
+	@echo ... src/UIButtonImage.s
 	@echo ... src/UIElement.obj
 	@echo ... src/UIElement.i
 	@echo ... src/UIElement.s
+	@echo ... src/UIGroup.obj
+	@echo ... src/UIGroup.i
+	@echo ... src/UIGroup.s
 	@echo ... src/UIImage.obj
 	@echo ... src/UIImage.i
 	@echo ... src/UIImage.s

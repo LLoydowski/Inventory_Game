@@ -11,6 +11,12 @@
 #include <UIButton.hpp>
 #include <UIImage.hpp>
 #include <Player.hpp>
+#include <UIButtonImage.hpp>
+
+void doSth() //! To be removed
+{
+    std::cout << "Skibadi Action to a butotn" << std::endl;
+}
 
 int main(int argc, char *argv[])
 {
@@ -52,17 +58,6 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 72);
-    if (font == nullptr)
-    {
-        std::cerr << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        TTF_Quit();
-        SDL_Quit();
-        return 1;
-    }
-
     //? Loading textures
 
     SDL_Texture *placeholderTexture = NULL;
@@ -89,20 +84,18 @@ int main(int argc, char *argv[])
     inv->setPos(10, 10, renderer);
     Item *item = new Item("Skibidi", rare, 100, sword01Texture);
     inv->addItem(item);
+    Item *item2 = new Item("Skibidi2", rare, 100, sword01Texture);
+    inv->addItem(item2);
+    Item *item3 = new Item("Skibidi3", rare, 100, sword01Texture);
+    inv->addItem(item3);
 
-    Shop *shop = new Shop(2, 2);
-    shop->setPos(500, 0, renderer);
+    // Shop *shop = new Shop(2, 2);
+    // shop->setPos(500, 0, renderer);
 
     //? UI ELEMENTS
-    std::vector<UIElement *>
-        UI;
+    std::vector<UIElement *> UI;
 
-    SDL_Color btnColor = {189, 189, 189, 255};
-
-    UIButton *btn = new UIButton(200, 100, 100, 100, btnColor, "Wybierz gracza", font, renderer);
-    UI.push_back(btn);
-    UIButton *btn2 = new UIButton(200, 100, 100, 225, btnColor, "Pokaż graczy", font, renderer);
-    UI.push_back(btn2);
+    // SDL_Color btnColor = {189, 189, 189, 255};
 
     //? Game loop
     bool isRunning = true;
@@ -118,13 +111,10 @@ int main(int argc, char *argv[])
             }
             else if (e.type == SDL_MOUSEBUTTONDOWN)
             {
-                if (btn->checkMouseCollision())
+                bool wasActionCalled = false;
+                if (!wasActionCalled)
                 {
-                    std::cout << "Button 1 pressed" << std::endl;
-                }
-                else if (btn2->checkMouseCollision())
-                {
-                    std::cout << "Button 2 pressed" << std::endl;
+                    wasActionCalled = inv->handleClickEvents();
                 }
             }
         }
@@ -134,24 +124,19 @@ int main(int argc, char *argv[])
 
         // TODO FIX Disabled buttons
 
+        inv->displaySDL(renderer);
+        // shop->displaySDL(renderer);
+
         // for (UIElement *element : UI)
         // {
         //     element->display(renderer);
         // }
 
-        inv->displaySDL(renderer);
-        shop->displaySDL(renderer);
-
         SDL_RenderPresent(renderer);
     }
 
     delete inv;
-    delete shop;
-
-    delete btn;
-    delete btn2;
-
-    TTF_CloseFont(font);
+    // delete shop;
 
     SDL_DestroyTexture(placeholderTexture);
     SDL_DestroyTexture(sword01Texture);

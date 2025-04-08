@@ -1,5 +1,7 @@
-CMakeFiles/InventoryGame.dir/src/UIImage.cpp.obj: \
- E:\Projekty\Programowanie\C++\InventoryGame\src\UIImage.cpp \
+CMakeFiles/InventoryGame.dir/src/UIGroup.cpp.obj: \
+ E:\Projekty\Programowanie\C++\InventoryGame\src\UIGroup.cpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIGroup.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIElement.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL.h \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_main.h \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_stdinc.h \
@@ -192,7 +194,8 @@ CMakeFiles/InventoryGame.dir/src/UIImage.cpp.obj: \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_version.h \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_locale.h \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_misc.h \
- E:/Projekty/Programowanie/C++/InventoryGame/inc/UIImage.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_ttf.h \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL.h \
  C:/msys64/mingw64/include/c++/14.2.0/string \
  C:/msys64/mingw64/include/c++/14.2.0/bits/requires_hosted.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/stringfwd.h \
@@ -256,9 +259,6 @@ CMakeFiles/InventoryGame.dir/src/UIImage.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/functional_hash.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/hash_bytes.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.tcc \
- E:/Projekty/Programowanie/C++/InventoryGame/inc/UIElement.hpp \
- E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_ttf.h \
- E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL.h \
  C:/msys64/mingw64/include/c++/14.2.0/map \
  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_tree.h \
  C:/msys64/mingw64/include/c++/14.2.0/ext/aligned_buffer.h \
@@ -266,4 +266,9 @@ CMakeFiles/InventoryGame.dir/src/UIImage.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/tuple \
  C:/msys64/mingw64/include/c++/14.2.0/bits/uses_allocator.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_multimap.h \
- C:/msys64/mingw64/include/c++/14.2.0/bits/erase_if.h
+ C:/msys64/mingw64/include/c++/14.2.0/bits/erase_if.h \
+ C:/msys64/mingw64/include/c++/14.2.0/vector \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_vector.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/vector.tcc

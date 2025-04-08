@@ -2,6 +2,7 @@
 #include <UIElement.hpp>
 #include <UIButton.hpp>
 #include <UIImage.hpp>
+#include <UIButtonImage.hpp>
 
 #include "Weapon.hpp"
 #include "Armor.hpp"
@@ -13,28 +14,60 @@
 
 #include <vector>
 
+void Inventory::defaultSlotAction(int row, int col)
+{
+    // std::cout << "[Inventory] Success: This is a default action\n";
+
+    int mouseX, mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
+
+    this->removeMenu();
+
+    menu = new UIGroup(mouseX, mouseY);
+
+    SDL_Color color = {200, 200, 200, 255};
+
+    UIElement *bg = new UIElement(100, 300, 0, 0, color);
+    menu->addElement(bg);
+
+    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 72);
+    if (font == nullptr)
+    {
+        std::cerr << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
+        return;
+    }
+
+    UIButton *moveButton = new UIButton(100, 50, 0, 0, color, "Move item", font, rend);
+    moveButton->setAction([this, row, col]()
+                          { testAction(row, col); });
+    menuButtons.push_back(moveButton);
+    menu->addElement(moveButton);
+
+    TTF_CloseFont(font);
+
+    menu->setPos(mouseX, mouseY);
+}
+
+void Inventory::testAction(int row, int col)
+{
+    std::cout << "[Inventory] Success: This is a test action\n";
+    std::cout << "Row: " << row << "\nCol: " << col << std::endl;
+}
+
 Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedWeapon{nullptr}, equipedArmor{nullptr}, equipedTrinket{nullptr}
 {
 
     // Generating item 2D array
     items = new Item **[rows];
+    UIInventorySlots = new UIButtonImage **[rows];
 
     for (int i = 0; i < rows; i++)
     {
         items[i] = new Item *[cols];
+        UIInventorySlots[i] = new UIButtonImage *[cols];
         for (int j = 0; j < cols; j++)
         {
             items[i][j] = nullptr;
-        }
-    }
-
-    UIInventorySlots = new UIImage **[rows];
-
-    for (int i = 0; i < rows; i++)
-    {
-        UIInventorySlots[i] = new UIImage *[cols];
-        for (int j = 0; j < cols; j++)
-        {
             UIInventorySlots[i][j] = nullptr;
         }
     }
@@ -51,6 +84,7 @@ Inventory::~Inventory()
             if (items[i][j] != nullptr)
             {
                 delete items[i][j];
+                items[i][j] = nullptr;
             }
         }
         delete[] items[i];
@@ -58,6 +92,7 @@ Inventory::~Inventory()
     delete[] items;
 
     delete inventoryBG;
+    inventoryBG = nullptr;
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
@@ -65,13 +100,16 @@ Inventory::~Inventory()
             if (UIInventorySlots[i][j] != nullptr)
             {
                 delete UIInventorySlots[i][j];
+                UIInventorySlots[i][j] = nullptr;
             }
         }
-        delete[] UIInventorySlots[i];
     }
-    delete[] UIInventorySlots;
 
-    SDL_DestroyTexture(nullTexture);
+    delete[] UIInventorySlots;
+    UIInventorySlots = nullptr;
+
+    delete menu;
+    menu = nullptr;
 }
 void Inventory::displayCLI()
 {
@@ -113,10 +151,14 @@ void Inventory::displaySDL(SDL_Renderer *rend)
             }
         }
     }
+
+    if (menu != nullptr)
+    {
+        menu->display(rend);
+    }
 }
 void Inventory::generateUIElements()
 {
-
     if (!rend)
     {
         std::cout << "[Inventory] ERROR: No renderer set." << std::endl;
@@ -128,49 +170,83 @@ void Inventory::generateUIElements()
 
     inventoryBG = new UIElement(width, height, posX, posY, inventoryBGColor);
 
-    nullTexture = NULL;
-    // SDL_Surface *nullSurf = IMG_Load("gfx/placeholder.png");
-    // if (nullSurf)
-    // {
-    //     nullTexture = SDL_CreateTextureFromSurface(rend, nullSurf);
-    //     SDL_FreeSurface(nullSurf);
-    // }
-
-    // blankSlotTexture = NULL;
-    // SDL_Surface *blankSLotSurface = IMG_Load("gfx/placeholder.png");
-    // if (!blankSLotSurface)
-    // {
-    //     std::cerr << "Failed to load image: " << IMG_GetError() << std::endl;
-    //     return;
-    // }
-
-    // blankSlotTexture = SDL_CreateTextureFromSurface(rend, blankSLotSurface);
-    // SDL_FreeSurface(blankSLotSurface);
-
-    // if (!blankSlotTexture)
-    // {
-    //     std::cerr << "Failed to create texture from surface: " << SDL_GetError() << std::endl;
-    //     return;
-    // }
-
     int wholeOffsetY = posY + PADDING;
     for (int i = 0; i < rows; i++)
     {
         int wholeOffsetX = posX + PADDING;
         for (int j = 0; j < cols; j++)
         {
-            if (UIInventorySlots[i][j] != nullptr)
+            if (UIInventorySlots[i][j] != nullptr && UIInventorySlots[i][j] != NULL)
             {
                 delete UIInventorySlots[i][j];
             }
 
             SDL_Color bgColor = {153, 154, 158, SDL_ALPHA_OPAQUE};
-            UIInventorySlots[i][j] = new UIImage(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, nullTexture, bgColor);
+            UIButtonImage *button = new UIButtonImage(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, NULL, bgColor);
+            button->setAction([this, i, j]()
+                              { defaultSlotAction(i, j); });
+            UIInventorySlots[i][j] = button;
+            slotButtons.push_back(button);
 
             wholeOffsetX += PADDING + SLOT_SIZE;
         }
+
         wholeOffsetY += PADDING + SLOT_SIZE;
     }
+}
+
+bool Inventory::handleClickEvents()
+{
+    bool wasActionCalled = false;
+
+    if (!wasActionCalled)
+    {
+        for (int i = menuButtons.size() - 1; i >= 0; i--)
+        {
+            if (menuButtons[i]->checkMouseCollision())
+            {
+                menuButtons[i]->callAction();
+                wasActionCalled = true;
+                return true;
+                break;
+            }
+        }
+    }
+
+    if (!wasActionCalled)
+    {
+        for (int i = slotButtons.size() - 1; i >= 0; i--)
+        {
+            if (slotButtons[i]->checkMouseCollision())
+            {
+                slotButtons[i]->callAction();
+                wasActionCalled = true;
+                return true;
+                break;
+            }
+        }
+    }
+
+    if (!wasActionCalled)
+    {
+        this->removeMenu();
+    }
+
+    return false;
+}
+
+bool Inventory::removeMenu()
+{
+    if (!menu)
+    {
+        return false;
+    }
+
+    delete menu;
+    menu = nullptr;
+    menuButtons.clear();
+
+    return true;
 }
 
 bool Inventory::addItem(Item *item)
@@ -183,7 +259,7 @@ bool Inventory::addItem(Item *item)
             {
                 items[i][j] = item;
 
-                SDL_Texture *texture = nullTexture;
+                SDL_Texture *texture = NULL;
                 SDL_Texture *itemTexture = item->getTexture();
                 if (itemTexture != nullptr)
                 {

@@ -4,6 +4,7 @@
 #include <SDL2/SDL_ttf.h>
 
 #include <string>
+#include <map>
 
 class UIElement
 {
@@ -15,7 +16,12 @@ protected:
 
     int textPadding = 5;
 
+    bool hasParent = false;
+    int parentX, parentY;
+
 public:
+    std::map<std::string, int> params;
+
     UIElement();
     UIElement(int width, int height, int posX, int posY);
     UIElement(int width, int height, int posX, int posY, SDL_Color color);
@@ -34,4 +40,5 @@ public:
     void setText(std::string text);
     void setText(std::string text, TTF_Font *font, SDL_Renderer *rend);
     void setTextPadding(int textPadding);
+    void setParentPos(int posX, int posY);
 };

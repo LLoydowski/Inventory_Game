@@ -11,7 +11,18 @@ endif()
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
-add_executable(${P_NAME} "src/main.cpp" "src/Inventory.cpp" "src/Item.cpp" "src/UIElement.cpp" "src/UIButton.cpp" "src/Player.cpp" "src/UIImage.cpp" "src/Shop.cpp")
+add_executable(${P_NAME}
+    "src/main.cpp"
+    "src/Inventory.cpp"
+    "src/Item.cpp"
+    "src/UIElement.cpp"
+    "src/UIButton.cpp"
+    "src/Player.cpp"
+    "src/UIImage.cpp"
+    "src/Shop.cpp"
+    "src/UIButtonImage.cpp"
+    "src/UIGroup.cpp"
+)
 
 if(WIN32)
     include_directories("${CMAKE_BINARY_DIR}/inc/")

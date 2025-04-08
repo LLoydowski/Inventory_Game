@@ -260,7 +260,25 @@ CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/functional_hash.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/hash_bytes.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.tcc \
+ C:/msys64/mingw64/include/c++/14.2.0/map \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_tree.h \
+ C:/msys64/mingw64/include/c++/14.2.0/ext/aligned_buffer.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_map.h \
+ C:/msys64/mingw64/include/c++/14.2.0/tuple \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/uses_allocator.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_multimap.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/erase_if.h \
+ C:/msys64/mingw64/include/c++/14.2.0/functional \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/std_function.h \
+ C:/msys64/mingw64/include/c++/14.2.0/typeinfo \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/UIImage.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIButtonImage.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIGroup.hpp \
+ C:/msys64/mingw64/include/c++/14.2.0/vector \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_vector.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/vector.tcc \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/Item.hpp \
  C:/msys64/mingw64/include/c++/14.2.0/iostream \
  C:/msys64/mingw64/include/c++/14.2.0/ostream \
@@ -268,7 +286,6 @@ CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/exception \
  C:/msys64/mingw64/include/c++/14.2.0/bits/exception_ptr.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/cxxabi_init_exception.h \
- C:/msys64/mingw64/include/c++/14.2.0/typeinfo \
  C:/msys64/mingw64/include/c++/14.2.0/bits/nested_exception.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/ios_base.h \
  C:/msys64/mingw64/include/c++/14.2.0/ext/atomicity.h \
@@ -302,9 +319,4 @@ CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/ostream.tcc \
  C:/msys64/mingw64/include/c++/14.2.0/istream \
  C:/msys64/mingw64/include/c++/14.2.0/bits/istream.tcc \
- E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_image.h \
- C:/msys64/mingw64/include/c++/14.2.0/vector \
- C:/msys64/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
- C:/msys64/mingw64/include/c++/14.2.0/bits/stl_vector.h \
- C:/msys64/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
- C:/msys64/mingw64/include/c++/14.2.0/bits/vector.tcc
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_image.h
