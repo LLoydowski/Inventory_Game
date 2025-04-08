@@ -459,6 +459,51 @@ void Inventory::unequipItem(int row, int col)
     }
 }
 
+void Inventory::useItem(int row, int col)
+{
+    if (row < 0 || row >= rows || col < 0 || col >= cols)
+    {
+        return;
+    }
+
+    Item *item = items[row][col];
+
+    if (item == nullptr)
+    {
+        return;
+    }
+
+    if (Weapon *weapon = dynamic_cast<Weapon *>(item))
+    {
+        if (equipedWeapon == nullptr)
+        {
+            return;
+        }
+
+        //Use Weapon?
+        
+    }
+    else if (Armor *armor = dynamic_cast<Armor *>(item))
+    {
+        if (equipedArmor == nullptr)
+        {
+            return;
+        }
+
+        //Use Armor?
+
+    }
+    else if (Trinket *trinket = dynamic_cast<Trinket *>(item))
+    {
+        if (equipedArmor == nullptr)
+        {
+            return;
+        }
+
+        //Use Trinket?
+    }
+}
+
 int Inventory::getCols()
 {
     return cols;

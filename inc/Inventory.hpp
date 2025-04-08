@@ -59,6 +59,7 @@ public:
     void removeItem(int row, int col);
     void equipItem(int row, int col);
     void unequipItem(int row, int col);
+    void useItem(int row, int col); //change to bool later i think?
     bool toggleFavourite(int row, int col);
 
     int getCols();
