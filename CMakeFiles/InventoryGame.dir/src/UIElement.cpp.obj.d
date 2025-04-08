@@ -298,4 +298,12 @@ CMakeFiles/InventoryGame.dir/src/UIElement.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/ostream.tcc \
  C:/msys64/mingw64/include/c++/14.2.0/istream \
  C:/msys64/mingw64/include/c++/14.2.0/bits/istream.tcc \
- E:/Projekty/Programowanie/C++/InventoryGame/inc/UIElement.hpp
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIElement.hpp \
+ C:/msys64/mingw64/include/c++/14.2.0/map \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_tree.h \
+ C:/msys64/mingw64/include/c++/14.2.0/ext/aligned_buffer.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_map.h \
+ C:/msys64/mingw64/include/c++/14.2.0/tuple \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/uses_allocator.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_multimap.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/erase_if.h

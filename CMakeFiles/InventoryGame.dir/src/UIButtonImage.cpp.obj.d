@@ -260,9 +260,15 @@ CMakeFiles/InventoryGame.dir/src/UIButtonImage.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/functional_hash.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/hash_bytes.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.tcc \
- C:/msys64/mingw64/include/c++/14.2.0/functional \
+ C:/msys64/mingw64/include/c++/14.2.0/map \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_tree.h \
+ C:/msys64/mingw64/include/c++/14.2.0/ext/aligned_buffer.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_map.h \
  C:/msys64/mingw64/include/c++/14.2.0/tuple \
  C:/msys64/mingw64/include/c++/14.2.0/bits/uses_allocator.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_multimap.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/erase_if.h \
+ C:/msys64/mingw64/include/c++/14.2.0/functional \
  C:/msys64/mingw64/include/c++/14.2.0/bits/std_function.h \
  C:/msys64/mingw64/include/c++/14.2.0/typeinfo \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/UIImage.hpp \

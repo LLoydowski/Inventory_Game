@@ -39,8 +39,8 @@ protected:
     const int SLOT_SIZE = 50;
     const int SLOT_PADDING = 1;
 
-    void defaultAction();
-    void testAction();
+    void defaultSlotAction(int row, int col);
+    void testAction(int row, int col);
 
 public:
     Inventory(int rows, int cols);

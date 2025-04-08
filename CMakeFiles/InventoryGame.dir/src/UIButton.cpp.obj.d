@@ -302,4 +302,10 @@ CMakeFiles/InventoryGame.dir/src/UIButton.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/istream \
  C:/msys64/mingw64/include/c++/14.2.0/bits/istream.tcc \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/UIButton.hpp \
- E:/Projekty/Programowanie/C++/InventoryGame/inc/UIELement.hpp
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/UIELement.hpp \
+ C:/msys64/mingw64/include/c++/14.2.0/map \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_tree.h \
+ C:/msys64/mingw64/include/c++/14.2.0/ext/aligned_buffer.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_map.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_multimap.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/erase_if.h

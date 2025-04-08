@@ -4,6 +4,7 @@
 #include <SDL2/SDL_ttf.h>
 
 #include <string>
+#include <map>
 
 class UIElement
 {
@@ -19,6 +20,8 @@ protected:
     int parentX, parentY;
 
 public:
+    std::map<std::string, int> params;
+
     UIElement();
     UIElement(int width, int height, int posX, int posY);
     UIElement(int width, int height, int posX, int posY, SDL_Color color);

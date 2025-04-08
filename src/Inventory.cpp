@@ -10,44 +10,44 @@
 
 #include <vector>
 
-void Inventory::defaultAction()
+void Inventory::defaultSlotAction(int row, int col)
 {
     // std::cout << "[Inventory] Success: This is a default action\n";
 
     int mouseX, mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
 
-    if (menu == nullptr)
+    this->removeMenu();
+
+    menu = new UIGroup(mouseX, mouseY);
+
+    SDL_Color color = {200, 200, 200, 255};
+
+    UIElement *bg = new UIElement(100, 300, 0, 0, color);
+    menu->addElement(bg);
+
+    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 72);
+    if (font == nullptr)
     {
-        menu = new UIGroup(mouseX, mouseY);
-
-        SDL_Color color = {200, 200, 200, 255};
-
-        UIElement *bg = new UIElement(100, 300, 0, 0, color);
-        menu->addElement(bg);
-
-        TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 72);
-        if (font == nullptr)
-        {
-            std::cerr << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
-            return;
-        }
-
-        UIButton *moveButton = new UIButton(100, 50, 0, 0, color, "Move item", font, rend);
-        moveButton->setAction([this]()
-                              { testAction(); });
-        menuButtons.push_back(moveButton);
-        menu->addElement(moveButton);
-
-        TTF_CloseFont(font);
+        std::cerr << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
+        return;
     }
+
+    UIButton *moveButton = new UIButton(100, 50, 0, 0, color, "Move item", font, rend);
+    moveButton->setAction([this, row, col]()
+                          { testAction(row, col); });
+    menuButtons.push_back(moveButton);
+    menu->addElement(moveButton);
+
+    TTF_CloseFont(font);
 
     menu->setPos(mouseX, mouseY);
 }
 
-void Inventory::testAction()
+void Inventory::testAction(int row, int col)
 {
     std::cout << "[Inventory] Success: This is a test action\n";
+    std::cout << "Row: " << row << "\nCol: " << col << std::endl;
 }
 
 Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedWeapon{nullptr}, equipedArmor{nullptr}, equipedTrinket{nullptr}
@@ -179,8 +179,8 @@ void Inventory::generateUIElements()
 
             SDL_Color bgColor = {153, 154, 158, SDL_ALPHA_OPAQUE};
             UIButtonImage *button = new UIButtonImage(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, NULL, bgColor);
-            button->setAction([this]()
-                              { defaultAction(); });
+            button->setAction([this, i, j]()
+                              { defaultSlotAction(i, j); });
             UIInventorySlots[i][j] = button;
             slotButtons.push_back(button);
 
