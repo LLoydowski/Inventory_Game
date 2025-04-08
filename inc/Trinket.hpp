@@ -9,8 +9,8 @@ class Trinket : public Item
 public:
     Trinket();
     Trinket(std::string name, Rarities rarity, float price);
-    Trinket(std::string name, Rarities rarity, float price, SDL_Texture* texture);
+    Trinket(std::string name, Rarities rarity, float price, SDL_Texture *texture);
+    ~Trinket() override;
 
-
-    void display();
+    void display() override;
 };

@@ -11,15 +11,14 @@ private:
 public:
     Weapon();
     Weapon(std::string name, Rarities rarity, float price, int damage);
-    Weapon(std::string name, Rarities rarity, float price, SDL_Texture* texture, int damage);
+    Weapon(std::string name, Rarities rarity, float price, SDL_Texture *texture, int damage);
+    ~Weapon() override;
 
-
-    //Getters
+    // Getters
     int getDamage() const;
 
-
-    //Setters
+    // Setters
     void setDamage(int damage);
 
-    void display();
+    void display() override;
 };

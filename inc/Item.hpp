@@ -14,7 +14,7 @@ enum Rarities
 
 class Item
 {
-private:
+protected:
     std::string name;
     Rarities rarity;
     float price;
@@ -25,7 +25,7 @@ public:
     Item();
     Item(std::string name, Rarities rarity, float price);
     Item(std::string name, Rarities rarity, float price, SDL_Texture *texture);
-    virtual ~Item(); 
+    virtual ~Item();
 
     virtual void display();
 

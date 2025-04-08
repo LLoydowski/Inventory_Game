@@ -319,4 +319,7 @@ CMakeFiles/InventoryGame.dir/src/Inventory.cpp.obj: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/ostream.tcc \
  C:/msys64/mingw64/include/c++/14.2.0/istream \
  C:/msys64/mingw64/include/c++/14.2.0/bits/istream.tcc \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/Weapon.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/Armor.hpp \
+ E:/Projekty/Programowanie/C++/InventoryGame/inc/Trinket.hpp \
  E:/Projekty/Programowanie/C++/InventoryGame/inc/SDL2/SDL_image.h

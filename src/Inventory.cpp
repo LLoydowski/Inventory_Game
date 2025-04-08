@@ -361,39 +361,47 @@ bool Inventory::toggleFavourite(int row, int col)
     return true;
 }
 
-
-void Inventory::equipItem(int row, int col) {
-    if (row < 0 || row >= rows || col < 0 || col >= cols) {
+void Inventory::equipItem(int row, int col)
+{
+    if (row < 0 || row >= rows || col < 0 || col >= cols)
+    {
         return;
     }
 
-    Item* item = items[row][col];
+    Item *item = items[row][col];
 
-    if (item == nullptr) {
+    if (item == nullptr)
+    {
         return;
     }
 
-    if (Weapon* weapon = dynamic_cast<Weapon*>(item)) {
+    if (Weapon *weapon = dynamic_cast<Weapon *>(item))
+    {
 
-        if (equipedWeapon != nullptr) {
+        if (equipedWeapon != nullptr)
+        {
             addItem(equipedWeapon);
         }
 
         equipedWeapon = weapon;
         items[row][col] = nullptr;
     }
-    else if (Armor* armor = dynamic_cast<Armor*>(item)) {
+    else if (Armor *armor = dynamic_cast<Armor *>(item))
+    {
 
-        if (equipedArmor != nullptr) {
+        if (equipedArmor != nullptr)
+        {
             addItem(equipedArmor);
         }
 
         equipedArmor = armor;
         items[row][col] = nullptr;
     }
-    else if (Trinket* trinket = dynamic_cast<Trinket*>(item)) {
+    else if (Trinket *trinket = dynamic_cast<Trinket *>(item))
+    {
 
-        if (equipedTrinket != nullptr) {
+        if (equipedTrinket != nullptr)
+        {
             addItem(equipedTrinket);
         }
 
@@ -402,45 +410,54 @@ void Inventory::equipItem(int row, int col) {
     }
 }
 
-
-void Inventory::unequipItem(int row, int col) {
-    if (row < 0 || row >= rows || col < 0 || col >= cols) {
+void Inventory::unequipItem(int row, int col)
+{
+    if (row < 0 || row >= rows || col < 0 || col >= cols)
+    {
         return;
     }
 
-    Item* item = items[row][col];
+    Item *item = items[row][col];
 
-    if (item == nullptr) {
+    if (item == nullptr)
+    {
         return;
     }
 
-    if (Weapon* weapon = dynamic_cast<Weapon*>(item)) {
-        if (equipedWeapon != nullptr) {
+    if (Weapon *weapon = dynamic_cast<Weapon *>(item))
+    {
+        if (equipedWeapon != nullptr)
+        {
             addItem(equipedWeapon);
         }
 
         equipedWeapon = nullptr;
         items[row][col] = nullptr;
+        (void)weapon;
     }
-    else if (Armor* armor = dynamic_cast<Armor*>(item)) {
-        if (equipedArmor != nullptr) {
+    else if (Armor *armor = dynamic_cast<Armor *>(item))
+    {
+        if (equipedArmor != nullptr)
+        {
             addItem(equipedArmor);
         }
 
         equipedArmor = nullptr;
         items[row][col] = nullptr;
+        (void)armor;
     }
-    else if (Trinket* trinket = dynamic_cast<Trinket*>(item)) {
-        if (equipedTrinket != nullptr) {
+    else if (Trinket *trinket = dynamic_cast<Trinket *>(item))
+    {
+        if (equipedTrinket != nullptr)
+        {
             addItem(equipedTrinket);
         }
 
         equipedTrinket = nullptr;
         items[row][col] = nullptr;
+        (void)trinket;
     }
 }
-
-
 
 int Inventory::getCols()
 {

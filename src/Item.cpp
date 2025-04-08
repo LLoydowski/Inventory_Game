@@ -15,8 +15,12 @@ Item::Item(std::string name, Rarities rarity, float price, SDL_Texture *texture)
 {
 }
 
-Item::~Item() {
-
+Item::~Item()
+{
+    if (texture)
+    {
+        SDL_DestroyTexture(texture);
+    }
 }
 
 void Item::display()

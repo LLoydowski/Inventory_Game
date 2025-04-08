@@ -128,6 +128,30 @@ InventoryGame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/build
 .PHONY : InventoryGame/fast
 
+src/Armor.obj: src/Armor.cpp.obj
+.PHONY : src/Armor.obj
+
+# target to build an object file
+src/Armor.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Armor.cpp.obj
+.PHONY : src/Armor.cpp.obj
+
+src/Armor.i: src/Armor.cpp.i
+.PHONY : src/Armor.i
+
+# target to preprocess a source file
+src/Armor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Armor.cpp.i
+.PHONY : src/Armor.cpp.i
+
+src/Armor.s: src/Armor.cpp.s
+.PHONY : src/Armor.s
+
+# target to generate assembly for a file
+src/Armor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Armor.cpp.s
+.PHONY : src/Armor.cpp.s
+
 src/Inventory.obj: src/Inventory.cpp.obj
 .PHONY : src/Inventory.obj
 
@@ -223,6 +247,30 @@ src/Shop.s: src/Shop.cpp.s
 src/Shop.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Shop.cpp.s
 .PHONY : src/Shop.cpp.s
+
+src/Trinket.obj: src/Trinket.cpp.obj
+.PHONY : src/Trinket.obj
+
+# target to build an object file
+src/Trinket.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Trinket.cpp.obj
+.PHONY : src/Trinket.cpp.obj
+
+src/Trinket.i: src/Trinket.cpp.i
+.PHONY : src/Trinket.i
+
+# target to preprocess a source file
+src/Trinket.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Trinket.cpp.i
+.PHONY : src/Trinket.cpp.i
+
+src/Trinket.s: src/Trinket.cpp.s
+.PHONY : src/Trinket.s
+
+# target to generate assembly for a file
+src/Trinket.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Trinket.cpp.s
+.PHONY : src/Trinket.cpp.s
 
 src/UIButton.obj: src/UIButton.cpp.obj
 .PHONY : src/UIButton.obj
@@ -344,6 +392,30 @@ src/UIImage.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/UIImage.cpp.s
 .PHONY : src/UIImage.cpp.s
 
+src/Weapon.obj: src/Weapon.cpp.obj
+.PHONY : src/Weapon.obj
+
+# target to build an object file
+src/Weapon.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Weapon.cpp.obj
+.PHONY : src/Weapon.cpp.obj
+
+src/Weapon.i: src/Weapon.cpp.i
+.PHONY : src/Weapon.i
+
+# target to preprocess a source file
+src/Weapon.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Weapon.cpp.i
+.PHONY : src/Weapon.cpp.i
+
+src/Weapon.s: src/Weapon.cpp.s
+.PHONY : src/Weapon.s
+
+# target to generate assembly for a file
+src/Weapon.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Weapon.cpp.s
+.PHONY : src/Weapon.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -377,6 +449,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... InventoryGame
+	@echo ... src/Armor.obj
+	@echo ... src/Armor.i
+	@echo ... src/Armor.s
 	@echo ... src/Inventory.obj
 	@echo ... src/Inventory.i
 	@echo ... src/Inventory.s
@@ -389,6 +464,9 @@ help:
 	@echo ... src/Shop.obj
 	@echo ... src/Shop.i
 	@echo ... src/Shop.s
+	@echo ... src/Trinket.obj
+	@echo ... src/Trinket.i
+	@echo ... src/Trinket.s
 	@echo ... src/UIButton.obj
 	@echo ... src/UIButton.i
 	@echo ... src/UIButton.s
@@ -404,6 +482,9 @@ help:
 	@echo ... src/UIImage.obj
 	@echo ... src/UIImage.i
 	@echo ... src/UIImage.s
+	@echo ... src/Weapon.obj
+	@echo ... src/Weapon.i
+	@echo ... src/Weapon.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
