@@ -3,3 +3,4 @@ Makefile
 note.txt
 build/
 cmake_install.cmake
+CMakeFiles/
