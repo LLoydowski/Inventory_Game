@@ -37,11 +37,25 @@ void Inventory::defaultSlotAction(int row, int col)
         return;
     }
 
-    UIButton *moveButton = new UIButton(100, 50, 0, 0, color, "Move item", font, rend);
+    int height = 0;
+
+    UIButton *moveButton = new UIButton(100, 50, 0, height, color, "Move", font, rend);
     moveButton->setAction([this, row, col]()
                           { enableMoveMode(row, col); });
     menuButtons.push_back(moveButton);
     menu->addElement(moveButton);
+    height += 50;
+
+    std::cout << items[row][col]->getType() << std::endl;
+    if (items[row][col]->getType() == "Weapon")
+    {
+        UIButton *equipButton = new UIButton(100, 50, 0, 50, color, "Equip", font, rend);
+        equipButton->setAction([this, row, col]()
+                               { std::cout << "huh\n"; });
+        menuButtons.push_back(equipButton);
+        menu->addElement(equipButton);
+        height += 50;
+    }
 
     TTF_CloseFont(font);
 
@@ -62,8 +76,13 @@ void Inventory::enableMoveMode(int row, int col)
     this->moveOriginRow = row;
     this->moveOriginCol = col;
     this->removeMenu();
+}
 
-    std::cout << "[Inventory] Status: Move mode enabled\n";
+void Inventory::disableMoveMode()
+{
+    this->isMoveMode = false;
+    this->moveOriginRow = -1;
+    this->moveOriginCol = -1;
 }
 
 Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedWeapon{nullptr}, equipedArmor{nullptr}, equipedTrinket{nullptr}
@@ -254,6 +273,7 @@ bool Inventory::handleClickEvents()
     }
 
     this->removeMenu();
+    this->disableMoveMode();
 
     return false;
 }

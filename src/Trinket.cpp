@@ -4,15 +4,24 @@
 #include <SDL2/SDL.h>
 
 Trinket::Trinket()
-    : Item() {}
+    : Item()
+{
+    this->type = "Trinket";
+}
 
 // Konstruktor bez tekstury
 Trinket::Trinket(std::string name, Rarities rarity, float price)
-    : Item(name, rarity, price) {}
+    : Item(name, rarity, price)
+{
+    this->type = "Trinket";
+}
 
 // Konstruktor z teksturą
 Trinket::Trinket(std::string name, Rarities rarity, float price, SDL_Texture *texture)
-    : Item(name, rarity, price, texture) {}
+    : Item(name, rarity, price, texture)
+{
+    this->type = "Trinket";
+}
 
 Trinket::~Trinket()
 {

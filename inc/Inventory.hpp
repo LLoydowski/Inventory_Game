@@ -46,7 +46,6 @@ protected:
 
     void defaultSlotAction(int row, int col);
     void testAction(int row, int col);
-    void enableMoveMode(int row, int col);
 
 public:
     Inventory(int rows, int cols);
@@ -58,6 +57,9 @@ public:
 
     bool handleClickEvents();
     bool removeMenu();
+
+    void enableMoveMode(int row, int col);
+    void disableMoveMode();
 
     bool addItem(Item *item);
     void sortItems(char parameter);

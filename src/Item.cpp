@@ -56,6 +56,10 @@ SDL_Texture *Item::getTexture()
 {
     return texture;
 }
+std::string Item::getType()
+{
+    return type;
+}
 //! Setters
 
 void Item::setFavourite(bool optoion)

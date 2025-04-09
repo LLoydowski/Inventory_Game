@@ -13,11 +13,7 @@
 #include <UIImage.hpp>
 #include <Player.hpp>
 #include <UIButtonImage.hpp>
-
-void doSth() //! To be removed
-{
-    std::cout << "Skibadi Action to a butotn" << std::endl;
-}
+#include <Weapon.hpp>
 
 int main(int argc, char *argv[])
 {
@@ -85,7 +81,7 @@ int main(int argc, char *argv[])
     inv->setPos(10, 10, renderer);
     Item *item = new Item("Skibidi", rare, 100, sword01Texture);
     inv->addItem(item);
-    Item *item2 = new Item("Skibidi2", rare, 100, sword01Texture);
+    Item *item2 = new Weapon("Skibidi2", rare, 100, placeholderTexture, 1);
     inv->addItem(item2);
     Item *item3 = new Item("Skibidi3", rare, 100, sword01Texture);
     inv->addItem(item3);
@@ -119,7 +115,10 @@ int main(int argc, char *argv[])
                     if (inv->handleClickEvents())
                     {
                         wasActionCalled = true;
+
+                        //? Clearing shop menu
                         shop->removeMenu();
+                        shop->disableMoveMode();
                     }
                 }
                 if (!wasActionCalled)
@@ -127,7 +126,9 @@ int main(int argc, char *argv[])
                     if (shop->handleClickEvents())
                     {
                         wasActionCalled = true;
+                        //? Clearing inventory menu
                         inv->removeMenu();
+                        inv->disableMoveMode();
                     }
                 }
             }
