@@ -1,3 +1,0 @@
-E:/Projekty/Programowanie/C++/InventoryGame/CMakeFiles/InventoryGame.dir
-E:/Projekty/Programowanie/C++/InventoryGame/CMakeFiles/edit_cache.dir
-E:/Projekty/Programowanie/C++/InventoryGame/CMakeFiles/rebuild_cache.dir
