@@ -405,35 +405,9 @@ void Inventory::useItem(int row, int col)
         return;
     }
 
-    if (Weapon *weapon = dynamic_cast<Weapon *>(item))
-    {
-        if (equipedWeapon == nullptr)
-        {
-            return;
-        }
+    
+    //Using potion code
 
-        //Use Weapon?
-        
-    }
-    else if (Armor *armor = dynamic_cast<Armor *>(item))
-    {
-        if (equipedArmor == nullptr)
-        {
-            return;
-        }
-
-        //Use Armor?
-
-    }
-    else if (Trinket *trinket = dynamic_cast<Trinket *>(item))
-    {
-        if (equipedArmor == nullptr)
-        {
-            return;
-        }
-
-        //Use Trinket?
-    }
 }
 
 int Inventory::getCols()
