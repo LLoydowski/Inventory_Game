@@ -37,24 +37,48 @@ void Inventory::defaultSlotAction(int row, int col)
         return;
     }
 
-    int height = 0;
+    int offsetY = 0;
 
-    UIButton *moveButton = new UIButton(100, 50, 0, height, color, "Move", font, rend);
+    UIButton *moveButton = new UIButton(100, 50, 0, offsetY, color, "Move", font, rend);
     moveButton->setAction([this, row, col]()
                           { enableMoveMode(row, col); });
     menuButtons.push_back(moveButton);
     menu->addElement(moveButton);
-    height += 50;
+    offsetY += 50;
 
-    std::cout << items[row][col]->getType() << std::endl;
-    if (items[row][col]->getType() == "Weapon")
+    std::string itemType = items[row][col]->getType();
+
+    if (itemType == "Weapon")
     {
-        UIButton *equipButton = new UIButton(100, 50, 0, 50, color, "Equip", font, rend);
-        equipButton->setAction([this, row, col]()
-                               { std::cout << "huh\n"; });
+        Weapon *weapon = dynamic_cast<Weapon *>(items[row][col]);
+        UIButton *equipButton = new UIButton(100, 50, 0, offsetY, color, "Equip", font, rend);
+        equipButton->setAction([this, weapon]()
+                               { this->equipItem(weapon); });
         menuButtons.push_back(equipButton);
         menu->addElement(equipButton);
-        height += 50;
+        offsetY += 50;
+    }
+
+    if (itemType == "Armor")
+    {
+        Armor *armor = dynamic_cast<Armor *>(items[row][col]);
+        UIButton *equipButton = new UIButton(100, 50, 0, offsetY, color, "Equip", font, rend);
+        equipButton->setAction([this, armor]()
+                               { this->equipItem(armor); });
+        menuButtons.push_back(equipButton);
+        menu->addElement(equipButton);
+        offsetY += 50;
+    }
+
+    if (itemType == "Trinket")
+    {
+        Trinket *trinket = dynamic_cast<Trinket *>(items[row][col]);
+        UIButton *equipButton = new UIButton(100, 50, 0, offsetY, color, "Equip", font, rend);
+        equipButton->setAction([this, trinket]()
+                               { this->equipItem(trinket); });
+        menuButtons.push_back(equipButton);
+        menu->addElement(equipButton);
+        offsetY += 50;
     }
 
     TTF_CloseFont(font);
@@ -404,53 +428,20 @@ bool Inventory::toggleFavourite(int row, int col)
     return true;
 }
 
-void Inventory::equipItem(int row, int col)
+void Inventory::equipItem(Weapon *weapon)
 {
-    if (row < 0 || row >= rows || col < 0 || col >= cols)
-    {
-        return;
-    }
-
-    Item *item = items[row][col];
-
-    if (item == nullptr)
-    {
-        return;
-    }
-
-    if (Weapon *weapon = dynamic_cast<Weapon *>(item))
-    {
-
-        if (equipedWeapon != nullptr)
-        {
-            addItem(equipedWeapon);
-        }
-
-        equipedWeapon = weapon;
-        items[row][col] = nullptr;
-    }
-    else if (Armor *armor = dynamic_cast<Armor *>(item))
-    {
-
-        if (equipedArmor != nullptr)
-        {
-            addItem(equipedArmor);
-        }
-
-        equipedArmor = armor;
-        items[row][col] = nullptr;
-    }
-    else if (Trinket *trinket = dynamic_cast<Trinket *>(item))
-    {
-
-        if (equipedTrinket != nullptr)
-        {
-            addItem(equipedTrinket);
-        }
-
-        equipedTrinket = trinket;
-        items[row][col] = nullptr;
-    }
+    equipedWeapon = weapon;
+    std::cout << "[Inventory] Status: Equiped weapon [" << weapon->getName() << "]\n";
+}
+void Inventory::equipItem(Armor *armor)
+{
+    equipedArmor = armor;
+    std::cout << "[Inventory] Status: Equiped armor [" << armor->getName() << "]\n";
+}
+void Inventory::equipItem(Trinket *trinket)
+{
+    equipedTrinket = trinket;
+    std::cout << "[Inventory] Status: Equiped trinket [" << trinket->getName() << "]\n";
 }
 
 void Inventory::unequipItem(int row, int col)

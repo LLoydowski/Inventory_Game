@@ -8,6 +8,10 @@
 #include <UIButtonImage.hpp>
 #include <UIGroup.hpp>
 
+#include <Weapon.hpp>
+#include <Armor.hpp>
+#include <Trinket.hpp>
+
 #include <Item.hpp>
 
 #include <vector>
@@ -65,7 +69,9 @@ public:
     void sortItems(char parameter);
     bool moveItems(int oldRow, int oldCol, int newRow, int newCol);
     void removeItem(int row, int col);
-    void equipItem(int row, int col);
+    void equipItem(Weapon *weapon);
+    void equipItem(Armor *armor);
+    void equipItem(Trinket *trinket);
     void unequipItem(int row, int col);
     bool toggleFavourite(int row, int col);
 
