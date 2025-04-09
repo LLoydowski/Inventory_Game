@@ -1,3 +1,5 @@
 CMakeCache.txt
 Makefile
 note.txt
+build/
+cmake_install.cmake
