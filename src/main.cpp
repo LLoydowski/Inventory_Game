@@ -3,6 +3,7 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 #include <vector>
+#include <typeinfo>
 
 #include <Inventory.hpp>
 #include <Shop.hpp>
@@ -89,8 +90,8 @@ int main(int argc, char *argv[])
     Item *item3 = new Item("Skibidi3", rare, 100, sword01Texture);
     inv->addItem(item3);
 
-    // Shop *shop = new Shop(2, 2);
-    // shop->setPos(500, 0, renderer);
+    Shop *shop = new Shop(2, 2);
+    shop->setPos(500, 0, renderer);
 
     //? UI ELEMENTS
     std::vector<UIElement *> UI;
@@ -111,10 +112,23 @@ int main(int argc, char *argv[])
             }
             else if (e.type == SDL_MOUSEBUTTONDOWN)
             {
+
                 bool wasActionCalled = false;
                 if (!wasActionCalled)
                 {
-                    wasActionCalled = inv->handleClickEvents();
+                    if (inv->handleClickEvents())
+                    {
+                        wasActionCalled = true;
+                        shop->removeMenu();
+                    }
+                }
+                if (!wasActionCalled)
+                {
+                    if (shop->handleClickEvents())
+                    {
+                        wasActionCalled = true;
+                        inv->removeMenu();
+                    }
                 }
             }
         }
@@ -125,7 +139,7 @@ int main(int argc, char *argv[])
         // TODO FIX Disabled buttons
 
         inv->displaySDL(renderer);
-        // shop->displaySDL(renderer);
+        shop->displaySDL(renderer);
 
         // for (UIElement *element : UI)
         // {
@@ -136,7 +150,7 @@ int main(int argc, char *argv[])
     }
 
     delete inv;
-    // delete shop;
+    delete shop;
 
     SDL_DestroyTexture(placeholderTexture);
     SDL_DestroyTexture(sword01Texture);

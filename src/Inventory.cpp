@@ -39,7 +39,7 @@ void Inventory::defaultSlotAction(int row, int col)
 
     UIButton *moveButton = new UIButton(100, 50, 0, 0, color, "Move item", font, rend);
     moveButton->setAction([this, row, col]()
-                          { testAction(row, col); });
+                          { enableMoveMode(row, col); });
     menuButtons.push_back(moveButton);
     menu->addElement(moveButton);
 
@@ -50,8 +50,20 @@ void Inventory::defaultSlotAction(int row, int col)
 
 void Inventory::testAction(int row, int col)
 {
-    std::cout << "[Inventory] Success: This is a test action\n";
-    std::cout << "Row: " << row << "\nCol: " << col << std::endl;
+    (void)row;
+    (void)col;
+    // std::cout << "[Inventory] Success: This is a test action\n";
+    // std::cout << "Row: " << row << "\nCol: " << col << std::endl;
+}
+
+void Inventory::enableMoveMode(int row, int col)
+{
+    this->isMoveMode = true;
+    this->moveOriginRow = row;
+    this->moveOriginCol = col;
+    this->removeMenu();
+
+    std::cout << "[Inventory] Status: Move mode enabled\n";
 }
 
 Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedWeapon{nullptr}, equipedArmor{nullptr}, equipedTrinket{nullptr}
@@ -176,13 +188,14 @@ void Inventory::generateUIElements()
         int wholeOffsetX = posX + PADDING;
         for (int j = 0; j < cols; j++)
         {
-            if (UIInventorySlots[i][j] != nullptr && UIInventorySlots[i][j] != NULL)
-            {
-                delete UIInventorySlots[i][j];
-            }
-
             SDL_Color bgColor = {153, 154, 158, SDL_ALPHA_OPAQUE};
             UIButtonImage *button = new UIButtonImage(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, NULL, bgColor);
+
+            if (items[i][j])
+            {
+                button->setTexture(items[i][j]->getTexture());
+            }
+
             button->setAction([this, i, j]()
                               { defaultSlotAction(i, j); });
             UIInventorySlots[i][j] = button;
@@ -193,44 +206,54 @@ void Inventory::generateUIElements()
 
         wholeOffsetY += PADDING + SLOT_SIZE;
     }
+
+    isUIGenerated = true;
 }
 
 bool Inventory::handleClickEvents()
 {
-    bool wasActionCalled = false;
-
-    if (!wasActionCalled)
+    if (this->isMoveMode)
     {
-        for (int i = menuButtons.size() - 1; i >= 0; i--)
+        for (int i = 0; i < rows; i++)
         {
-            if (menuButtons[i]->checkMouseCollision())
+            for (int j = 0; j < cols; j++)
             {
-                menuButtons[i]->callAction();
-                wasActionCalled = true;
-                return true;
-                break;
+                if (UIInventorySlots[i][j]->checkMouseCollision())
+                {
+                    this->moveItems(moveOriginRow, moveOriginCol, i, j);
+                    this->isMoveMode = false;
+                    this->moveOriginCol = -1;
+                    this->moveOriginRow = -1;
+                    this->generateUIElements();
+
+                    return true;
+                    break;
+                }
             }
         }
     }
 
-    if (!wasActionCalled)
+    for (int i = menuButtons.size() - 1; i >= 0; i--)
     {
-        for (int i = slotButtons.size() - 1; i >= 0; i--)
+        if (menuButtons[i]->checkMouseCollision())
         {
-            if (slotButtons[i]->checkMouseCollision())
-            {
-                slotButtons[i]->callAction();
-                wasActionCalled = true;
-                return true;
-                break;
-            }
+            menuButtons[i]->callAction();
+            return true;
+            break;
         }
     }
 
-    if (!wasActionCalled)
+    for (int i = slotButtons.size() - 1; i >= 0; i--)
     {
-        this->removeMenu();
+        if (slotButtons[i]->checkMouseCollision())
+        {
+            slotButtons[i]->callAction();
+            return true;
+            break;
+        }
     }
+
+    this->removeMenu();
 
     return false;
 }

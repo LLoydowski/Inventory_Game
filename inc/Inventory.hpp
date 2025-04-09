@@ -22,6 +22,10 @@ protected:
     Item *equipedArmor;
     Item *equipedTrinket;
 
+    bool isMoveMode = false;
+    int moveOriginRow = -1;
+    int moveOriginCol = -1;
+
     //? UI Stuff
     SDL_Renderer *rend;
     const SDL_Color inventoryBGColor = {116, 117, 125, SDL_ALPHA_OPAQUE};
@@ -31,6 +35,7 @@ protected:
 
     int posX, posY;
 
+    bool isUIGenerated = false;
     UIElement *inventoryBG;
     UIButtonImage ***UIInventorySlots;
     UIGroup *menu = nullptr;
@@ -41,6 +46,7 @@ protected:
 
     void defaultSlotAction(int row, int col);
     void testAction(int row, int col);
+    void enableMoveMode(int row, int col);
 
 public:
     Inventory(int rows, int cols);
