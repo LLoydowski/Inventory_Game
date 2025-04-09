@@ -22,7 +22,3 @@
     2. `./bin/InventoryGame` on Linux / Mac
 7. Run the executable
 
-## Naming conventons
-
--   Every class that starts with `_` is abstract (eg. `_UIButton`)
--   ... (soon)
