@@ -19,10 +19,10 @@ UIImage::UIImage(int width, int height, int posX, int posY, SDL_Texture *texture
 
 UIImage::~UIImage()
 {
-    if (texture != nullptr && texture != NULL)
-    {
-        SDL_DestroyTexture(texture);
-    }
+    // if (texture != nullptr && texture != NULL)
+    // {
+    //     SDL_DestroyTexture(texture);
+    // }
 }
 
 void UIImage::display(SDL_Renderer *rend)

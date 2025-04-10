@@ -47,6 +47,8 @@ protected:
     const int PADDING = 10;
     const int SLOT_SIZE = 50;
     const int SLOT_PADDING = 1;
+    const int MENU_BUTTON_WIDTH = 70;
+    const int MENU_BUTTON_HEIGHT = 40;
 
     void defaultSlotAction(int row, int col);
     void testAction(int row, int col);
