@@ -4,13 +4,22 @@
 #include <SDL2/SDL.h>
 
 Armor::Armor()
-    : Item(), defense(0) {}
+    : Item(), defense(0)
+{
+    this->type = "Armor";
+}
 
 Armor::Armor(std::string name, Rarities rarity, float price, int defense)
-    : Item(name, rarity, price), defense(defense) {}
+    : Item(name, rarity, price), defense(defense)
+{
+    this->type = "Armor";
+}
 
 Armor::Armor(std::string name, Rarities rarity, float price, SDL_Texture *texture, int defense)
-    : Item(name, rarity, price, texture), defense(defense) {}
+    : Item(name, rarity, price, texture), defense(defense)
+{
+    this->type = "Armor";
+}
 
 Armor::~Armor()
 {

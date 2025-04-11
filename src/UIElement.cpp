@@ -146,3 +146,8 @@ void UIElement::setParentPos(int posX, int posY)
     this->parentY = posY;
     this->hasParent = true;
 }
+void UIElement::setSize(int width, int height)
+{
+    this->width = width;
+    this->height = height;
+}

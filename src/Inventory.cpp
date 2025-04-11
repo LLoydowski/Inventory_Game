@@ -18,6 +18,11 @@ void Inventory::defaultSlotAction(int row, int col)
 {
     // std::cout << "[Inventory] Success: This is a default action\n";
 
+    if (items[row][col] == nullptr)
+    {
+        return;
+    }
+
     int mouseX, mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
 
@@ -27,31 +32,113 @@ void Inventory::defaultSlotAction(int row, int col)
 
     SDL_Color color = {200, 200, 200, 255};
 
-    UIElement *bg = new UIElement(100, 300, 0, 0, color);
+    UIElement *bg = new UIElement(MENU_BUTTON_WIDTH, 0, 0, 0, color);
     menu->addElement(bg);
 
-    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 72);
+    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 42);
     if (font == nullptr)
     {
         std::cerr << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
         return;
     }
 
-    UIButton *moveButton = new UIButton(100, 50, 0, 0, color, "Move item", font, rend);
+    int offsetY = 0;
+
+    UIButton *moveButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Move", font, rend);
     moveButton->setAction([this, row, col]()
-                          { testAction(row, col); });
+                          { enableMoveMode(row, col); });
     menuButtons.push_back(moveButton);
     menu->addElement(moveButton);
+    offsetY += MENU_BUTTON_HEIGHT;
+
+    std::string itemType = items[row][col]->getType();
+
+    if (itemType == "Weapon")
+    {
+        Weapon *weapon = dynamic_cast<Weapon *>(items[row][col]);
+
+        if (items[row][col] == equipedWeapon)
+        {
+            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
+            // equipButton->setAction([this, row, col]()
+            //                        { this->unequipItem(row, col); });
+            menuButtons.push_back(equipButton);
+            menu->addElement(equipButton);
+        }
+        else
+        {
+            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
+            equipButton->setAction([this, weapon]()
+                                   { this->equipItem(weapon); });
+            menuButtons.push_back(equipButton);
+            menu->addElement(equipButton);
+        }
+
+        offsetY += MENU_BUTTON_HEIGHT;
+    }
+
+    if (itemType == "Armor")
+    {
+        Armor *armor = dynamic_cast<Armor *>(items[row][col]);
+        UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
+        equipButton->setAction([this, armor]()
+                               { this->equipItem(armor); });
+        menuButtons.push_back(equipButton);
+        menu->addElement(equipButton);
+        offsetY += MENU_BUTTON_HEIGHT;
+    }
+
+    if (itemType == "Trinket")
+    {
+        Trinket *trinket = dynamic_cast<Trinket *>(items[row][col]);
+        UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
+        equipButton->setAction([this, trinket]()
+                               { this->equipItem(trinket); });
+        menuButtons.push_back(equipButton);
+        menu->addElement(equipButton);
+        offsetY += MENU_BUTTON_HEIGHT;
+    }
+
+    if (
+        items[row][col] != this->equipedArmor &&
+        items[row][col] != this->equipedWeapon &&
+        items[row][col] != this->equipedTrinket)
+    {
+        UIButton *removeButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Remove", font, rend);
+        removeButton->setAction([this, row, col]()
+                                { removeItem(row, col); });
+        menuButtons.push_back(removeButton);
+        menu->addElement(removeButton);
+        offsetY += MENU_BUTTON_HEIGHT;
+    }
 
     TTF_CloseFont(font);
 
+    bg->setSize(MENU_BUTTON_WIDTH, offsetY);
     menu->setPos(mouseX, mouseY);
 }
 
 void Inventory::testAction(int row, int col)
 {
-    std::cout << "[Inventory] Success: This is a test action\n";
-    std::cout << "Row: " << row << "\nCol: " << col << std::endl;
+    (void)row;
+    (void)col;
+    // std::cout << "[Inventory] Success: This is a test action\n";
+    // std::cout << "Row: " << row << "\nCol: " << col << std::endl;
+}
+
+void Inventory::enableMoveMode(int row, int col)
+{
+    this->isMoveMode = true;
+    this->moveOriginRow = row;
+    this->moveOriginCol = col;
+    this->removeMenu();
+}
+
+void Inventory::disableMoveMode()
+{
+    this->isMoveMode = false;
+    this->moveOriginRow = -1;
+    this->moveOriginCol = -1;
 }
 
 Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedWeapon{nullptr}, equipedArmor{nullptr}, equipedTrinket{nullptr}
@@ -176,13 +263,14 @@ void Inventory::generateUIElements()
         int wholeOffsetX = posX + PADDING;
         for (int j = 0; j < cols; j++)
         {
-            if (UIInventorySlots[i][j] != nullptr && UIInventorySlots[i][j] != NULL)
-            {
-                delete UIInventorySlots[i][j];
-            }
-
             SDL_Color bgColor = {153, 154, 158, SDL_ALPHA_OPAQUE};
             UIButtonImage *button = new UIButtonImage(SLOT_SIZE, SLOT_SIZE, wholeOffsetX, wholeOffsetY, NULL, bgColor);
+
+            if (items[i][j])
+            {
+                button->setTexture(items[i][j]->getTexture());
+            }
+
             button->setAction([this, i, j]()
                               { defaultSlotAction(i, j); });
             UIInventorySlots[i][j] = button;
@@ -193,44 +281,55 @@ void Inventory::generateUIElements()
 
         wholeOffsetY += PADDING + SLOT_SIZE;
     }
+
+    isUIGenerated = true;
 }
 
 bool Inventory::handleClickEvents()
 {
-    bool wasActionCalled = false;
-
-    if (!wasActionCalled)
+    if (this->isMoveMode)
     {
-        for (int i = menuButtons.size() - 1; i >= 0; i--)
+        for (int i = 0; i < rows; i++)
         {
-            if (menuButtons[i]->checkMouseCollision())
+            for (int j = 0; j < cols; j++)
             {
-                menuButtons[i]->callAction();
-                wasActionCalled = true;
-                return true;
-                break;
+                if (UIInventorySlots[i][j]->checkMouseCollision())
+                {
+                    this->moveItems(moveOriginRow, moveOriginCol, i, j);
+                    this->isMoveMode = false;
+                    this->moveOriginCol = -1;
+                    this->moveOriginRow = -1;
+                    this->generateUIElements();
+
+                    return true;
+                    break;
+                }
             }
         }
     }
 
-    if (!wasActionCalled)
+    for (int i = menuButtons.size() - 1; i >= 0; i--)
     {
-        for (int i = slotButtons.size() - 1; i >= 0; i--)
+        if (menuButtons[i]->checkMouseCollision())
         {
-            if (slotButtons[i]->checkMouseCollision())
-            {
-                slotButtons[i]->callAction();
-                wasActionCalled = true;
-                return true;
-                break;
-            }
+            menuButtons[i]->callAction();
+            return true;
+            break;
         }
     }
 
-    if (!wasActionCalled)
+    for (int i = slotButtons.size() - 1; i >= 0; i--)
     {
-        this->removeMenu();
+        if (slotButtons[i]->checkMouseCollision())
+        {
+            slotButtons[i]->callAction();
+            return true;
+            break;
+        }
     }
+
+    this->removeMenu();
+    this->disableMoveMode();
 
     return false;
 }
@@ -279,6 +378,8 @@ void Inventory::removeItem(int row, int col)
 {
     delete items[row][col];
     items[row][col] = nullptr;
+    this->generateUIElements();
+    this->removeMenu();
 }
 
 bool Inventory::moveItems(int oldRow, int oldCol, int newRow, int newCol)

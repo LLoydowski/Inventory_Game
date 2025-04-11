@@ -41,4 +41,5 @@ public:
     void setText(std::string text, TTF_Font *font, SDL_Renderer *rend);
     void setTextPadding(int textPadding);
     void setParentPos(int posX, int posY);
+    void setSize(int width, int height);
 };

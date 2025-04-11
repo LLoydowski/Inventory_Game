@@ -3,6 +3,7 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 #include <vector>
+#include <typeinfo>
 
 #include <Inventory.hpp>
 #include <Shop.hpp>
@@ -12,11 +13,7 @@
 #include <UIImage.hpp>
 #include <Player.hpp>
 #include <UIButtonImage.hpp>
-
-void doSth() //! To be removed
-{
-    std::cout << "Skibadi Action to a butotn" << std::endl;
-}
+#include <Weapon.hpp>
 
 int main(int argc, char *argv[])
 {
@@ -84,13 +81,13 @@ int main(int argc, char *argv[])
     inv->setPos(10, 10, renderer);
     Item *item = new Item("Skibidi", rare, 100, sword01Texture);
     inv->addItem(item);
-    Item *item2 = new Item("Skibidi2", rare, 100, sword01Texture);
+    Item *item2 = new Weapon("Skibidi2", rare, 100, placeholderTexture, 1);
     inv->addItem(item2);
     Item *item3 = new Item("Skibidi3", rare, 100, sword01Texture);
     inv->addItem(item3);
 
-    // Shop *shop = new Shop(2, 2);
-    // shop->setPos(500, 0, renderer);
+    Shop *shop = new Shop(2, 2);
+    shop->setPos(500, 0, renderer);
 
     //? UI ELEMENTS
     std::vector<UIElement *> UI;
@@ -111,10 +108,28 @@ int main(int argc, char *argv[])
             }
             else if (e.type == SDL_MOUSEBUTTONDOWN)
             {
+
                 bool wasActionCalled = false;
                 if (!wasActionCalled)
                 {
-                    wasActionCalled = inv->handleClickEvents();
+                    if (inv->handleClickEvents())
+                    {
+                        wasActionCalled = true;
+
+                        //? Clearing shop menu
+                        shop->removeMenu();
+                        shop->disableMoveMode();
+                    }
+                }
+                if (!wasActionCalled)
+                {
+                    if (shop->handleClickEvents())
+                    {
+                        wasActionCalled = true;
+                        //? Clearing inventory menu
+                        inv->removeMenu();
+                        inv->disableMoveMode();
+                    }
                 }
             }
         }
@@ -125,7 +140,7 @@ int main(int argc, char *argv[])
         // TODO FIX Disabled buttons
 
         inv->displaySDL(renderer);
-        // shop->displaySDL(renderer);
+        shop->displaySDL(renderer);
 
         // for (UIElement *element : UI)
         // {
@@ -136,7 +151,7 @@ int main(int argc, char *argv[])
     }
 
     delete inv;
-    // delete shop;
+    delete shop;
 
     SDL_DestroyTexture(placeholderTexture);
     SDL_DestroyTexture(sword01Texture);

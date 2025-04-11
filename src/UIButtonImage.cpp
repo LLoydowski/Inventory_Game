@@ -27,11 +27,11 @@ UIButtonImage::~UIButtonImage()
         SDL_DestroyTexture(textTexture);
         textTexture = nullptr;
     }
-    if (texture != nullptr && texture != NULL)
-    {
-        SDL_DestroyTexture(texture);
-        texture = nullptr;
-    }
+    // if (texture != nullptr && texture != NULL)
+    // {
+    //     SDL_DestroyTexture(texture);
+    //     texture = nullptr;
+    // }
 }
 
 void UIButtonImage::display(SDL_Renderer *rend)

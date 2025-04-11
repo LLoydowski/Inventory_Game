@@ -17,10 +17,10 @@ Item::Item(std::string name, Rarities rarity, float price, SDL_Texture *texture)
 
 Item::~Item()
 {
-    if (texture)
-    {
-        SDL_DestroyTexture(texture);
-    }
+    // if (texture)
+    // {
+    //     SDL_DestroyTexture(texture);
+    // }
 }
 
 void Item::display()
@@ -55,6 +55,10 @@ bool Item::getFavourite()
 SDL_Texture *Item::getTexture()
 {
     return texture;
+}
+std::string Item::getType()
+{
+    return type;
 }
 //! Setters
 

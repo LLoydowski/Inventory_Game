@@ -8,13 +8,16 @@
 #include <UIButtonImage.hpp>
 #include <UIGroup.hpp>
 
+#include <Weapon.hpp>
+#include <Armor.hpp>
+#include <Trinket.hpp>
+
 #include <Item.hpp>
 #include <Weapon.hpp>
 #include <Armor.hpp>
 #include <Trinket.hpp>
 
 #include <vector>
-
 
 enum ItemParameter
 {
@@ -33,6 +36,10 @@ protected:
     Item *equipedArmor;
     Item *equipedTrinket;
 
+    bool isMoveMode = false;
+    int moveOriginRow = -1;
+    int moveOriginCol = -1;
+
     //? UI Stuff
     SDL_Renderer *rend;
     const SDL_Color inventoryBGColor = {116, 117, 125, SDL_ALPHA_OPAQUE};
@@ -42,6 +49,7 @@ protected:
 
     int posX, posY;
 
+    bool isUIGenerated = false;
     UIElement *inventoryBG;
     UIButtonImage ***UIInventorySlots;
     UIGroup *menu = nullptr;
@@ -49,6 +57,8 @@ protected:
     const int PADDING = 10;
     const int SLOT_SIZE = 50;
     const int SLOT_PADDING = 1;
+    const int MENU_BUTTON_WIDTH = 70;
+    const int MENU_BUTTON_HEIGHT = 40;
 
     void defaultSlotAction(int row, int col);
     void testAction(int row, int col);
@@ -64,13 +74,16 @@ public:
     bool handleClickEvents();
     bool removeMenu();
 
+    void enableMoveMode(int row, int col);
+    void disableMoveMode();
+
     bool addItem(Item *item);
     void sortItems(char parameter);
     bool moveItems(int oldRow, int oldCol, int newRow, int newCol);
     void removeItem(int row, int col);
-    void equipItem(Weapon* weapon);
-    void equipItem(Trinket* trinket);
-    void equipItem(Armor* armor);
+    void equipItem(Weapon *weapon);
+    void equipItem(Trinket *trinket);
+    void equipItem(Armor *armor);
     void unequipItem(ItemParameter parameter);
     void useItem(int row, int col);
     bool toggleFavourite(int row, int col);
