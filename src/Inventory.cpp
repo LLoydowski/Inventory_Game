@@ -23,18 +23,21 @@ void Inventory::defaultSlotAction(int row, int col)
         return;
     }
 
-    int mouseX, mouseY;
-    SDL_GetMouseState(&mouseX, &mouseY);
-
     this->removeMenu();
 
+    //? Creating the menu group
+    int mouseX, mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
     menu = new UIGroup(mouseX, mouseY);
 
+    //? Defining default button color
     SDL_Color color = {200, 200, 200, 255};
 
+    //? Creating menu background
     UIElement *bg = new UIElement(MENU_BUTTON_WIDTH, 0, 0, 0, color);
     menu->addElement(bg);
 
+    //? Opening the font for menu buttons
     TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 42);
     if (font == nullptr)
     {
@@ -42,8 +45,9 @@ void Inventory::defaultSlotAction(int row, int col)
         return;
     }
 
-    int offsetY = 0;
+    int offsetY = 0; //* It defines the relative Y position of next element and the height overall
 
+    //? Creating move button
     UIButton *moveButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Move", font, rend);
     moveButton->setAction([this, row, col]()
                           { enableMoveMode(row, col); });
@@ -53,12 +57,14 @@ void Inventory::defaultSlotAction(int row, int col)
 
     std::string itemType = items[row][col]->getType();
 
+    //? Handling weapon
     if (itemType == "Weapon")
     {
         Weapon *weapon = dynamic_cast<Weapon *>(items[row][col]);
 
         if (items[row][col] == equipedWeapon)
         {
+            //? Creating equip button
             UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
             equipButton->setAction([this]()
                                    { this->unequipItem(this->weapon); });
@@ -67,6 +73,7 @@ void Inventory::defaultSlotAction(int row, int col)
         }
         else
         {
+            //? Creating unequip button
             UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
             equipButton->setAction([this, weapon]()
                                    { this->equipItem(weapon); });
@@ -77,12 +84,14 @@ void Inventory::defaultSlotAction(int row, int col)
         offsetY += MENU_BUTTON_HEIGHT;
     }
 
+    //? Handling armor
     if (itemType == "Armor")
     {
         Armor *armor = dynamic_cast<Armor *>(items[row][col]);
 
         if (items[row][col] == equipedWeapon)
         {
+            //? Creating equip button
             UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
             equipButton->setAction([this]()
                                    { this->unequipItem(this->armor); });
@@ -91,6 +100,7 @@ void Inventory::defaultSlotAction(int row, int col)
         }
         else
         {
+            //? Creating unequip button
             UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
             equipButton->setAction([this, armor]()
                                    { this->equipItem(armor); });
@@ -100,12 +110,14 @@ void Inventory::defaultSlotAction(int row, int col)
         offsetY += MENU_BUTTON_HEIGHT;
     }
 
+    //? Handling trinket
     if (itemType == "Trinket")
     {
         Trinket *trinket = dynamic_cast<Trinket *>(items[row][col]);
 
         if (items[row][col] == equipedWeapon)
         {
+            //? Creating equip button
             UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
             equipButton->setAction([this]()
                                    { this->unequipItem(this->trinket); });
@@ -114,6 +126,7 @@ void Inventory::defaultSlotAction(int row, int col)
         }
         else
         {
+            //? Creating unequip button
             UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
             equipButton->setAction([this, trinket]()
                                    { this->equipItem(trinket); });
@@ -123,11 +136,13 @@ void Inventory::defaultSlotAction(int row, int col)
         offsetY += MENU_BUTTON_HEIGHT;
     }
 
+    //? Checking if the item is equipped, if it isn't creating remove button
     if (
         items[row][col] != this->equipedArmor &&
         items[row][col] != this->equipedWeapon &&
         items[row][col] != this->equipedTrinket)
     {
+        //? Creating remove button
         UIButton *removeButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Remove", font, rend);
         removeButton->setAction([this, row, col]()
                                 { removeItem(row, col); });
@@ -136,18 +151,9 @@ void Inventory::defaultSlotAction(int row, int col)
         offsetY += MENU_BUTTON_HEIGHT;
     }
 
-    TTF_CloseFont(font);
-
     bg->setSize(MENU_BUTTON_WIDTH, offsetY);
-    menu->setPos(mouseX, mouseY);
-}
 
-void Inventory::testAction(int row, int col)
-{
-    (void)row;
-    (void)col;
-    // std::cout << "[Inventory] Success: This is a test action\n";
-    // std::cout << "Row: " << row << "\nCol: " << col << std::endl;
+    TTF_CloseFont(font);
 }
 
 void Inventory::enableMoveMode(int row, int col)

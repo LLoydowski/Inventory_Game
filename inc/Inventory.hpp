@@ -59,18 +59,17 @@ protected:
     const int MENU_BUTTON_WIDTH = 70;
     const int MENU_BUTTON_HEIGHT = 40;
 
-    void defaultSlotAction(int row, int col);
-    void testAction(int row, int col);
+    virtual void defaultSlotAction(int row, int col);
 
 public:
     Inventory(int rows, int cols);
-    ~Inventory();
+    virtual ~Inventory();
 
     void displayCLI();
     void displaySDL(SDL_Renderer *rend);
     void generateUIElements();
 
-    bool handleClickEvents();
+    virtual bool handleClickEvents();
     bool removeMenu();
 
     void enableMoveMode(int row, int col);

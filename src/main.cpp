@@ -83,11 +83,11 @@ int main(int argc, char *argv[])
     inv->addItem(item);
     Item *item2 = new Weapon("Skibidi2", rare, 100, placeholderTexture, 1);
     inv->addItem(item2);
-    Item *item3 = new Item("Skibidi3", rare, 100, sword01Texture);
-    inv->addItem(item3);
 
     Shop *shop = new Shop(2, 2);
     shop->setPos(500, 0, renderer);
+    Item *item3 = new Item("Skibidi3", rare, 100, sword01Texture);
+    shop->addItem(item3);
 
     //? UI ELEMENTS
     std::vector<UIElement *> UI;
@@ -141,11 +141,6 @@ int main(int argc, char *argv[])
 
         inv->displaySDL(renderer);
         shop->displaySDL(renderer);
-
-        // for (UIElement *element : UI)
-        // {
-        //     element->display(renderer);
-        // }
 
         SDL_RenderPresent(renderer);
     }
