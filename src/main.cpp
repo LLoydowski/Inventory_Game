@@ -75,18 +75,18 @@ int main(int argc, char *argv[])
 
     //? Game Logic
 
-    // Player *player = new Player("Jasiu", 100.0, 20.0);
+    Player *player = new Player("Jasiu", 100.0, 20.0);
 
-    Inventory *inv = new Inventory(6, 3);
-    inv->setPos(10, 10, renderer);
+    Inventory *playerInv = player->getInv();
+    playerInv->setPos(10, 10, renderer);
     Item *item = new Item("Skibidi", rare, 100, sword01Texture);
-    inv->addItem(item);
+    playerInv->addItem(item);
     Item *item2 = new Weapon("Skibidi2", rare, 100, placeholderTexture, 1);
-    inv->addItem(item2);
+    playerInv->addItem(item2);
 
     Shop *shop = new Shop(2, 2);
     shop->setPos(500, 0, renderer);
-    Item *item3 = new Item("Skibidi3", rare, 100, sword01Texture);
+    Item *item3 = new Item("Skibidi3", rare, 100.0, sword01Texture);
     shop->addItem(item3);
 
     //? UI ELEMENTS
@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
                 bool wasActionCalled = false;
                 if (!wasActionCalled)
                 {
-                    if (inv->handleClickEvents())
+                    if (playerInv->handleClickEvents())
                     {
                         wasActionCalled = true;
 
@@ -127,8 +127,8 @@ int main(int argc, char *argv[])
                     {
                         wasActionCalled = true;
                         //? Clearing inventory menu
-                        inv->removeMenu();
-                        inv->disableMoveMode();
+                        playerInv->removeMenu();
+                        playerInv->disableMoveMode();
                     }
                 }
             }
@@ -139,13 +139,13 @@ int main(int argc, char *argv[])
 
         // TODO FIX Disabled buttons
 
-        inv->displaySDL(renderer);
+        playerInv->displaySDL(renderer);
         shop->displaySDL(renderer);
 
         SDL_RenderPresent(renderer);
     }
 
-    delete inv;
+    delete playerInv;
     delete shop;
 
     SDL_DestroyTexture(placeholderTexture);

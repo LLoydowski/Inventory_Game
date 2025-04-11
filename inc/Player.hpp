@@ -6,8 +6,8 @@
 class Player
 {
 private:
-    int INVENTORY_ROWS = 3;
-    int INVENTORY_COLS = 4;
+    const int INVENTORY_ROWS = 3;
+    const int INVENTORY_COLS = 4;
 
     std::string name;
     float HP, gold;
@@ -23,4 +23,5 @@ public:
 
     //? Getters
     int getGold();
+    Inventory *getInv();
 };

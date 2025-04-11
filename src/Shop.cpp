@@ -2,6 +2,9 @@
 #include "Player.hpp"
 #include "Item.hpp"
 
+#include <iomanip>
+#include <sstream>
+
 void Shop::defaultSlotAction(int row, int col)
 {
     if (items[row][col] == nullptr)
@@ -34,11 +37,20 @@ void Shop::defaultSlotAction(int row, int col)
     int offsetY = 0; //* It defines the relative Y position of next element and the height overall
 
     //? Creating move button
-    UIButton *moveButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Buy", font, rend);
-    moveButton->setAction([this, row, col]()
-                          { std::cout << "Buy " << row << " " << col; });
-    menuButtons.push_back(moveButton);
-    menu->addElement(moveButton);
+
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(1) << items[row][col]->getPrice();
+    std::string priceString = stream.str();
+
+    std::string buyButtonText = "Buy (" + priceString + ")";
+
+    std::cout << buyButtonText << std::endl;
+
+    UIButton *buyButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, buyButtonText, font, rend);
+    buyButton->setAction([this, row, col]()
+                         { std::cout << "Buy " << row << " " << col; });
+    menuButtons.push_back(buyButton);
+    menu->addElement(buyButton);
     offsetY += MENU_BUTTON_HEIGHT;
 
     std::string itemType = items[row][col]->getType();
