@@ -361,18 +361,18 @@ bool Inventory::toggleFavourite(int row, int col)
     return true;
 }
 
-void Inventory::equipItem(Weapon* weapon)
-{   
+void Inventory::equipItem(Weapon *weapon)
+{
     equipedWeapon = weapon;
 }
-void Inventory::equipItem(Armor* armor) {
+void Inventory::equipItem(Armor *armor)
+{
     equipedArmor = armor;
 }
-void Inventory::equipItem(Trinket* trinket)
+void Inventory::equipItem(Trinket *trinket)
 {
     equipedTrinket = trinket;
 }
-
 
 void Inventory::unequipItem(ItemParameter parameter)
 {
@@ -388,7 +388,9 @@ void Inventory::unequipItem(ItemParameter parameter)
         equipedTrinket = nullptr;
         break;
     }
-    
+
+    this->generateUIElements();
+    this->removeMenu();
 }
 
 void Inventory::useItem(int row, int col)
@@ -405,9 +407,7 @@ void Inventory::useItem(int row, int col)
         return;
     }
 
-    
-    //Using potion code
-
+    // Using potion code
 }
 
 int Inventory::getCols()
