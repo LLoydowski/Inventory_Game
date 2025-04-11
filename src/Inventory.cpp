@@ -60,8 +60,8 @@ void Inventory::defaultSlotAction(int row, int col)
         if (items[row][col] == equipedWeapon)
         {
             UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
-            // equipButton->setAction([this, row, col]()
-            //                        { this->unequipItem(row, col); });
+            equipButton->setAction([this]()
+                                   { this->unequipItem(this->weapon); });
             menuButtons.push_back(equipButton);
             menu->addElement(equipButton);
         }
@@ -80,22 +80,46 @@ void Inventory::defaultSlotAction(int row, int col)
     if (itemType == "Armor")
     {
         Armor *armor = dynamic_cast<Armor *>(items[row][col]);
-        UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
-        equipButton->setAction([this, armor]()
-                               { this->equipItem(armor); });
-        menuButtons.push_back(equipButton);
-        menu->addElement(equipButton);
+
+        if (items[row][col] == equipedWeapon)
+        {
+            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
+            equipButton->setAction([this]()
+                                   { this->unequipItem(this->armor); });
+            menuButtons.push_back(equipButton);
+            menu->addElement(equipButton);
+        }
+        else
+        {
+            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
+            equipButton->setAction([this, armor]()
+                                   { this->equipItem(armor); });
+            menuButtons.push_back(equipButton);
+            menu->addElement(equipButton);
+        }
         offsetY += MENU_BUTTON_HEIGHT;
     }
 
     if (itemType == "Trinket")
     {
         Trinket *trinket = dynamic_cast<Trinket *>(items[row][col]);
-        UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
-        equipButton->setAction([this, trinket]()
-                               { this->equipItem(trinket); });
-        menuButtons.push_back(equipButton);
-        menu->addElement(equipButton);
+
+        if (items[row][col] == equipedWeapon)
+        {
+            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
+            equipButton->setAction([this]()
+                                   { this->unequipItem(this->trinket); });
+            menuButtons.push_back(equipButton);
+            menu->addElement(equipButton);
+        }
+        else
+        {
+            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
+            equipButton->setAction([this, trinket]()
+                                   { this->equipItem(trinket); });
+            menuButtons.push_back(equipButton);
+            menu->addElement(equipButton);
+        }
         offsetY += MENU_BUTTON_HEIGHT;
     }
 
@@ -465,14 +489,17 @@ bool Inventory::toggleFavourite(int row, int col)
 void Inventory::equipItem(Weapon *weapon)
 {
     equipedWeapon = weapon;
+    this->removeMenu();
 }
 void Inventory::equipItem(Armor *armor)
 {
     equipedArmor = armor;
+    this->removeMenu();
 }
 void Inventory::equipItem(Trinket *trinket)
 {
     equipedTrinket = trinket;
+    this->removeMenu();
 }
 
 void Inventory::unequipItem(ItemParameter parameter)

@@ -19,16 +19,15 @@
 
 #include <vector>
 
-enum ItemParameter
-{
-    weapon,
-    armor,
-    trinket
-};
-
 class Inventory
 {
 protected:
+    enum ItemParameter
+    {
+        weapon,
+        armor,
+        trinket
+    };
     //? Logic Stuff
     int rows, cols;
     Item ***items;
