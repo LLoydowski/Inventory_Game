@@ -56,11 +56,24 @@ void Inventory::defaultSlotAction(int row, int col)
     if (itemType == "Weapon")
     {
         Weapon *weapon = dynamic_cast<Weapon *>(items[row][col]);
-        UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
-        equipButton->setAction([this, weapon]()
-                               { this->equipItem(weapon); });
-        menuButtons.push_back(equipButton);
-        menu->addElement(equipButton);
+
+        if (items[row][col] == equipedWeapon)
+        {
+            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
+            // equipButton->setAction([this, row, col]()
+            //                        { this->unequipItem(row, col); });
+            menuButtons.push_back(equipButton);
+            menu->addElement(equipButton);
+        }
+        else
+        {
+            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
+            equipButton->setAction([this, weapon]()
+                                   { this->equipItem(weapon); });
+            menuButtons.push_back(equipButton);
+            menu->addElement(equipButton);
+        }
+
         offsetY += MENU_BUTTON_HEIGHT;
     }
 
