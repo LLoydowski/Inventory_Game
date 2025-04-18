@@ -50,14 +50,19 @@ protected:
 
     bool isUIGenerated = false;
     UIElement *inventoryBG;
+    UIElement *inventoryTitle;
+    UIElement *goldText;
     UIButtonImage ***UIInventorySlots;
     UIGroup *menu = nullptr;
 
+    const int PADDING_TOP = 15;
     const int PADDING = 10;
     const int SLOT_SIZE = 50;
     const int SLOT_PADDING = 1;
-    const int MENU_BUTTON_WIDTH = 70;
-    const int MENU_BUTTON_HEIGHT = 40;
+    const int MENU_BUTTON_WIDTH = 100;
+    const int MENU_BUTTON_HEIGHT = 35;
+
+    std::string inventoryName = "Inventory";
 
     virtual void defaultSlotAction(int row, int col);
 
@@ -66,7 +71,7 @@ public:
     virtual ~Inventory();
 
     void displayCLI();
-    void displaySDL(SDL_Renderer *rend);
+    void virtual displaySDL(SDL_Renderer *rend);
     void generateUIElements();
 
     virtual bool handleClickEvents();

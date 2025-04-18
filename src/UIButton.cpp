@@ -120,8 +120,11 @@ void UIButton::display(SDL_Renderer *rend)
         int texWidth, texHeight;
         SDL_QueryTexture(textTexture, NULL, NULL, &texWidth, &texHeight);
 
-        SDL_Rect paddedRect = {realX + textPadding, realY + textPadding, width - 2 * textPadding, height - 2 * textPadding};
+        float scaleRatio = float(this->height) / float(texHeight);
+
         SDL_Rect textRect = {0, 0, texWidth, texHeight};
+
+        SDL_Rect paddedRect = {realX + textPadding, realY + textPadding, int(texWidth * scaleRatio), int(texHeight * scaleRatio)};
 
         SDL_RenderCopy(rend, textTexture, &textRect, &paddedRect);
     }

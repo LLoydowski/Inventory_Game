@@ -1,7 +1,7 @@
 {
     "files.associations": {
-        "*.embeddedhtml": "html",
         "*.ejs": "html",
+        "*.embeddedhtml": "html",
         "system_error": "cpp",
         "xlocale": "cpp",
         "iostream": "cpp",
@@ -57,6 +57,8 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "map": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "iomanip": "cpp",
+        "sstream": "cpp"
     }
 }

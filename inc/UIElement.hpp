@@ -14,7 +14,7 @@ protected:
     std::string text;
     SDL_Texture *textTexture;
 
-    int textPadding = 5;
+    int textPadding = 1.5;
 
     bool hasParent = false;
     int parentX, parentY;

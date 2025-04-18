@@ -38,7 +38,7 @@ void Inventory::defaultSlotAction(int row, int col)
     menu->addElement(bg);
 
     //? Opening the font for menu buttons
-    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 42);
+    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 24);
     if (font == nullptr)
     {
         std::cerr << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
@@ -209,6 +209,9 @@ Inventory::~Inventory()
     delete[] items;
 
     delete inventoryBG;
+    delete inventoryTitle;
+    delete goldText;
+
     inventoryBG = nullptr;
     for (int i = 0; i < rows; i++)
     {
@@ -257,6 +260,8 @@ void Inventory::displaySDL(SDL_Renderer *rend)
     }
 
     inventoryBG->display(rend);
+    inventoryTitle->display(rend);
+    goldText->display(rend);
 
     for (int i = 0; i < rows; i++)
     {
@@ -283,11 +288,21 @@ void Inventory::generateUIElements()
     }
 
     const int width = (cols * (PADDING + SLOT_SIZE)) + PADDING;
-    const int height = (rows * (PADDING + SLOT_SIZE)) + PADDING;
+    const int height = (rows * (PADDING + SLOT_SIZE)) + PADDING + PADDING_TOP;
+    int paddingWhole = PADDING_TOP + PADDING;
+
+    TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 18);
+    if (font == nullptr)
+    {
+        std::cerr << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
+        return;
+    }
 
     inventoryBG = new UIElement(width, height, posX, posY, inventoryBGColor);
+    inventoryTitle = new UIElement(100, paddingWhole, posX + PADDING, posY, inventoryBGColor, inventoryName, font, rend);
+    goldText = new UIElement(110, paddingWhole, (posX + width) - 110 - PADDING, posY, inventoryBGColor, "Gold: --TEST--", font, rend);
 
-    int wholeOffsetY = posY + PADDING;
+    int wholeOffsetY = posY + PADDING + PADDING_TOP;
     for (int i = 0; i < rows; i++)
     {
         int wholeOffsetX = posX + PADDING;

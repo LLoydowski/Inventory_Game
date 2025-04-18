@@ -14,4 +14,5 @@ public:
 
     bool buyItem(int col, int row, Player *player);
     bool handleClickEvents() override;
+    void displaySDL(SDL_Renderer *rend) override;
 };

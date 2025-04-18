@@ -62,6 +62,7 @@ void Shop::defaultSlotAction(int row, int col)
 
 Shop::Shop(int rows, int cols) : Inventory(rows, cols)
 {
+    this->inventoryName = "Shop";
 }
 
 bool Shop::buyItem(int col, int row, Player *player)
@@ -108,4 +109,32 @@ bool Shop::handleClickEvents()
     this->disableMoveMode();
 
     return false;
+}
+
+void Shop::displaySDL(SDL_Renderer *rend)
+{
+    if (posX == -1 || posY == -1)
+    {
+        std::cout << "You need to set position first ( setPos(posX, posY); )" << std::endl;
+        return;
+    }
+
+    inventoryBG->display(rend);
+    inventoryTitle->display(rend);
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            if (UIInventorySlots[i][j] != nullptr)
+            {
+                UIInventorySlots[i][j]->display(rend, PADDING);
+            }
+        }
+    }
+
+    if (menu != nullptr)
+    {
+        menu->display(rend);
+    }
 }

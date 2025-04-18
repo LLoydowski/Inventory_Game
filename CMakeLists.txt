@@ -38,6 +38,9 @@ if(WIN32)
         "${CMAKE_BINARY_DIR}/lib/libSDL2_ttf.dll.a"
         "${CMAKE_BINARY_DIR}/lib/libSDL2_image.dll.a"
     )
+
+    # ? Renable it when the project will be finnished
+    # set_target_properties(${P_NAME} PROPERTIES WIN32_EXECUTABLE TRUE)
     target_compile_options(${P_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror -g -O0)
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     include_directories("${CMAKE_BINARY_DIR}/inc")
