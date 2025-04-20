@@ -46,6 +46,12 @@ void Inventory::defaultSlotAction(int row, int col)
     }
 
     int offsetY = 0; //* It defines the relative Y position of next element and the height overall
+    int width = 0;
+
+    UIElement *itemName = new UIElement(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, items[row][col]->getName(), font, rend);
+    menu->addElement(itemName);
+    offsetY += MENU_BUTTON_HEIGHT;
+    calculateMenuElementDimentions(width, itemName->getTextTexture());
 
     //? Creating move button
     UIButton *moveButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Move", font, rend);
@@ -54,18 +60,21 @@ void Inventory::defaultSlotAction(int row, int col)
     menuButtons.push_back(moveButton);
     menu->addElement(moveButton);
     offsetY += MENU_BUTTON_HEIGHT;
+    calculateMenuElementDimentions(width, moveButton->getTextTexture());
 
-    std::string itemType = items[row][col]->getType();
+    ItemType itemType = items[row][col]->getType();
 
     //? Handling weapon
-    if (itemType == "Weapon")
+    if (itemType == ItemType::Weapon)
     {
         Weapon *weapon = dynamic_cast<Weapon *>(items[row][col]);
+
+        UIButton *equipButton = nullptr;
 
         if (items[row][col] == equipedWeapon)
         {
             //? Creating equip button
-            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
+            equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
             equipButton->setAction([this]()
                                    { this->unequipItem(ItemType::Weapon); });
             menuButtons.push_back(equipButton);
@@ -74,7 +83,7 @@ void Inventory::defaultSlotAction(int row, int col)
         else
         {
             //? Creating unequip button
-            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
+            equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
             equipButton->setAction([this, weapon]()
                                    { this->equipItem(weapon); });
             menuButtons.push_back(equipButton);
@@ -82,17 +91,20 @@ void Inventory::defaultSlotAction(int row, int col)
         }
 
         offsetY += MENU_BUTTON_HEIGHT;
+        calculateMenuElementDimentions(width, equipButton->getTextTexture());
     }
 
     //? Handling armor
-    if (itemType == "Armor")
+    if (itemType == ItemType::Armor)
     {
         Armor *armor = dynamic_cast<Armor *>(items[row][col]);
+
+        UIButton *equipButton = nullptr;
 
         if (items[row][col] == equipedArmor)
         {
             //? Creating equip button
-            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
+            equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
             equipButton->setAction([this]()
                                    { this->unequipItem(ItemType::Armor); });
             menuButtons.push_back(equipButton);
@@ -101,24 +113,27 @@ void Inventory::defaultSlotAction(int row, int col)
         else
         {
             //? Creating unequip button
-            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
+            equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
             equipButton->setAction([this, armor]()
                                    { this->equipItem(armor); });
             menuButtons.push_back(equipButton);
             menu->addElement(equipButton);
         }
         offsetY += MENU_BUTTON_HEIGHT;
+        calculateMenuElementDimentions(width, equipButton->getTextTexture());
     }
 
     //? Handling trinket
-    if (itemType == "Trinket")
+    if (itemType == ItemType::Trinket)
     {
         Trinket *trinket = dynamic_cast<Trinket *>(items[row][col]);
+
+        UIButton *equipButton = nullptr;
 
         if (items[row][col] == equipedTrinket)
         {
             //? Creating equip button
-            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
+            equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
             equipButton->setAction([this]()
                                    { this->unequipItem(ItemType::Trinket); });
             menuButtons.push_back(equipButton);
@@ -127,13 +142,14 @@ void Inventory::defaultSlotAction(int row, int col)
         else
         {
             //? Creating unequip button
-            UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
+            equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Equip", font, rend);
             equipButton->setAction([this, trinket]()
                                    { this->equipItem(trinket); });
             menuButtons.push_back(equipButton);
             menu->addElement(equipButton);
         }
         offsetY += MENU_BUTTON_HEIGHT;
+        calculateMenuElementDimentions(width, equipButton->getTextTexture());
     }
 
     //? Checking if the item is equipped, if it isn't creating remove button
@@ -149,11 +165,28 @@ void Inventory::defaultSlotAction(int row, int col)
         menuButtons.push_back(removeButton);
         menu->addElement(removeButton);
         offsetY += MENU_BUTTON_HEIGHT;
+        calculateMenuElementDimentions(width, removeButton->getTextTexture());
     }
 
-    bg->setSize(MENU_BUTTON_WIDTH, offsetY);
+    bg->setSize(width, offsetY);
+    menu->resizeElementsWidth(width + MENU_PADDING_RIGHT);
 
     TTF_CloseFont(font);
+}
+
+void Inventory::calculateMenuElementDimentions(int &maxWidth, SDL_Texture *texture)
+{
+    int texWidth, texHeight;
+    SDL_QueryTexture(texture, NULL, NULL, &texWidth, &texHeight);
+
+    float scaleRatio = float(MENU_BUTTON_HEIGHT) / float(texHeight);
+
+    int width = texWidth * scaleRatio;
+
+    if (width > maxWidth)
+    {
+        maxWidth = width;
+    }
 }
 
 void Inventory::enableMoveMode(int row, int col)
@@ -527,6 +560,12 @@ void Inventory::unequipItem(ItemType parameter)
 {
     switch (parameter)
     {
+    case ItemType::Generic:
+        std::cout << "[Inventory/unequipItem] WARNING: Tried to unequp Generic Item\n";
+        break;
+    case ItemType::Chest:
+        std::cout << "[Inventory/unequipItem] WARNING: Tried to unequp Chest\n";
+        break;
     case ItemType::Weapon:
         equipedWeapon = nullptr;
         break;

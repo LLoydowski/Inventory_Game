@@ -224,6 +224,30 @@ src/Item.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Item.cpp.s
 .PHONY : src/Item.cpp.s
 
+src/LootTable.obj: src/LootTable.cpp.obj
+.PHONY : src/LootTable.obj
+
+# target to build an object file
+src/LootTable.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/LootTable.cpp.obj
+.PHONY : src/LootTable.cpp.obj
+
+src/LootTable.i: src/LootTable.cpp.i
+.PHONY : src/LootTable.i
+
+# target to preprocess a source file
+src/LootTable.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/LootTable.cpp.i
+.PHONY : src/LootTable.cpp.i
+
+src/LootTable.s: src/LootTable.cpp.s
+.PHONY : src/LootTable.s
+
+# target to generate assembly for a file
+src/LootTable.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/LootTable.cpp.s
+.PHONY : src/LootTable.cpp.s
+
 src/Player.obj: src/Player.cpp.obj
 .PHONY : src/Player.obj
 
@@ -485,6 +509,9 @@ help:
 	@echo ... src/Item.obj
 	@echo ... src/Item.i
 	@echo ... src/Item.s
+	@echo ... src/LootTable.obj
+	@echo ... src/LootTable.i
+	@echo ... src/LootTable.s
 	@echo ... src/Player.obj
 	@echo ... src/Player.i
 	@echo ... src/Player.s

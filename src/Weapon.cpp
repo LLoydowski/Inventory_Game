@@ -6,19 +6,19 @@
 Weapon::Weapon()
     : Item(), damage(0)
 {
-    this->type = "Weapon";
+    this->type = ItemType::Weapon;
 }
 
 Weapon::Weapon(std::string name, Rarities rarity, float price, int damage)
     : Item(name, rarity, price), damage(damage)
 {
-    this->type = "Weapon";
+    this->type = ItemType::Weapon;
 }
 
 Weapon::Weapon(std::string name, Rarities rarity, float price, SDL_Texture *texture, int damage)
     : Item(name, rarity, price, texture), damage(damage)
 {
-    this->type = "Weapon";
+    this->type = ItemType::Weapon;
 }
 
 Weapon::~Weapon()

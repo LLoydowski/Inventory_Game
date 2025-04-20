@@ -51,12 +51,14 @@ protected:
     const int PADDING = 10;
     const int SLOT_SIZE = 50;
     const int SLOT_PADDING = 1;
-    const int MENU_BUTTON_WIDTH = 100;
+    const int MENU_BUTTON_WIDTH = 100; //! Not used anymore
     const int MENU_BUTTON_HEIGHT = 35;
+    const int MENU_PADDING_RIGHT = 5;
 
     std::string inventoryName = "Inventory";
 
     virtual void defaultSlotAction(int row, int col);
+    void calculateMenuElementDimentions(int &maxWidth, SDL_Texture *texutre);
 
 public:
     Inventory(int rows, int cols);

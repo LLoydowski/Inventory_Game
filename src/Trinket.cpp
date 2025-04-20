@@ -6,21 +6,21 @@
 Trinket::Trinket()
     : Item()
 {
-    this->type = "Trinket";
+    this->type = ItemType::Trinket;
 }
 
 // Konstruktor bez tekstury
-Trinket::Trinket(std::string name, Rarities rarity, float price)
-    : Item(name, rarity, price)
+Trinket::Trinket(std::string name, Rarities rarity, float price, float HP)
+    : Item(name, rarity, price), HP{HP}
 {
-    this->type = "Trinket";
+    this->type = ItemType::Trinket;
 }
 
 // Konstruktor z teksturą
 Trinket::Trinket(std::string name, Rarities rarity, float price, SDL_Texture *texture)
     : Item(name, rarity, price, texture)
 {
-    this->type = "Trinket";
+    this->type = ItemType::Trinket;
 }
 
 Trinket::~Trinket()
@@ -29,6 +29,11 @@ Trinket::~Trinket()
     {
         SDL_DestroyTexture(texture);
     }
+}
+
+float Trinket::getAdditionalHP()
+{
+    return HP;
 }
 
 void Trinket::display()

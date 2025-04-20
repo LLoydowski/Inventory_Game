@@ -36,6 +36,7 @@ public:
     int getX();
     int getY();
     std::string getText();
+    SDL_Texture *getTextTexture();
 
     void setText(std::string text);
     void setText(std::string text, TTF_Font *font, SDL_Renderer *rend);

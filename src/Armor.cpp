@@ -2,23 +2,24 @@
 
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <Enums.hpp>
 
 Armor::Armor()
     : Item(), defense(0)
 {
-    this->type = "Armor";
+    this->type = ItemType::Armor;
 }
 
 Armor::Armor(std::string name, Rarities rarity, float price, int defense)
     : Item(name, rarity, price), defense(defense)
 {
-    this->type = "Armor";
+    this->type = ItemType::Armor;
 }
 
 Armor::Armor(std::string name, Rarities rarity, float price, SDL_Texture *texture, int defense)
     : Item(name, rarity, price, texture), defense(defense)
 {
-    this->type = "Armor";
+    this->type = ItemType::Armor;
 }
 
 Armor::~Armor()

@@ -9,8 +9,10 @@ class LootTable
 private:
     float preferenceMultiplier = 1.3;
 
+    Rarities rarity = Rarities::common;
+
     std::map<Statistic, fInterval> statsIntervals = {{Statistic::HP, {0, 0}}, {Statistic::DMG, {0, 0}}, {Statistic::DEF, {0, 0}}};
-    std::vector<ItemExactType> validItemsTypes;
+    std::vector<ItemType> validItemsTypes;
 
 public:
     LootTable();
@@ -23,5 +25,5 @@ public:
     void setDMG(float min, float max);
     void setDEF(float min, float max);
     void setPreferenceMultiplier(float multiplier);
-    void setValidTypes(std::vector<ItemExactType> validItemsTypes);
+    void setValidTypes(std::vector<ItemType> validItemsTypes);
 };

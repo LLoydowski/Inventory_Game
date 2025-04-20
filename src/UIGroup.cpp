@@ -43,3 +43,15 @@ void UIGroup::setPos(int x, int y)
         element->setParentPos(posX, posY);
     }
 }
+
+void UIGroup::resizeElementsWidth(int width)
+{
+    for (int i = 0; i < int(elements.size()); i++)
+    {
+        if (elements[i] != nullptr)
+        {
+            int elementHeight = elements[i]->getHeight();
+            elements[i]->setSize(width, elementHeight);
+        }
+    }
+}

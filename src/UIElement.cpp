@@ -101,11 +101,6 @@ bool UIElement::generateTexture(TTF_Font *font, SDL_Renderer *rend)
     return true;
 }
 
-int UIElement::getWidth()
-{
-    return width;
-}
-
 int UIElement::getHeight()
 {
     return height;
@@ -124,6 +119,11 @@ int UIElement::getY()
 std::string UIElement::getText()
 {
     return text;
+}
+
+SDL_Texture *UIElement::getTextTexture()
+{
+    return textTexture;
 }
 
 void UIElement::setText(std::string text)

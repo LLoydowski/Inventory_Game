@@ -14,6 +14,7 @@
 #include <Player.hpp>
 #include <UIButtonImage.hpp>
 #include <Weapon.hpp>
+#include <Chest.hpp>
 
 int main(int argc, char *argv[])
 {
@@ -73,24 +74,40 @@ int main(int argc, char *argv[])
         SDL_FreeSurface(sword01Surf);
     }
 
+    SDL_Texture *weaponChestT1Texture = NULL;
+    SDL_Surface *weaponChestT1Surf = IMG_Load("gfx/chest.png");
+    if (weaponChestT1Surf)
+    {
+        weaponChestT1Texture = SDL_CreateTextureFromSurface(renderer, weaponChestT1Surf);
+        SDL_FreeSurface(weaponChestT1Surf);
+    }
+
     //? Game Logic
 
     Player *player = new Player("Jasiu", 100.0, 20.0);
 
     Inventory *playerInv = player->getInv();
     playerInv->setPos(10, 10, renderer);
-    Item *item = new Item("Skibidi", rare, 100, sword01Texture);
+    Item *item = new Item("DlugiSkibidi", Rarities::rare, 100, sword01Texture);
     playerInv->addItem(item);
-    Item *item2 = new Weapon("Skibidi2", rare, 100, placeholderTexture, 1);
+    Item *item2 = new Weapon("Skibidi2", Rarities::rare, 100, placeholderTexture, 1);
     playerInv->addItem(item2);
 
     Shop *shop = new Shop(2, 2);
     shop->setPos(500, 0, renderer);
-    Item *item3 = new Item("Skibidi3", rare, 100.0, sword01Texture);
-    shop->addItem(item3);
+
+    //? Creating loot table for T1 Weapon Chest
+    LootTable *weaponT1Loot = new LootTable();
+    weaponT1Loot->setDMG(1, 10);
+
+    //? Creating chest object
+    Chest *chestWeapon1 = new Chest("Weapon Chest [T1]", Rarities::common, 10, weaponChestT1Texture, weaponT1Loot);
+
+    shop->addItem(chestWeapon1);
 
     //? UI ELEMENTS
-    std::vector<UIElement *> UI;
+    std::vector<UIElement *>
+        UI;
 
     // SDL_Color btnColor = {189, 189, 189, 255};
 
@@ -150,6 +167,7 @@ int main(int argc, char *argv[])
 
     SDL_DestroyTexture(placeholderTexture);
     SDL_DestroyTexture(sword01Texture);
+    SDL_DestroyTexture(weaponChestT1Texture);
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

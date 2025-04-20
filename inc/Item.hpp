@@ -14,7 +14,7 @@ protected:
     float price;
     bool favourite;
     SDL_Texture *texture;
-    std::string type = "Item";
+    ItemType type = ItemType::Generic;
 
 public:
     Item();
@@ -31,7 +31,7 @@ public:
     Rarities getRarity();
     bool getFavourite();
     SDL_Texture *getTexture();
-    std::string getType();
+    ItemType getType();
 
     // Setters
     void setFavourite(bool optoion);

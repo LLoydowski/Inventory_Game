@@ -35,16 +35,17 @@ void Shop::defaultSlotAction(int row, int col)
     }
 
     int offsetY = 0; //* It defines the relative Y position of next element and the height overall
+    int width = 0;
 
-    //? Creating move button
+    UIElement *itemName = new UIElement(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, items[row][col]->getName(), font, rend);
+    menu->addElement(itemName);
+    offsetY += MENU_BUTTON_HEIGHT;
+    calculateMenuElementDimentions(width, itemName->getTextTexture());
 
     std::stringstream stream;
     stream << std::fixed << std::setprecision(1) << items[row][col]->getPrice();
     std::string priceString = stream.str();
-
     std::string buyButtonText = "Buy (" + priceString + ")";
-
-    std::cout << buyButtonText << std::endl;
 
     UIButton *buyButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, buyButtonText, font, rend);
     buyButton->setAction([this, row, col]()
@@ -52,10 +53,12 @@ void Shop::defaultSlotAction(int row, int col)
     menuButtons.push_back(buyButton);
     menu->addElement(buyButton);
     offsetY += MENU_BUTTON_HEIGHT;
+    calculateMenuElementDimentions(width, buyButton->getTextTexture());
 
-    std::string itemType = items[row][col]->getType();
+    // ItemType itemType = items[row][col]->getType();
 
     bg->setSize(MENU_BUTTON_WIDTH, offsetY);
+    menu->resizeElementsWidth(width + MENU_PADDING_RIGHT);
 
     TTF_CloseFont(font);
 }

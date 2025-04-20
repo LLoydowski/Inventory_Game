@@ -15,4 +15,5 @@ public:
     void addElement(UIElement *element);
     void display(SDL_Renderer *rend);
     void setPos(int x, int y);
+    void resizeElementsWidth(int width);
 };

@@ -12,29 +12,21 @@ struct fInterval
     float min, max;
 };
 
+enum class ItemType
+{
+    Generic,
+    Weapon,
+    Armor,
+    Trinket,
+    Chest
+};
+
 enum class Rarities
 {
     common,
     uncommon,
     rare,
     epic
-};
-
-enum class ItemType
-{
-    Weapon,
-    Armor,
-    Trinket
-};
-
-enum class ItemExactType
-{
-    Sword,
-    Axe,
-    Spear,
-    Armor,
-    Robe,
-
 };
 
 enum class Statistic
@@ -44,21 +36,11 @@ enum class Statistic
     DEF
 };
 
-struct Preference
-{
-    Statistic preferedStat;
-    Statistic hatedStat;
-};
-
 struct GeneratedStats
 {
-    ItemExactType itemType;
+    ItemType itemType;
     float additionalHP, additionalDMG, additionalDEF;
+    Rarities rarity;
 };
 
-const static std::map<ItemExactType, Preference> ItemStatPreferences = {
-    {ItemExactType::Sword, {Statistic::DMG, Statistic::HP}},
-    {ItemExactType::Axe, {Statistic::DMG, Statistic::HP}},
-    {ItemExactType::Spear, {Statistic::DMG, Statistic::DEF}}};
-
-std::map<ItemExactType, SDL_Texture *> ItemTextures;
+// std::map<ItemType, SDL_Texture *> ItemTextures;

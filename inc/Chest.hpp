@@ -3,10 +3,12 @@
 #include <Item.hpp>
 #include <vector>
 
+#include <LootTable.hpp>
+
 class Chest : public Item
 {
 private:
-    std::vector<Item *> lootTable;
+    LootTable *lootTable;
     std::string type = "Chest";
 
 public:
@@ -15,13 +17,13 @@ public:
     Chest();
     Chest(std::string name, Rarities rarity, float price);
     Chest(std::string name, Rarities rarity, float price, SDL_Texture *texture);
-    Chest(std::string name, Rarities rarity, float price, SDL_Texture *texture, std::vector<Item *> lootTable);
+    Chest(std::string name, Rarities rarity, float price, SDL_Texture *texture, LootTable *lootTable);
 
-    virtual Item *openChest();
+    Item *openChest();
 
     //? Setters
-    void setLootTable(std::vector<Item *> table);
+    void setLootTable(LootTable *table);
 
     //? Getters
-    std::vector<Item *> *getLootTable();
+    LootTable *getLootTable();
 };

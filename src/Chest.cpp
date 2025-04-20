@@ -1,13 +1,11 @@
 #include "Chest.hpp"
+#include <Weapon.hpp>
+#include <Armor.hpp>
+#include <Trinket.hpp>
 
 Chest::~Chest()
 {
-    for (int i = 0; i < lootTable.size(); i++)
-    {
-        delete lootTable[i];
-        lootTable[i] = nullptr;
-    }
-    lootTable.clear();
+    delete lootTable;
 }
 
 Chest::Chest() : Item()
@@ -24,7 +22,7 @@ Chest::Chest(std::string name, Rarities rarity, float price, SDL_Texture *textur
 {
 }
 
-Chest::Chest(std::string name, Rarities rarity, float price, SDL_Texture *texture, std::vector<Item *> lootTable)
+Chest::Chest(std::string name, Rarities rarity, float price, SDL_Texture *texture, LootTable *lootTable)
     : Item(name, rarity, price, texture)
 {
     this->lootTable = lootTable;
@@ -32,15 +30,31 @@ Chest::Chest(std::string name, Rarities rarity, float price, SDL_Texture *textur
 
 Item *Chest::openChest()
 {
+    GeneratedStats stats = lootTable->generate();
 
-    return nullptr;
+    Item *item = nullptr;
+
+    if (stats.itemType == ItemType::Weapon)
+    {
+        item = new Weapon("Sword", stats.rarity, 0, stats.additionalDMG);
+    }
+    else if (stats.itemType == ItemType::Armor)
+    {
+        item = new Armor("Armor", stats.rarity, 0, stats.additionalDEF);
+    }
+    else if (stats.itemType == ItemType::Trinket)
+    {
+        item = new Trinket("Ammulet", stats.rarity, 0, stats.additionalHP);
+    }
+
+    return item;
 }
 
-void Chest::setLootTable(std::vector<Item *> table)
+void Chest::setLootTable(LootTable *table)
 {
     this->lootTable = table;
 }
-std::vector<Item *> *Chest::getLootTable()
+LootTable *Chest::getLootTable()
 {
-    return &lootTable;
+    return lootTable;
 }

@@ -22,7 +22,7 @@ GeneratedStats LootTable::generate()
 
     srand(time(NULL));
 
-    ItemExactType type = ItemExactType::Sword;
+    ItemType type = ItemType::Weapon;
     type = validItemsTypes[rand() % validItemsTypes.size()];
     stats.itemType = type;
 
@@ -30,16 +30,11 @@ GeneratedStats LootTable::generate()
     float DMGmult = (float)(rand()) / (float)(RAND_MAX);
     float DEFmult = (float)(rand()) / (float)(RAND_MAX);
 
-    std::map<Statistic, float> multipliers = {{Statistic::HP, HPmult}, {Statistic::DMG, DMGmult}, {Statistic::DEF, DEFmult}};
-
-    Preference preference = ItemStatPreferences.find(type)->second;
-
-    multipliers[preference.preferedStat] = multipliers[preference.preferedStat] * preferenceMultiplier;
-    multipliers[preference.hatedStat] = multipliers[preference.hatedStat] / preferenceMultiplier;
-
     stats.additionalHP = statsIntervals[Statistic::HP].min + (HPmult * (statsIntervals[Statistic::HP].max - statsIntervals[Statistic::HP].min));
     stats.additionalDMG = statsIntervals[Statistic::DMG].min + (DMGmult * (statsIntervals[Statistic::DMG].max - statsIntervals[Statistic::DMG].min));
     stats.additionalDEF = statsIntervals[Statistic::DEF].min + (DEFmult * (statsIntervals[Statistic::DEF].max - statsIntervals[Statistic::DEF].min));
+
+    stats.rarity = this->rarity;
 
     return stats;
 }
@@ -67,7 +62,7 @@ void LootTable::setPreferenceMultiplier(float multiplier)
     this->preferenceMultiplier = multiplier;
 }
 
-void LootTable::setValidTypes(std::vector<ItemExactType> validItemsTypes)
+void LootTable::setValidTypes(std::vector<ItemType> validItemsTypes)
 {
     this->validItemsTypes = validItemsTypes;
 }

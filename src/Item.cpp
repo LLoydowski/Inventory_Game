@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 
-Item::Item() : name{"Scrap"}, rarity{common}, price{0.1}, favourite{false}, texture{nullptr}
+Item::Item() : name{"Scrap"}, rarity{Rarities::common}, price{0.1}, favourite{false}, texture{nullptr}
 {
 }
 
@@ -26,7 +26,7 @@ Item::~Item()
 void Item::display()
 {
     std::cout << "Name: " << this->name << std::endl;
-    std::cout << "Price: " << this->rarity << std::endl;
+    std::cout << "Price: " << int(this->rarity) << std::endl;
     std::cout << "Rarity: " << this->price << std::endl;
     std::cout << "Favoutire" << this->favourite << std::endl;
 }
@@ -56,7 +56,7 @@ SDL_Texture *Item::getTexture()
 {
     return texture;
 }
-std::string Item::getType()
+ItemType Item::getType()
 {
     return type;
 }
