@@ -72,7 +72,7 @@ bool Shop::buyItem(int col, int row, Player *player)
 {
     Item *item = items[col][row];
 
-    if (player->getGold() < item->getPrice())
+    if (player->getInv()->getGold() < item->getPrice())
     {
         return false;
     }

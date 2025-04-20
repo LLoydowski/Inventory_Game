@@ -32,6 +32,8 @@ protected:
     int moveOriginRow = -1;
     int moveOriginCol = -1;
 
+    float maxHP, HP, gold;
+
     //? UI Stuff
     SDL_Renderer *rend;
     const SDL_Color inventoryBGColor = {116, 117, 125, SDL_ALPHA_OPAQUE};
@@ -92,6 +94,14 @@ public:
     int getRows();
     void setPos(int posX, int posY, SDL_Renderer *rend);
 
+    float getMaxHP();
+    float getHP();
+    float getGold();
+
+    void setMaxHP(float maxHP);
+    void setHP(float HP);
+    void setGold(float gold);
+
     bool hasFreeSlot();
 };
 
@@ -108,7 +118,7 @@ public:
 // Rénmín fānshēn dāngjiāzuòzhǔ rén
 
 // Tiānshàng tàiyang hóng ya hóngtōngtōng ēi
-// Xīnzhōng de tàiyang shì máozédōng ēi
+// Xīnzhōng de tàiyang shì máozédōng ēi 🌸🌷🌻
 // Tā lǐngdǎo wǒmen fènyǒng xiàngqián jìn ēi
 // Gémìng jiāngshān yì yē yí piàn hóng ēi
 // Yīya yī zhī yōu wèi

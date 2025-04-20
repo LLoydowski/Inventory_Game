@@ -14,6 +14,8 @@
 #include <SDL2/SDL_image.h>
 
 #include <vector>
+#include <sstream>
+#include <iomanip>
 
 void Inventory::defaultSlotAction(int row, int col)
 {
@@ -241,7 +243,8 @@ void Inventory::disableMoveMode()
     this->moveOriginCol = -1;
 }
 
-Inventory::Inventory(int rows, int cols) : rows{rows}, cols{cols}, equipedWeapon{nullptr}, equipedArmor{nullptr}, equipedTrinket{nullptr}
+Inventory::Inventory(int rows, int cols)
+    : rows{rows}, cols{cols}, equipedWeapon{nullptr}, equipedArmor{nullptr}, equipedTrinket{nullptr}, maxHP{100}, HP{100}, gold{20}
 {
 
     // Generating item 2D array
@@ -370,7 +373,12 @@ void Inventory::generateUIElements()
 
     inventoryBG = new UIElement(width, height, posX, posY, inventoryBGColor);
     inventoryTitle = new UIElement(100, paddingWhole, posX + PADDING, posY, inventoryBGColor, inventoryName, font, rend);
-    goldText = new UIElement(110, paddingWhole, (posX + width) - 110 - PADDING, posY, inventoryBGColor, "Gold: --TEST--", font, rend);
+
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(1) << this->gold;
+    std::string goldString = stream.str();
+    std::string goldTextStr = "Gold: " + goldString;
+    goldText = new UIElement(110, paddingWhole, (posX + width) - 110 - PADDING, posY, inventoryBGColor, goldTextStr, font, rend);
 
     int wholeOffsetY = posY + PADDING + PADDING_TOP;
     for (int i = 0; i < rows; i++)
@@ -659,6 +667,47 @@ void Inventory::setPos(int posX, int posY, SDL_Renderer *rend)
     this->posY = posY;
     this->rend = rend;
     generateUIElements();
+}
+
+float Inventory::getMaxHP()
+{
+    return maxHP;
+}
+
+float Inventory::getHP()
+{
+    return HP;
+}
+
+float Inventory::getGold()
+{
+    return gold;
+}
+
+void Inventory::setMaxHP(float maxHP)
+{
+    this->maxHP = maxHP;
+}
+
+void Inventory::setHP(float HP)
+{
+    if (HP > this->maxHP)
+    {
+        this->HP = maxHP;
+        return;
+    }
+    else if (HP < 0)
+    {
+        this->HP = 0;
+        return;
+    }
+
+    this->HP = HP;
+}
+
+void Inventory::setGold(float gold)
+{
+    this->gold = gold;
 }
 
 bool Inventory::hasFreeSlot()

@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
     //? Creating chest object
     Chest *chestWeapon1 = new Chest("Weapon Chest [T1]", Rarities::common, 10, weaponChestT1Texture, weaponT1Loot);
 
-    playerInv->addItem(chestWeapon1);
+    shop->addItem(chestWeapon1);
 
     //? UI ELEMENTS
     std::vector<UIElement *>

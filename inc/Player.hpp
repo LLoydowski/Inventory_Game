@@ -10,7 +10,6 @@ private:
     const int INVENTORY_COLS = 4;
 
     std::string name;
-    float HP, gold;
     Inventory *inventory;
 
 public:
@@ -22,6 +21,5 @@ public:
     void addItemToInv(Item *item);
 
     //? Getters
-    int getGold();
     Inventory *getInv();
 };

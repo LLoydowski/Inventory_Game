@@ -2,22 +2,20 @@
 
 #include <Player.hpp>
 
-Player::Player() : name{"Guest"}, HP{100}, gold{10}
+Player::Player() : name{"Guest"}
 {
     inventory = new Inventory(INVENTORY_ROWS, INVENTORY_COLS);
 }
-Player::Player(std::string name, float HP, float gold) : name{name}, HP{HP}, gold{gold}
+Player::Player(std::string name, float maxHP, float gold) : name{name}
 {
     inventory = new Inventory(INVENTORY_ROWS, INVENTORY_COLS);
+    inventory->setMaxHP(maxHP);
+    inventory->setHP(maxHP);
+    inventory->setGold(gold);
 }
 Player::~Player()
 {
     delete inventory;
-}
-
-int Player::getGold()
-{
-    return gold;
 }
 
 Inventory *Player::getInv()
