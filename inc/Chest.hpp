@@ -9,7 +9,6 @@ class Chest : public Item
 {
 private:
     LootTable *lootTable;
-    std::string type = "Chest";
 
 public:
     ~Chest();

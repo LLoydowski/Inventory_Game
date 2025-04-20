@@ -1,6 +1,10 @@
 #pragma once
 
 #include <map>
+#include <string>
+#include <SDL2/SDL.h>
+
+extern std::map<std::string, SDL_Texture *> loadedTextures;
 
 struct Interval
 {

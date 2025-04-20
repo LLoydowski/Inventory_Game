@@ -12,6 +12,7 @@
 #include <Weapon.hpp>
 #include <Armor.hpp>
 #include <Trinket.hpp>
+#include <Chest.hpp>
 
 #include <Enums.hpp>
 
@@ -58,6 +59,7 @@ protected:
     std::string inventoryName = "Inventory";
 
     virtual void defaultSlotAction(int row, int col);
+    bool openChest(int row, int col);
     void calculateMenuElementDimentions(int &maxWidth, SDL_Texture *texutre);
 
 public:
@@ -78,6 +80,7 @@ public:
     void sortItems(char parameter);
     bool moveItems(int oldRow, int oldCol, int newRow, int newCol);
     void removeItem(int row, int col);
+    Item *takeItemOut(int row, int col);
     void equipItem(Weapon *weapon);
     void equipItem(Trinket *trinket);
     void equipItem(Armor *armor);

@@ -16,6 +16,8 @@
 #include <Weapon.hpp>
 #include <Chest.hpp>
 
+std::map<std::string, SDL_Texture *> loadedTextures;
+
 int main(int argc, char *argv[])
 {
     (void)argc; // Mark argc as unused
@@ -74,6 +76,8 @@ int main(int argc, char *argv[])
         SDL_FreeSurface(sword01Surf);
     }
 
+    loadedTextures["Sword01"] = sword01Texture;
+
     SDL_Texture *weaponChestT1Texture = NULL;
     SDL_Surface *weaponChestT1Surf = IMG_Load("gfx/chest.png");
     if (weaponChestT1Surf)
@@ -99,11 +103,12 @@ int main(int argc, char *argv[])
     //? Creating loot table for T1 Weapon Chest
     LootTable *weaponT1Loot = new LootTable();
     weaponT1Loot->setDMG(1, 10);
+    weaponT1Loot->addValidType(ItemType::Weapon);
 
     //? Creating chest object
     Chest *chestWeapon1 = new Chest("Weapon Chest [T1]", Rarities::common, 10, weaponChestT1Texture, weaponT1Loot);
 
-    shop->addItem(chestWeapon1);
+    playerInv->addItem(chestWeapon1);
 
     //? UI ELEMENTS
     std::vector<UIElement *>

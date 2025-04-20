@@ -26,4 +26,5 @@ public:
     void setDEF(float min, float max);
     void setPreferenceMultiplier(float multiplier);
     void setValidTypes(std::vector<ItemType> validItemsTypes);
+    void addValidType(ItemType type);
 };

@@ -66,3 +66,8 @@ void LootTable::setValidTypes(std::vector<ItemType> validItemsTypes)
 {
     this->validItemsTypes = validItemsTypes;
 }
+
+void LootTable::addValidType(ItemType type)
+{
+    this->validItemsTypes.push_back(type);
+}

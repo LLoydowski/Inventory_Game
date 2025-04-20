@@ -10,22 +10,26 @@ Chest::~Chest()
 
 Chest::Chest() : Item()
 {
+    this->type = ItemType::Chest;
 }
 
 Chest::Chest(std::string name, Rarities rarity, float price)
     : Item(name, rarity, price)
 {
+    this->type = ItemType::Chest;
 }
 
 Chest::Chest(std::string name, Rarities rarity, float price, SDL_Texture *texture)
     : Item(name, rarity, price, texture)
 {
+    this->type = ItemType::Chest;
 }
 
 Chest::Chest(std::string name, Rarities rarity, float price, SDL_Texture *texture, LootTable *lootTable)
     : Item(name, rarity, price, texture)
 {
     this->lootTable = lootTable;
+    this->type = ItemType::Chest;
 }
 
 Item *Chest::openChest()
@@ -36,7 +40,7 @@ Item *Chest::openChest()
 
     if (stats.itemType == ItemType::Weapon)
     {
-        item = new Weapon("Sword", stats.rarity, 0, stats.additionalDMG);
+        item = new Weapon("Sword", stats.rarity, 0, loadedTextures["Sword01"], stats.additionalDMG);
     }
     else if (stats.itemType == ItemType::Armor)
     {

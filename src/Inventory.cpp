@@ -7,6 +7,7 @@
 #include "Weapon.hpp"
 #include "Armor.hpp"
 #include "Trinket.hpp"
+#include <Chest.hpp>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -152,6 +153,21 @@ void Inventory::defaultSlotAction(int row, int col)
         calculateMenuElementDimentions(width, equipButton->getTextTexture());
     }
 
+    if (itemType == ItemType::Chest)
+    {
+        // Chest *chest = dynamic_cast<Chest *>(items[row][col]);
+
+        //? Creating equip button
+        UIButton *openButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Open", font, rend);
+        openButton->setAction([this, row, col]()
+                              { this->openChest(row, col); });
+        menuButtons.push_back(openButton);
+        menu->addElement(openButton);
+
+        offsetY += MENU_BUTTON_HEIGHT;
+        calculateMenuElementDimentions(width, openButton->getTextTexture());
+    }
+
     //? Checking if the item is equipped, if it isn't creating remove button
     if (
         items[row][col] != this->equipedArmor &&
@@ -172,6 +188,27 @@ void Inventory::defaultSlotAction(int row, int col)
     menu->resizeElementsWidth(width + MENU_PADDING_RIGHT);
 
     TTF_CloseFont(font);
+}
+
+bool Inventory::openChest(int row, int col)
+{
+    if (items[row][col]->getType() != ItemType::Chest)
+    {
+        std::cout << "[Inventory/openChest() WARNING: Can't open not chest item.]\n";
+        return false;
+    }
+
+    Chest *chest = dynamic_cast<Chest *>(this->takeItemOut(row, col));
+    Item *item = chest->openChest();
+
+    this->addItem(item);
+    this->generateUIElements();
+
+    delete chest;
+
+    this->removeMenu();
+
+    return true;
 }
 
 void Inventory::calculateMenuElementDimentions(int &maxWidth, SDL_Texture *texture)
@@ -458,6 +495,14 @@ void Inventory::removeItem(int row, int col)
     items[row][col] = nullptr;
     this->generateUIElements();
     this->removeMenu();
+}
+
+Item *Inventory::takeItemOut(int row, int col)
+{
+    Item *item = items[row][col];
+    items[row][col] = nullptr;
+    generateUIElements();
+    return item;
 }
 
 bool Inventory::moveItems(int oldRow, int oldCol, int newRow, int newCol)
