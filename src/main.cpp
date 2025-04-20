@@ -99,6 +99,7 @@ int main(int argc, char *argv[])
 
     Shop *shop = new Shop(2, 2);
     shop->setPos(500, 0, renderer);
+    shop->setPlayerUsingShop(player);
 
     //? Creating loot table for T1 Weapon Chest
     LootTable *weaponT1Loot = new LootTable();

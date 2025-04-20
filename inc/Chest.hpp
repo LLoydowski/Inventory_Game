@@ -25,4 +25,6 @@ public:
 
     //? Getters
     LootTable *getLootTable();
+
+    Item *copy() override;
 };

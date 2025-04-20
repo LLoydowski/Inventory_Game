@@ -13,6 +13,7 @@ LootTable::LootTable()
 GeneratedStats LootTable::generate()
 {
     GeneratedStats stats;
+
     if (validItemsTypes.empty())
     {
         std::cout << "[LootTable.cpp/generate()] No valid types set.\n";

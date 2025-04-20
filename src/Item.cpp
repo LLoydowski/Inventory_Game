@@ -37,6 +37,13 @@ std::string Item::getName()
     return name;
 }
 
+Item *Item::copy()
+{
+    Item *newItem = new Item(*this);
+
+    return newItem;
+}
+
 float Item::getPrice()
 {
     return price;

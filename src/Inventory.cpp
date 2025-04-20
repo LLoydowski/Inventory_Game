@@ -194,6 +194,7 @@ void Inventory::defaultSlotAction(int row, int col)
 
 bool Inventory::openChest(int row, int col)
 {
+
     if (items[row][col]->getType() != ItemType::Chest)
     {
         std::cout << "[Inventory/openChest() WARNING: Can't open not chest item.]\n";

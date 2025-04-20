@@ -49,7 +49,7 @@ void Shop::defaultSlotAction(int row, int col)
 
     UIButton *buyButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, buyButtonText, font, rend);
     buyButton->setAction([this, row, col]()
-                         { std::cout << "Buy " << row << " " << col; });
+                         { this->buyItem(row, col); });
     menuButtons.push_back(buyButton);
     menu->addElement(buyButton);
     offsetY += MENU_BUTTON_HEIGHT;
@@ -68,21 +68,39 @@ Shop::Shop(int rows, int cols) : Inventory(rows, cols)
     this->inventoryName = "Shop";
 }
 
-bool Shop::buyItem(int col, int row, Player *player)
+bool Shop::buyItem(int col, int row)
 {
+    if (playerUsingShop == nullptr)
+    {
+        std::cout << "[Shop/buyItem] ERROR: No player uses the shop\n";
+        return false;
+    }
+
     Item *item = items[col][row];
 
-    if (player->getInv()->getGold() < item->getPrice())
+    Inventory *inv = playerUsingShop->getInv();
+
+    if (inv->getGold() < item->getPrice())
     {
         return false;
     }
 
-    if (!player->hasFreeSlot())
+    if (!playerUsingShop->hasFreeSlot())
     {
         return false;
     }
 
-    player->addItemToInv(item);
+    Item *itemSold = item->copy();
+
+    std::cout << "Original item: " << item << "\nNew item: " << itemSold << "\n";
+
+    inv->setGold(inv->getGold() - item->getPrice());
+
+    playerUsingShop->addItemToInv(itemSold);
+    this->removeMenu();
+
+    inv->generateUIElements();
+
     return true;
 }
 
@@ -140,4 +158,9 @@ void Shop::displaySDL(SDL_Renderer *rend)
     {
         menu->display(rend);
     }
+}
+
+void Shop::setPlayerUsingShop(Player *plr)
+{
+    this->playerUsingShop = plr;
 }

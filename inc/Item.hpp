@@ -24,6 +24,8 @@ public:
 
     virtual void display();
 
+    virtual Item *copy();
+
     // Getters
     std::string getName();
 

@@ -34,8 +34,7 @@ Chest::Chest(std::string name, Rarities rarity, float price, SDL_Texture *textur
 
 Item *Chest::openChest()
 {
-    GeneratedStats stats = lootTable->generate();
-
+    GeneratedStats stats = lootTable->generate(); //! <- Error here
     Item *item = nullptr;
 
     if (stats.itemType == ItemType::Weapon)
@@ -61,4 +60,15 @@ void Chest::setLootTable(LootTable *table)
 LootTable *Chest::getLootTable()
 {
     return lootTable;
+}
+
+Item *Chest::copy()
+{
+    LootTable *newLootTable = new LootTable(*this->lootTable);
+
+    Chest *chest = new Chest(*this);
+
+    chest->setLootTable(newLootTable);
+
+    return chest;
 }
