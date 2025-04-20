@@ -26,6 +26,8 @@ add_executable(${P_NAME}
     "src/Shop.cpp"
     "src/UIButtonImage.cpp"
     "src/UIGroup.cpp"
+    "src/Chest.cpp"
+    "src/LootTable.cpp"
 )
 
 if(WIN32)

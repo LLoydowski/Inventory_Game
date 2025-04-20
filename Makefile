@@ -152,6 +152,30 @@ src/Armor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Armor.cpp.s
 .PHONY : src/Armor.cpp.s
 
+src/Chest.obj: src/Chest.cpp.obj
+.PHONY : src/Chest.obj
+
+# target to build an object file
+src/Chest.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Chest.cpp.obj
+.PHONY : src/Chest.cpp.obj
+
+src/Chest.i: src/Chest.cpp.i
+.PHONY : src/Chest.i
+
+# target to preprocess a source file
+src/Chest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Chest.cpp.i
+.PHONY : src/Chest.cpp.i
+
+src/Chest.s: src/Chest.cpp.s
+.PHONY : src/Chest.s
+
+# target to generate assembly for a file
+src/Chest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Chest.cpp.s
+.PHONY : src/Chest.cpp.s
+
 src/Inventory.obj: src/Inventory.cpp.obj
 .PHONY : src/Inventory.obj
 
@@ -452,6 +476,9 @@ help:
 	@echo ... src/Armor.obj
 	@echo ... src/Armor.i
 	@echo ... src/Armor.s
+	@echo ... src/Chest.obj
+	@echo ... src/Chest.i
+	@echo ... src/Chest.s
 	@echo ... src/Inventory.obj
 	@echo ... src/Inventory.i
 	@echo ... src/Inventory.s

@@ -67,7 +67,7 @@ void Inventory::defaultSlotAction(int row, int col)
             //? Creating equip button
             UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
             equipButton->setAction([this]()
-                                   { this->unequipItem(this->weapon); });
+                                   { this->unequipItem(ItemType::Weapon); });
             menuButtons.push_back(equipButton);
             menu->addElement(equipButton);
         }
@@ -89,12 +89,12 @@ void Inventory::defaultSlotAction(int row, int col)
     {
         Armor *armor = dynamic_cast<Armor *>(items[row][col]);
 
-        if (items[row][col] == equipedWeapon)
+        if (items[row][col] == equipedArmor)
         {
             //? Creating equip button
             UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
             equipButton->setAction([this]()
-                                   { this->unequipItem(this->armor); });
+                                   { this->unequipItem(ItemType::Armor); });
             menuButtons.push_back(equipButton);
             menu->addElement(equipButton);
         }
@@ -115,12 +115,12 @@ void Inventory::defaultSlotAction(int row, int col)
     {
         Trinket *trinket = dynamic_cast<Trinket *>(items[row][col]);
 
-        if (items[row][col] == equipedWeapon)
+        if (items[row][col] == equipedTrinket)
         {
             //? Creating equip button
             UIButton *equipButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Unequip", font, rend);
             equipButton->setAction([this]()
-                                   { this->unequipItem(this->trinket); });
+                                   { this->unequipItem(ItemType::Trinket); });
             menuButtons.push_back(equipButton);
             menu->addElement(equipButton);
         }
@@ -523,17 +523,17 @@ void Inventory::equipItem(Trinket *trinket)
     this->removeMenu();
 }
 
-void Inventory::unequipItem(ItemParameter parameter)
+void Inventory::unequipItem(ItemType parameter)
 {
     switch (parameter)
     {
-    case weapon:
+    case ItemType::Weapon:
         equipedWeapon = nullptr;
         break;
-    case armor:
+    case ItemType::Armor:
         equipedArmor = nullptr;
         break;
-    case trinket:
+    case ItemType::Trinket:
         equipedTrinket = nullptr;
         break;
     }

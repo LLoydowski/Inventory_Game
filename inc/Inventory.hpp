@@ -8,26 +8,18 @@
 #include <UIButtonImage.hpp>
 #include <UIGroup.hpp>
 
-#include <Weapon.hpp>
-#include <Armor.hpp>
-#include <Trinket.hpp>
-
 #include <Item.hpp>
 #include <Weapon.hpp>
 #include <Armor.hpp>
 #include <Trinket.hpp>
+
+#include <Enums.hpp>
 
 #include <vector>
 
 class Inventory
 {
 protected:
-    enum ItemParameter
-    {
-        weapon,
-        armor,
-        trinket
-    };
     //? Logic Stuff
     int rows, cols;
     Item ***items;
@@ -87,7 +79,7 @@ public:
     void equipItem(Weapon *weapon);
     void equipItem(Trinket *trinket);
     void equipItem(Armor *armor);
-    void unequipItem(ItemParameter parameter);
+    void unequipItem(ItemType parameter);
     void useItem(int row, int col);
     bool toggleFavourite(int row, int col);
 

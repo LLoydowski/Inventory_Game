@@ -4,13 +4,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 
-enum Rarities
-{
-    common,
-    uncommon,
-    rare,
-    epic
-};
+#include <Enums.hpp>
 
 class Item
 {
