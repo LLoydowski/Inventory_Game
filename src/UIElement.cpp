@@ -153,3 +153,8 @@ void UIElement::setSize(int width, int height)
     this->width = width;
     this->height = height;
 }
+
+void UIElement::setX(int x)
+{
+    this->posX = x;
+}

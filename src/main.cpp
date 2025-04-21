@@ -191,6 +191,12 @@ int main(int argc, char *argv[])
     (void)argc; // Mark argc as unused
     (void)argv; // Mark argv as unused
 
+    const int FPS = 144;
+    const int frameDelay = 1000 / FPS;
+
+    Uint32 frameStart;
+    int frameTime;
+
     //? Declaring window size
     int windowWidth = 800;
     int windowHeight = 500;
@@ -238,6 +244,8 @@ int main(int argc, char *argv[])
 
     while (isRunning)
     {
+        frameStart = SDL_GetTicks();
+
         while (SDL_PollEvent(&e))
         {
             if (e.type == SDL_QUIT)
@@ -271,6 +279,13 @@ int main(int argc, char *argv[])
         }
 
         SDL_RenderPresent(renderer);
+
+        frameTime = SDL_GetTicks() - frameStart;
+
+        if (frameDelay > frameTime)
+        {
+            SDL_Delay(frameDelay - frameTime);
+        }
     }
 
     delete player;
