@@ -34,6 +34,7 @@ public:
     bool getFavourite();
     SDL_Texture *getTexture();
     ItemType getType();
+    virtual std::string getInfo();
 
     // Setters
     void setFavourite(bool optoion);

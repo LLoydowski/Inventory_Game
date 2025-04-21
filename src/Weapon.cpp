@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <sstream>
+#include <iomanip>
 
 Weapon::Weapon()
     : Item(), damage(0)
@@ -45,4 +47,15 @@ void Weapon::display()
 {
     Item::display();
     std::cout << "Damage: " << this->damage << std::endl;
+}
+
+std::string Weapon::getInfo()
+{
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(1) << this->damage;
+    std::string dmgString = stream.str();
+
+    std::string text = "Damage: +" + dmgString;
+
+    return text;
 }

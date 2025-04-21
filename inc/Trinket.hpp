@@ -17,4 +17,6 @@ public:
     float getAdditionalHP();
 
     void display() override;
+
+    std::string getInfo() override;
 };

@@ -3,6 +3,9 @@
 #include <string>
 #include <iostream>
 
+#include <sstream>
+#include <iomanip>
+
 Item::Item() : name{"Scrap"}, rarity{Rarities::common}, price{0.1}, favourite{false}, texture{nullptr}
 {
 }
@@ -67,7 +70,16 @@ ItemType Item::getType()
 {
     return type;
 }
-//! Setters
+std::string Item::getInfo()
+{
+    // std::stringstream stream;
+    // stream << std::fixed << std::setprecision(1) << this->();
+    // std::string priceString = stream.str();
+    std::string text = "";
+
+    return text;
+}
+//? Setters
 
 void Item::setFavourite(bool optoion)
 {

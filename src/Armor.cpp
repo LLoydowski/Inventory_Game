@@ -4,6 +4,9 @@
 #include <SDL2/SDL.h>
 #include <Enums.hpp>
 
+#include <sstream>
+#include <iomanip>
+
 Armor::Armor()
     : Item(), defense(0)
 {
@@ -46,4 +49,15 @@ void Armor::display()
 {
     Item::display();
     std::cout << "Defence: " << this->defense << std::endl;
+}
+
+std::string Armor::getInfo()
+{
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(1) << this->defense;
+    std::string defString = stream.str();
+
+    std::string text = "Defense: +" + defString;
+
+    return text;
 }

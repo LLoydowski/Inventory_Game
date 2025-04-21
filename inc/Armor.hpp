@@ -21,4 +21,6 @@ public:
     void setDefense(int defense);
 
     void display() override;
+
+    std::string getInfo() override;
 };

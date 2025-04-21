@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <sstream>
+#include <iomanip>
 
 Trinket::Trinket()
     : Item()
@@ -40,4 +42,15 @@ void Trinket::display()
 {
     Item::display();
     std::cout << "Attribute: --NONE--" << std::endl;
+}
+
+std::string Trinket::getInfo()
+{
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(1) << this->HP;
+    std::string dmgString = stream.str();
+
+    std::string text = "HP: +" + dmgString;
+
+    return text;
 }

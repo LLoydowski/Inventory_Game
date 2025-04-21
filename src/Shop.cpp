@@ -92,8 +92,6 @@ bool Shop::buyItem(int col, int row)
 
     Item *itemSold = item->copy();
 
-    std::cout << "Original item: " << item << "\nNew item: " << itemSold << "\n";
-
     inv->setGold(inv->getGold() - item->getPrice());
 
     playerUsingShop->addItemToInv(itemSold);

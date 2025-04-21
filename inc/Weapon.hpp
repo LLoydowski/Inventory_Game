@@ -21,4 +21,6 @@ public:
     void setDamage(int damage);
 
     void display() override;
+
+    std::string getInfo() override;
 };

@@ -56,6 +56,14 @@ void Inventory::defaultSlotAction(int row, int col)
     offsetY += MENU_BUTTON_HEIGHT;
     calculateMenuElementDimentions(width, itemName->getTextTexture());
 
+    if (items[row][col]->getInfo() != "")
+    {
+        UIElement *stats = new UIElement(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, items[row][col]->getInfo(), font, rend);
+        menu->addElement(stats);
+        offsetY += MENU_BUTTON_HEIGHT;
+        calculateMenuElementDimentions(width, stats->getTextTexture());
+    }
+
     //? Creating move button
     UIButton *moveButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "Move", font, rend);
     moveButton->setAction([this, row, col]()

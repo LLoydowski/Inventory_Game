@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 
     //? Game Logic
 
-    Player *player = new Player("Jasiu", 100.0, 20.0);
+    Player *player = new Player("Jasiu", 100.0, 100.0);
 
     Inventory *playerInv = player->getInv();
     playerInv->setPos(10, 10, renderer);
