@@ -2,6 +2,7 @@
 
 #include <string>
 #include <Inventory.hpp>
+#include <Enums.hpp>
 
 class Player
 {
@@ -11,6 +12,7 @@ private:
 
     std::string name;
     Inventory *inventory;
+    PlayerPosition pos = PlayerPosition::Lobby;
 
 public:
     Player();
@@ -22,4 +24,8 @@ public:
 
     //? Getters
     Inventory *getInv();
+    PlayerPosition getPlayerPosition();
+
+    //? Setters
+    void setPlayerPosition(PlayerPosition pos);
 };

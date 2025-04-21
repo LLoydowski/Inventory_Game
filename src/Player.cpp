@@ -23,6 +23,16 @@ Inventory *Player::getInv()
     return inventory;
 }
 
+PlayerPosition Player::getPlayerPosition()
+{
+    return pos;
+}
+
+void Player::setPlayerPosition(PlayerPosition pos)
+{
+    this->pos = pos;
+}
+
 bool Player::hasFreeSlot()
 {
     return inventory->hasFreeSlot();

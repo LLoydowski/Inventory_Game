@@ -12,7 +12,7 @@ public:
     Weapon();
     Weapon(std::string name, Rarities rarity, float price, int damage);
     Weapon(std::string name, Rarities rarity, float price, SDL_Texture *texture, int damage);
-    ~Weapon() override;
+    ~Weapon();
 
     // Getters
     int getDamage() const;

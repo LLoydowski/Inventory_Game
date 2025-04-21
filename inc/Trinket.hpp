@@ -12,8 +12,7 @@ public:
     Trinket();
     Trinket(std::string name, Rarities rarity, float price, float HP);
     Trinket(std::string name, Rarities rarity, float price, SDL_Texture *texture);
-    ~Trinket() override;
-
+    ~Trinket();
     float getAdditionalHP();
 
     void display() override;

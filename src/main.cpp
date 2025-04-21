@@ -18,35 +18,30 @@
 
 std::map<std::string, SDL_Texture *> loadedTextures;
 
-int main(int argc, char *argv[])
+bool InitializeSDL(int windowWidth, int windowHeight, SDL_Window *&window, SDL_Renderer *&renderer)
 {
-    (void)argc; // Mark argc as unused
-    (void)argv; // Mark argv as unused
-    int windowWidth = 800;
-    int windowHeight = 500;
-
     //? SDL2 initialization
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
-        return 1;
+        return false;
     }
 
-    SDL_Window *window = SDL_CreateWindow("Inventory Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, 0);
+    window = SDL_CreateWindow("Inventory Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, 0);
     if (window == nullptr)
     {
         std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
         SDL_Quit();
-        return 1;
+        return false;
     }
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (renderer == nullptr)
     {
         std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
         SDL_DestroyWindow(window);
         SDL_Quit();
-        return 1;
+        return false;
     }
     //? SDL2_TTF initialization
     if (TTF_Init() != 0)
@@ -55,51 +50,60 @@ int main(int argc, char *argv[])
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_Quit();
-        return 1;
+        return false;
     }
 
-    //? Loading textures
+    return true;
+}
 
+void LoadTextures(SDL_Renderer *rend)
+{
     SDL_Texture *placeholderTexture = NULL;
     SDL_Surface *testSurface = IMG_Load("gfx/placeholder.png");
     if (testSurface)
     {
-        placeholderTexture = SDL_CreateTextureFromSurface(renderer, testSurface);
+        placeholderTexture = SDL_CreateTextureFromSurface(rend, testSurface);
         SDL_FreeSurface(testSurface);
     }
+    loadedTextures["placeholder"] = placeholderTexture;
 
     SDL_Texture *sword01Texture = NULL;
     SDL_Surface *sword01Surf = IMG_Load("gfx/Sword01.png");
     if (sword01Surf)
     {
-        sword01Texture = SDL_CreateTextureFromSurface(renderer, sword01Surf);
+        sword01Texture = SDL_CreateTextureFromSurface(rend, sword01Surf);
         SDL_FreeSurface(sword01Surf);
     }
-
     loadedTextures["Sword01"] = sword01Texture;
 
     SDL_Texture *weaponChestT1Texture = NULL;
     SDL_Surface *weaponChestT1Surf = IMG_Load("gfx/chest.png");
     if (weaponChestT1Surf)
     {
-        weaponChestT1Texture = SDL_CreateTextureFromSurface(renderer, weaponChestT1Surf);
+        weaponChestT1Texture = SDL_CreateTextureFromSurface(rend, weaponChestT1Surf);
         SDL_FreeSurface(weaponChestT1Surf);
     }
+    loadedTextures["WeaponChest01"] = weaponChestT1Texture;
+}
 
-    //? Game Logic
+void RemoveTextures()
+{
+    for (const auto &[name, texture] : loadedTextures)
+    {
+        if (texture != nullptr)
+        {
+            std::cout << "[Main/RemoveTextures] Removing texture: " << name << "\n";
+            SDL_DestroyTexture(texture);
+            loadedTextures[name] = nullptr;
+        }
+    }
+}
 
-    Player *player = new Player("Jasiu", 100.0, 100.0);
-
-    Inventory *playerInv = player->getInv();
-    playerInv->setPos(10, 10, renderer);
-    Item *item = new Item("DlugiSkibidi", Rarities::rare, 100, sword01Texture);
-    playerInv->addItem(item);
-    Item *item2 = new Weapon("Skibidi2", Rarities::rare, 100, placeholderTexture, 1);
-    playerInv->addItem(item2);
-
+Shop *CreateShop(SDL_Renderer *rend, Player *plr)
+{
     Shop *shop = new Shop(2, 2);
-    shop->setPos(500, 0, renderer);
-    shop->setPlayerUsingShop(player);
+    shop->setPos(500, 0, rend);
+    shop->setPlayerUsingShop(plr);
 
     //? Creating loot table for T1 Weapon Chest
     LootTable *weaponT1Loot = new LootTable();
@@ -107,15 +111,75 @@ int main(int argc, char *argv[])
     weaponT1Loot->addValidType(ItemType::Weapon);
 
     //? Creating chest object
-    Chest *chestWeapon1 = new Chest("Weapon Chest [T1]", Rarities::common, 10, weaponChestT1Texture, weaponT1Loot);
-
+    Chest *chestWeapon1 = new Chest("Weapon Chest [T1]", Rarities::common, 10, loadedTextures["WeaponChest01"], weaponT1Loot);
     shop->addItem(chestWeapon1);
 
-    //? UI ELEMENTS
-    std::vector<UIElement *>
-        UI;
+    return shop;
+}
 
-    // SDL_Color btnColor = {189, 189, 189, 255};
+//? Handles lobby (not arena) logic
+void HandleLobbyLogic(SDL_Event &e, Inventory *playerInv, Shop *shop)
+{
+
+    if (e.type == SDL_MOUSEBUTTONDOWN)
+    {
+
+        bool wasActionCalled = false;
+        if (!wasActionCalled)
+        {
+            if (playerInv->handleClickEvents())
+            {
+                wasActionCalled = true;
+
+                //? Clearing shop menu
+                shop->removeMenu();
+                shop->disableMoveMode();
+            }
+        }
+        if (!wasActionCalled)
+        {
+            if (shop->handleClickEvents())
+            {
+                wasActionCalled = true;
+                //? Clearing inventory menu
+                playerInv->removeMenu();
+                playerInv->disableMoveMode();
+            }
+        }
+    }
+}
+
+int main(int argc, char *argv[])
+{
+    (void)argc; // Mark argc as unused
+    (void)argv; // Mark argv as unused
+
+    //? Declaring window size
+    int windowWidth = 800;
+    int windowHeight = 500;
+
+    //? Initializing SDL2, SDL_TTF and SDL_image
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+    InitializeSDL(windowWidth, windowHeight, window, renderer);
+
+    LoadTextures(renderer);
+
+    //? Game Logic
+
+    Player *player = new Player("Player", 100.0, 100.0);
+
+    Inventory *playerInv = player->getInv();
+    playerInv->setPos(10, 10, renderer);
+
+    //* DEBUGING PURPOSES ONLY
+    Item *item = new Item("DlugiSkibidi", Rarities::rare, 100, loadedTextures["placeholder"]);
+    playerInv->addItem(item);
+    Item *item2 = new Weapon("Skibidi2", Rarities::rare, 100, loadedTextures["Sword01"], 1);
+    playerInv->addItem(item2);
+    //* ----------------------
+
+    Shop *shop = CreateShop(renderer, player);
 
     //? Game loop
     bool isRunning = true;
@@ -129,51 +193,35 @@ int main(int argc, char *argv[])
             {
                 isRunning = false;
             }
-            else if (e.type == SDL_MOUSEBUTTONDOWN)
+
+            if (player->getPlayerPosition() == PlayerPosition::Lobby)
             {
-
-                bool wasActionCalled = false;
-                if (!wasActionCalled)
-                {
-                    if (playerInv->handleClickEvents())
-                    {
-                        wasActionCalled = true;
-
-                        //? Clearing shop menu
-                        shop->removeMenu();
-                        shop->disableMoveMode();
-                    }
-                }
-                if (!wasActionCalled)
-                {
-                    if (shop->handleClickEvents())
-                    {
-                        wasActionCalled = true;
-                        //? Clearing inventory menu
-                        playerInv->removeMenu();
-                        playerInv->disableMoveMode();
-                    }
-                }
+                HandleLobbyLogic(e, playerInv, shop);
+            }
+            else
+            {
             }
         }
 
         SDL_SetRenderDrawColor(renderer, 74, 94, 224, SDL_ALPHA_OPAQUE); //? Sets background color
         SDL_RenderClear(renderer);
 
-        // TODO FIX Disabled buttons
-
-        playerInv->displaySDL(renderer);
-        shop->displaySDL(renderer);
+        if (player->getPlayerPosition() == PlayerPosition::Lobby)
+        {
+            playerInv->displaySDL(renderer);
+            shop->displaySDL(renderer);
+        }
+        else
+        {
+        }
 
         SDL_RenderPresent(renderer);
     }
 
-    delete playerInv;
+    delete player;
     delete shop;
 
-    SDL_DestroyTexture(placeholderTexture);
-    SDL_DestroyTexture(sword01Texture);
-    SDL_DestroyTexture(weaponChestT1Texture);
+    RemoveTextures();
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

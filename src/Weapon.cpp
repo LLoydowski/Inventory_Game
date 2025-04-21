@@ -25,10 +25,6 @@ Weapon::Weapon(std::string name, Rarities rarity, float price, SDL_Texture *text
 
 Weapon::~Weapon()
 {
-    if (texture != nullptr)
-    {
-        SDL_DestroyTexture(texture);
-    }
 }
 
 // Getter

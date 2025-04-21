@@ -27,10 +27,6 @@ Trinket::Trinket(std::string name, Rarities rarity, float price, SDL_Texture *te
 
 Trinket::~Trinket()
 {
-    if (texture != nullptr)
-    {
-        SDL_DestroyTexture(texture);
-    }
 }
 
 float Trinket::getAdditionalHP()

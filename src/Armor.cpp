@@ -27,10 +27,6 @@ Armor::Armor(std::string name, Rarities rarity, float price, SDL_Texture *textur
 
 Armor::~Armor()
 {
-    if (texture)
-    {
-        SDL_DestroyTexture(texture);
-    }
 }
 
 // Getter

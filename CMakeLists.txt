@@ -8,7 +8,7 @@ if(MSVC)
     message(FATAL_ERROR "Marcin cos nie wyszlo (Odpalil sie Visual Studio compiler)")
 endif()
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 add_executable(${P_NAME}

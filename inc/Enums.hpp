@@ -48,3 +48,9 @@ struct GeneratedStats
 };
 
 // std::map<ItemType, SDL_Texture *> ItemTextures;
+
+enum class PlayerPosition
+{
+    Lobby,
+    Arena
+};

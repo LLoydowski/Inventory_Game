@@ -12,7 +12,7 @@ public:
     Armor();
     Armor(std::string name, Rarities rarity, float price, int defense);
     Armor(std::string name, Rarities rarity, float price, SDL_Texture *texture, int defense);
-    ~Armor() override;
+    ~Armor();
 
     // Getters
     int getDefense() const;
