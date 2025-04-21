@@ -28,6 +28,8 @@ add_executable(${P_NAME}
     "src/UIGroup.cpp"
     "src/Chest.cpp"
     "src/LootTable.cpp"
+    "src/Enemy.cpp"
+    "src/Arena.cpp"
 )
 
 if(WIN32)

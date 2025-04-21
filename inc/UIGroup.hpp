@@ -1,3 +1,5 @@
+#pragma once
+
 #include <UIElement.hpp>
 
 #include <vector>
@@ -16,4 +18,6 @@ public:
     void display(SDL_Renderer *rend);
     void setPos(int x, int y);
     void resizeElementsWidth(int width);
+
+    UIElement *getElement(int index);
 };

@@ -128,6 +128,30 @@ InventoryGame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/build
 .PHONY : InventoryGame/fast
 
+src/Arena.obj: src/Arena.cpp.obj
+.PHONY : src/Arena.obj
+
+# target to build an object file
+src/Arena.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Arena.cpp.obj
+.PHONY : src/Arena.cpp.obj
+
+src/Arena.i: src/Arena.cpp.i
+.PHONY : src/Arena.i
+
+# target to preprocess a source file
+src/Arena.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Arena.cpp.i
+.PHONY : src/Arena.cpp.i
+
+src/Arena.s: src/Arena.cpp.s
+.PHONY : src/Arena.s
+
+# target to generate assembly for a file
+src/Arena.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Arena.cpp.s
+.PHONY : src/Arena.cpp.s
+
 src/Armor.obj: src/Armor.cpp.obj
 .PHONY : src/Armor.obj
 
@@ -175,6 +199,30 @@ src/Chest.s: src/Chest.cpp.s
 src/Chest.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Chest.cpp.s
 .PHONY : src/Chest.cpp.s
+
+src/Enemy.obj: src/Enemy.cpp.obj
+.PHONY : src/Enemy.obj
+
+# target to build an object file
+src/Enemy.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Enemy.cpp.obj
+.PHONY : src/Enemy.cpp.obj
+
+src/Enemy.i: src/Enemy.cpp.i
+.PHONY : src/Enemy.i
+
+# target to preprocess a source file
+src/Enemy.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Enemy.cpp.i
+.PHONY : src/Enemy.cpp.i
+
+src/Enemy.s: src/Enemy.cpp.s
+.PHONY : src/Enemy.s
+
+# target to generate assembly for a file
+src/Enemy.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Enemy.cpp.s
+.PHONY : src/Enemy.cpp.s
 
 src/Inventory.obj: src/Inventory.cpp.obj
 .PHONY : src/Inventory.obj
@@ -497,12 +545,18 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... InventoryGame
+	@echo ... src/Arena.obj
+	@echo ... src/Arena.i
+	@echo ... src/Arena.s
 	@echo ... src/Armor.obj
 	@echo ... src/Armor.i
 	@echo ... src/Armor.s
 	@echo ... src/Chest.obj
 	@echo ... src/Chest.i
 	@echo ... src/Chest.s
+	@echo ... src/Enemy.obj
+	@echo ... src/Enemy.i
+	@echo ... src/Enemy.s
 	@echo ... src/Inventory.obj
 	@echo ... src/Inventory.i
 	@echo ... src/Inventory.s

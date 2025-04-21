@@ -27,5 +27,6 @@ public:
     PlayerPosition getPlayerPosition();
 
     //? Setters
-    void setPlayerPosition(PlayerPosition pos);
+    void goToArena();
+    void goToLobby();
 };

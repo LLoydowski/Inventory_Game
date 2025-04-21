@@ -4,8 +4,6 @@
 #include <string>
 #include <SDL2/SDL.h>
 
-extern std::map<std::string, SDL_Texture *> loadedTextures;
-
 struct Interval
 {
     int min, max;
@@ -47,6 +45,12 @@ struct GeneratedStats
     Rarities rarity;
 };
 
+struct EnemyStats
+{
+    float HP, DMG, DEF;
+    int bHP, bDMG, bDEF;
+};
+
 // std::map<ItemType, SDL_Texture *> ItemTextures;
 
 enum class PlayerPosition
@@ -54,3 +58,6 @@ enum class PlayerPosition
     Lobby,
     Arena
 };
+
+extern std::map<std::string, SDL_Texture *> loadedTextures;
+extern std::map<int, EnemyStats> enemyTiers;

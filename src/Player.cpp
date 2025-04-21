@@ -23,14 +23,19 @@ Inventory *Player::getInv()
     return inventory;
 }
 
+void Player::goToArena()
+{
+    this->pos = PlayerPosition::Arena;
+}
+
+void Player::goToLobby()
+{
+    this->pos = PlayerPosition::Lobby;
+}
+
 PlayerPosition Player::getPlayerPosition()
 {
     return pos;
-}
-
-void Player::setPlayerPosition(PlayerPosition pos)
-{
-    this->pos = pos;
 }
 
 bool Player::hasFreeSlot()

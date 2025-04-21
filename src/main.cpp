@@ -15,10 +15,17 @@
 #include <UIButtonImage.hpp>
 #include <Weapon.hpp>
 #include <Chest.hpp>
+#include <Arena.hpp>
 
 std::map<std::string, SDL_Texture *> loadedTextures;
+std::map<int, EnemyStats> enemyTiers = {
+    {1, {15, 10, 0, 10, 5, 3}},
+    {2, {35, 25, 5, 10, 5, 4}},
+    {3, {70, 30, 10, 12, 5, 5}},
+    {4, {100, 40, 15, 15, 5, 5}},
+    {5, {150, 40, 30, 15, 10, 5}}};
 
-bool InitializeSDL(int windowWidth, int windowHeight, SDL_Window *&window, SDL_Renderer *&renderer)
+bool InitializeSDL(int windowWidth, int windowHeight, SDL_Window *&window, SDL_Renderer *&renderer, TTF_Font *&font)
 {
     //? SDL2 initialization
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -50,6 +57,13 @@ bool InitializeSDL(int windowWidth, int windowHeight, SDL_Window *&window, SDL_R
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_Quit();
+        return false;
+    }
+
+    font = TTF_OpenFont("font/OpenSans.ttf", 24);
+    if (font == nullptr)
+    {
+        std::cerr << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
         return false;
     }
 
@@ -101,7 +115,7 @@ void RemoveTextures()
 
 Shop *CreateShop(SDL_Renderer *rend, Player *plr)
 {
-    Shop *shop = new Shop(2, 2);
+    Shop *shop = new Shop(2, 3);
     shop->setPos(500, 0, rend);
     shop->setPlayerUsingShop(plr);
 
@@ -118,9 +132,8 @@ Shop *CreateShop(SDL_Renderer *rend, Player *plr)
 }
 
 //? Handles lobby (not arena) logic
-void HandleLobbyLogic(SDL_Event &e, Inventory *playerInv, Shop *shop)
+void HandleLobbyLogic(SDL_Event &e, Inventory *playerInv, Shop *shop, UIButton *goArenaBtn)
 {
-
     if (e.type == SDL_MOUSEBUTTONDOWN)
     {
 
@@ -146,6 +159,30 @@ void HandleLobbyLogic(SDL_Event &e, Inventory *playerInv, Shop *shop)
                 playerInv->disableMoveMode();
             }
         }
+        if (!wasActionCalled)
+        {
+            if (goArenaBtn->checkMouseCollision())
+            {
+                wasActionCalled = true;
+                goArenaBtn->callAction();
+            }
+        }
+    }
+}
+
+void HandleArenaLogic(SDL_Event &e, UIButton *goBackButton)
+{
+    if (e.type == SDL_MOUSEBUTTONDOWN)
+    {
+        bool wasActionCalled = false;
+        if (!wasActionCalled)
+        {
+            if (goBackButton->checkMouseCollision())
+            {
+                wasActionCalled = true;
+                goBackButton->callAction();
+            }
+        }
     }
 }
 
@@ -161,11 +198,12 @@ int main(int argc, char *argv[])
     //? Initializing SDL2, SDL_TTF and SDL_image
     SDL_Window *window;
     SDL_Renderer *renderer;
-    InitializeSDL(windowWidth, windowHeight, window, renderer);
+    TTF_Font *font;
+    InitializeSDL(windowWidth, windowHeight, window, renderer, font);
 
     LoadTextures(renderer);
 
-    //? Game Logic
+    //? Lobby Items
 
     Player *player = new Player("Player", 100.0, 100.0);
 
@@ -175,11 +213,24 @@ int main(int argc, char *argv[])
     //* DEBUGING PURPOSES ONLY
     Item *item = new Item("DlugiSkibidi", Rarities::rare, 100, loadedTextures["placeholder"]);
     playerInv->addItem(item);
-    Item *item2 = new Weapon("Skibidi2", Rarities::rare, 100, loadedTextures["Sword01"], 1);
+    Item *item2 = new Weapon("Skibidi2", Rarities::rare, 100, loadedTextures["Sword01"], 100000);
     playerInv->addItem(item2);
     //* ----------------------
 
     Shop *shop = CreateShop(renderer, player);
+
+    Arena *arena = new Arena(player);
+    arena->calibrateWindowPos(windowWidth, windowHeight, renderer, font);
+
+    UIButton *goToArenaButton = new UIButton(200, 50, 50, 400, {255, 0, 0, 1}, "Go to Arena", font, renderer);
+    goToArenaButton->setAction([player, arena]()
+                               { player->goToArena();
+                                 arena->nextFight(); });
+
+    //* DEBUG BUTTON
+    UIButton *goBackButton = new UIButton(200, 50, windowWidth / 2 - 100, 10, {0, 255, 0, 1}, "/Go Back/", font, renderer);
+    goBackButton->setAction([player]()
+                            { player->goToLobby(); });
 
     //? Game loop
     bool isRunning = true;
@@ -196,10 +247,11 @@ int main(int argc, char *argv[])
 
             if (player->getPlayerPosition() == PlayerPosition::Lobby)
             {
-                HandleLobbyLogic(e, playerInv, shop);
+                HandleLobbyLogic(e, playerInv, shop, goToArenaButton);
             }
             else
             {
+                HandleArenaLogic(e, goBackButton);
             }
         }
 
@@ -210,9 +262,12 @@ int main(int argc, char *argv[])
         {
             playerInv->displaySDL(renderer);
             shop->displaySDL(renderer);
+            goToArenaButton->display(renderer);
         }
         else
         {
+            goBackButton->display(renderer);
+            arena->display();
         }
 
         SDL_RenderPresent(renderer);
@@ -220,11 +275,15 @@ int main(int argc, char *argv[])
 
     delete player;
     delete shop;
+    delete goToArenaButton;
+    delete arena;
 
     RemoveTextures();
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+
+    TTF_CloseFont(font);
 
     TTF_Quit();
     SDL_Quit();

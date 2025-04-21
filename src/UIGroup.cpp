@@ -55,3 +55,8 @@ void UIGroup::resizeElementsWidth(int width)
         }
     }
 }
+
+UIElement *UIGroup::getElement(int index)
+{
+    return elements[index];
+}
