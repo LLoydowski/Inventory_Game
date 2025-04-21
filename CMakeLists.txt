@@ -30,6 +30,7 @@ add_executable(${P_NAME}
     "src/LootTable.cpp"
     "src/Enemy.cpp"
     "src/Arena.cpp"
+    "src/FightBar.cpp"
 )
 
 if(WIN32)

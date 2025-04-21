@@ -16,6 +16,7 @@
 #include <Weapon.hpp>
 #include <Chest.hpp>
 #include <Arena.hpp>
+#include <FightBar.hpp>
 
 std::map<std::string, SDL_Texture *> loadedTextures;
 std::map<int, EnemyStats> enemyTiers = {
@@ -238,6 +239,8 @@ int main(int argc, char *argv[])
     goBackButton->setAction([player]()
                             { player->goToLobby(); });
 
+    FightBar *fb = new FightBar(0, windowHeight - 50, windowWidth, 50);
+
     //? Game loop
     bool isRunning = true;
     SDL_Event e;
@@ -251,6 +254,14 @@ int main(int argc, char *argv[])
             if (e.type == SDL_QUIT)
             {
                 isRunning = false;
+            }
+            if (e.type == SDL_KEYDOWN)
+            {
+                SDL_Keycode key = e.key.keysym.sym;
+                if (key == SDLK_SPACE)
+                {
+                    fb->hit();
+                }
             }
 
             if (player->getPlayerPosition() == PlayerPosition::Lobby)
@@ -278,6 +289,8 @@ int main(int argc, char *argv[])
             arena->display();
         }
 
+        fb->display(renderer);
+
         SDL_RenderPresent(renderer);
 
         frameTime = SDL_GetTicks() - frameStart;
@@ -292,6 +305,7 @@ int main(int argc, char *argv[])
     delete shop;
     delete goToArenaButton;
     delete arena;
+    delete fb;
 
     RemoveTextures();
 

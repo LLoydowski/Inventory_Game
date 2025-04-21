@@ -9,8 +9,6 @@ private:
     std::string name;
     float HP, DMG, DEF;
 
-    const float lvlRatio = 1.8;
-
     Interval HPinterval = {15, 30};
     Interval DMGinterval = {1, 5};
     Interval DEFinterval = {};

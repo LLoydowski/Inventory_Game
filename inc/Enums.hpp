@@ -59,5 +59,12 @@ enum class PlayerPosition
     Arena
 };
 
-extern std::map<std::string, SDL_Texture *> loadedTextures;
+enum class Direction
+{
+    Right,
+    Left
+};
+
+extern std::map<std::string, SDL_Texture *>
+    loadedTextures;
 extern std::map<int, EnemyStats> enemyTiers;

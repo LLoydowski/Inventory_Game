@@ -224,6 +224,30 @@ src/Enemy.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/Enemy.cpp.s
 .PHONY : src/Enemy.cpp.s
 
+src/FightBar.obj: src/FightBar.cpp.obj
+.PHONY : src/FightBar.obj
+
+# target to build an object file
+src/FightBar.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/FightBar.cpp.obj
+.PHONY : src/FightBar.cpp.obj
+
+src/FightBar.i: src/FightBar.cpp.i
+.PHONY : src/FightBar.i
+
+# target to preprocess a source file
+src/FightBar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/FightBar.cpp.i
+.PHONY : src/FightBar.cpp.i
+
+src/FightBar.s: src/FightBar.cpp.s
+.PHONY : src/FightBar.s
+
+# target to generate assembly for a file
+src/FightBar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\InventoryGame.dir\build.make CMakeFiles/InventoryGame.dir/src/FightBar.cpp.s
+.PHONY : src/FightBar.cpp.s
+
 src/Inventory.obj: src/Inventory.cpp.obj
 .PHONY : src/Inventory.obj
 
@@ -557,6 +581,9 @@ help:
 	@echo ... src/Enemy.obj
 	@echo ... src/Enemy.i
 	@echo ... src/Enemy.s
+	@echo ... src/FightBar.obj
+	@echo ... src/FightBar.i
+	@echo ... src/FightBar.s
 	@echo ... src/Inventory.obj
 	@echo ... src/Inventory.i
 	@echo ... src/Inventory.s
