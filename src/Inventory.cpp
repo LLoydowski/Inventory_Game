@@ -197,6 +197,11 @@ void Inventory::defaultSlotAction(int row, int col)
     bg->setSize(width, offsetY);
     menu->resizeElementsWidth(width + MENU_PADDING_RIGHT);
 
+    if (width + mouseX >= windowWidth)
+    {
+        menu->setPos(mouseX - width, mouseY);
+    }
+
     TTF_CloseFont(font);
 }
 
@@ -369,8 +374,8 @@ void Inventory::generateUIElements()
         return;
     }
 
-    const int width = (cols * (PADDING + SLOT_SIZE)) + PADDING;
-    const int height = (rows * (PADDING + SLOT_SIZE)) + PADDING + PADDING_TOP;
+    invWidth = (cols * (PADDING + SLOT_SIZE)) + PADDING;
+    invHeight = (rows * (PADDING + SLOT_SIZE)) + PADDING + PADDING_TOP;
     int paddingWhole = PADDING_TOP + PADDING;
 
     TTF_Font *font = TTF_OpenFont("font/OpenSans.ttf", 18);
@@ -380,14 +385,14 @@ void Inventory::generateUIElements()
         return;
     }
 
-    inventoryBG = new UIElement(width, height, posX, posY, inventoryBGColor);
+    inventoryBG = new UIElement(invWidth, invHeight, posX, posY, inventoryBGColor);
     inventoryTitle = new UIElement(100, paddingWhole, posX + PADDING, posY, inventoryBGColor, inventoryName, font, rend);
 
     std::stringstream stream;
     stream << std::fixed << std::setprecision(1) << this->gold;
     std::string goldString = stream.str();
     std::string goldTextStr = "Gold: " + goldString;
-    goldText = new UIElement(110, paddingWhole, (posX + width) - 110 - PADDING, posY, inventoryBGColor, goldTextStr, font, rend);
+    goldText = new UIElement(110, paddingWhole, (posX + invWidth) - 110 - PADDING, posY, inventoryBGColor, goldTextStr, font, rend);
 
     int wholeOffsetY = posY + PADDING + PADDING_TOP;
     for (int i = 0; i < rows; i++)
@@ -670,12 +675,23 @@ int Inventory::getRows()
     return rows;
 }
 
+int Inventory::getWidth()
+{
+    return invWidth;
+}
+
 void Inventory::setPos(int posX, int posY, SDL_Renderer *rend)
 {
     this->posX = posX;
     this->posY = posY;
     this->rend = rend;
     generateUIElements();
+}
+
+void Inventory::setWindowSize(int x, int y)
+{
+    this->windowWidth = x;
+    this->windowHeight = y;
 }
 
 float Inventory::getMaxHP()

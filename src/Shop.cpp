@@ -42,23 +42,37 @@ void Shop::defaultSlotAction(int row, int col)
     offsetY += MENU_BUTTON_HEIGHT;
     calculateMenuElementDimentions(width, itemName->getTextTexture());
 
-    std::stringstream stream;
-    stream << std::fixed << std::setprecision(1) << items[row][col]->getPrice();
-    std::string priceString = stream.str();
-    std::string buyButtonText = "Buy (" + priceString + ")";
-
-    UIButton *buyButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, buyButtonText, font, rend);
-    buyButton->setAction([this, row, col]()
-                         { this->buyItem(row, col); });
-    menuButtons.push_back(buyButton);
-    menu->addElement(buyButton);
-    offsetY += MENU_BUTTON_HEIGHT;
-    calculateMenuElementDimentions(width, buyButton->getTextTexture());
+    if (playerUsingShop->getTier() >= items[row][col]->getTier())
+    {
+        std::stringstream stream;
+        stream << std::fixed << std::setprecision(1) << items[row][col]->getPrice();
+        std::string priceString = stream.str();
+        std::string buyButtonText = "Buy (" + priceString + ")";
+        UIButton *buyButton = new UIButton(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, buyButtonText, font, rend);
+        buyButton->setAction([this, row, col]()
+                             { this->buyItem(row, col); });
+        menuButtons.push_back(buyButton);
+        menu->addElement(buyButton);
+        offsetY += MENU_BUTTON_HEIGHT;
+        calculateMenuElementDimentions(width, buyButton->getTextTexture());
+    }
+    else
+    {
+        UIElement *cantBuy = new UIElement(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT, 0, offsetY, color, "You can't buy this yet", font, rend);
+        menu->addElement(cantBuy);
+        offsetY += MENU_BUTTON_HEIGHT;
+        calculateMenuElementDimentions(width, cantBuy->getTextTexture());
+    }
 
     // ItemType itemType = items[row][col]->getType();
 
     bg->setSize(MENU_BUTTON_WIDTH, offsetY);
     menu->resizeElementsWidth(width + MENU_PADDING_RIGHT);
+
+    if (width + mouseX >= windowWidth)
+    {
+        menu->setPos(mouseX - width, mouseY);
+    }
 
     TTF_CloseFont(font);
 }

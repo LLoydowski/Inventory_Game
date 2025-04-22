@@ -10,6 +10,8 @@ private:
     const int INVENTORY_ROWS = 3;
     const int INVENTORY_COLS = 4;
 
+    int tier = 1;
+
     std::string name;
     Inventory *inventory;
     PlayerPosition pos = PlayerPosition::Lobby;
@@ -25,8 +27,10 @@ public:
     //? Getters
     Inventory *getInv();
     PlayerPosition getPlayerPosition();
+    int getTier();
 
     //? Setters
     void goToArena();
     void goToLobby();
+    void setTier(int tier);
 };

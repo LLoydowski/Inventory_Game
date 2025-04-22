@@ -11,18 +11,21 @@ Chest::~Chest()
 Chest::Chest() : Item()
 {
     this->type = ItemType::Chest;
+    this->tier = 1;
 }
 
 Chest::Chest(std::string name, Rarities rarity, float price)
     : Item(name, rarity, price)
 {
     this->type = ItemType::Chest;
+    this->tier = 1;
 }
 
 Chest::Chest(std::string name, Rarities rarity, float price, SDL_Texture *texture)
     : Item(name, rarity, price, texture)
 {
     this->type = ItemType::Chest;
+    this->tier = 1;
 }
 
 Chest::Chest(std::string name, Rarities rarity, float price, SDL_Texture *texture, LootTable *lootTable)
@@ -30,6 +33,7 @@ Chest::Chest(std::string name, Rarities rarity, float price, SDL_Texture *textur
 {
     this->lootTable = lootTable;
     this->type = ItemType::Chest;
+    this->tier = 1;
 }
 
 Item *Chest::openChest()
@@ -37,17 +41,22 @@ Item *Chest::openChest()
     GeneratedStats stats = lootTable->generate();
     Item *item = nullptr;
 
+    std::string textureID = "";
+
     if (stats.itemType == ItemType::Weapon)
     {
-        item = new Weapon("Sword", stats.rarity, 0, loadedTextures["Sword01"], stats.additionalDMG);
+        textureID = "Sword0" + std::to_string(tier);
+        item = new Weapon("Sword", stats.rarity, 0, loadedTextures[textureID], stats.additionalDMG);
     }
     else if (stats.itemType == ItemType::Armor)
     {
-        item = new Armor("Armor", stats.rarity, 0, loadedTextures["Armor01"], stats.additionalDEF);
+        textureID = "Armor0" + std::to_string(tier);
+        item = new Armor("Armor", stats.rarity, 0, loadedTextures[textureID], stats.additionalDEF);
     }
     else if (stats.itemType == ItemType::Trinket)
     {
-        item = new Trinket("Ammulet", stats.rarity, 0, loadedTextures["Trinket01"], stats.additionalHP);
+        textureID = "Trinket0" + std::to_string(tier);
+        item = new Trinket("Ammulet", stats.rarity, 0, loadedTextures[textureID], stats.additionalHP);
     }
 
     return item;
@@ -57,6 +66,7 @@ void Chest::setLootTable(LootTable *table)
 {
     this->lootTable = table;
 }
+
 LootTable *Chest::getLootTable()
 {
     return lootTable;

@@ -42,6 +42,8 @@ protected:
     std::vector<UIButton *> slotButtons;
 
     int posX, posY;
+    int windowWidth, windowHeight;
+    int invWidth, invHeight;
 
     bool isUIGenerated = false;
     UIElement *inventoryBG;
@@ -90,9 +92,17 @@ public:
     void useItem(int row, int col);
     bool toggleFavourite(int row, int col);
 
+    void setPos(int posX, int posY, SDL_Renderer *rend);
+    void setWindowSize(int x, int y);
+
     int getCols();
     int getRows();
-    void setPos(int posX, int posY, SDL_Renderer *rend);
+    int getWidth();
+    int getHeight();
+
+    void setMaxHP(float maxHP);
+    void setHP(float HP);
+    void setGold(float gold);
 
     float getMaxHP();
     float getHP();
@@ -101,10 +111,6 @@ public:
     Weapon *getWeapon();
     Armor *getArmor();
     Trinket *getTrinket();
-
-    void setMaxHP(float maxHP);
-    void setHP(float HP);
-    void setGold(float gold);
 
     bool hasFreeSlot();
 };

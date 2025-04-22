@@ -33,9 +33,19 @@ void Player::goToLobby()
     this->pos = PlayerPosition::Lobby;
 }
 
+void Player::setTier(int tier)
+{
+    this->tier = tier;
+}
+
 PlayerPosition Player::getPlayerPosition()
 {
     return pos;
+}
+
+int Player::getTier()
+{
+    return tier;
 }
 
 bool Player::hasFreeSlot()

@@ -91,6 +91,8 @@ void LoadTextures(SDL_Renderer *rend)
     }
     loadedTextures["WeaponChest01"] = weaponChestT1Texture;
 
+    //* T1 Items (No chests)
+
     SDL_Texture *sword01Texture = NULL;
     SDL_Surface *sword01Surf = IMG_Load("gfx/sword/Sword01.png");
     if (sword01Surf)
@@ -117,6 +119,35 @@ void LoadTextures(SDL_Renderer *rend)
         SDL_FreeSurface(trinket01Surf);
     }
     loadedTextures["Trinket01"] = trinket01Texture;
+
+    //* T2 Items (No chests)
+
+    SDL_Texture *sword02Texture = NULL;
+    SDL_Surface *sword02Surf = IMG_Load("gfx/sword/Sword02.png");
+    if (sword02Surf)
+    {
+        sword02Texture = SDL_CreateTextureFromSurface(rend, sword02Surf);
+        SDL_FreeSurface(sword02Surf);
+    }
+    loadedTextures["Sword02"] = sword02Texture;
+
+    SDL_Texture *armor02Texture = NULL;
+    SDL_Surface *armor02Surf = IMG_Load("gfx/armor/Armor02.png");
+    if (armor02Surf)
+    {
+        armor02Texture = SDL_CreateTextureFromSurface(rend, armor02Surf);
+        SDL_FreeSurface(armor02Surf);
+    }
+    loadedTextures["Armor02"] = armor02Texture;
+
+    SDL_Texture *trinket02Texture = NULL;
+    SDL_Surface *trinket02Surf = IMG_Load("gfx/trinket/Trinket02.png");
+    if (trinket02Surf)
+    {
+        trinket02Texture = SDL_CreateTextureFromSurface(rend, trinket02Surf);
+        SDL_FreeSurface(trinket02Surf);
+    }
+    loadedTextures["Trinket02"] = trinket02Texture;
 }
 
 void RemoveTextures()
@@ -134,8 +165,8 @@ void RemoveTextures()
 
 Shop *CreateShop(SDL_Renderer *rend, Player *plr)
 {
-    Shop *shop = new Shop(2, 3);
-    shop->setPos(500, 0, rend);
+    Shop *shop = new Shop(5, 3);
+    shop->setPos(420, 20, rend);
     shop->setPlayerUsingShop(plr);
 
     //* T1
@@ -148,7 +179,7 @@ Shop *CreateShop(SDL_Renderer *rend, Player *plr)
     weaponT1Loot->addValidType(ItemType::Weapon);
 
     //? Creating chest object
-    Chest *chestWeapon1 = new Chest("Weapon Chest [T1]", Rarities::common, 10, loadedTextures["WeaponChest01"], weaponT1Loot);
+    Chest *chestWeapon1 = new Chest("Weapon Chest [T1]", Rarities::common, 15, loadedTextures["WeaponChest01"], weaponT1Loot);
     shop->addItem(chestWeapon1);
 
     //! Armor
@@ -159,7 +190,7 @@ Shop *CreateShop(SDL_Renderer *rend, Player *plr)
     armorT1Loot->addValidType(ItemType::Armor);
 
     //? Creating chest object
-    Chest *chestArmor1 = new Chest("Armor Chest [T1]", Rarities::common, 10, loadedTextures["WeaponChest01"], armorT1Loot);
+    Chest *chestArmor1 = new Chest("Armor Chest [T1]", Rarities::common, 15, loadedTextures["WeaponChest01"], armorT1Loot);
     shop->addItem(chestArmor1);
 
     //! Trinket
@@ -170,10 +201,46 @@ Shop *CreateShop(SDL_Renderer *rend, Player *plr)
     trinketT1Loot->addValidType(ItemType::Trinket);
 
     //? Creating chest object
-    Chest *chestTrinket1 = new Chest("Trinket Chest [T1]", Rarities::common, 10, loadedTextures["WeaponChest01"], trinketT1Loot);
+    Chest *chestTrinket1 = new Chest("Trinket Chest [T1]", Rarities::common, 15, loadedTextures["WeaponChest01"], trinketT1Loot);
     shop->addItem(chestTrinket1);
 
-    //* T1
+    //* T2
+
+    //! Weapon
+
+    //? Creating loot table for T1 Weapon Chest
+    LootTable *weaponT2Loot = new LootTable();
+    weaponT2Loot->setDMG(25, 50);
+    weaponT2Loot->addValidType(ItemType::Weapon);
+
+    //? Creating chest object
+    Chest *chestWeapon2 = new Chest("Weapon Chest [T2]", Rarities::uncommon, 50, loadedTextures["WeaponChest01"], weaponT2Loot);
+    chestWeapon2->setTier(2);
+    shop->addItem(chestWeapon2);
+
+    //! Armor
+
+    //? Creating loot table for T1 Armor Chest
+    LootTable *armorT2Loot = new LootTable();
+    armorT2Loot->setDEF(10, 20);
+    armorT2Loot->addValidType(ItemType::Armor);
+
+    //? Creating chest object
+    Chest *chestArmor2 = new Chest("Armor Chest [T2]", Rarities::uncommon, 50, loadedTextures["WeaponChest01"], armorT2Loot);
+    chestArmor2->setTier(2);
+    shop->addItem(chestArmor2);
+
+    //! Trinket
+
+    //? Creating loot table for T1 Armor Chest
+    LootTable *trinketT2Loot = new LootTable();
+    trinketT2Loot->setHP(20, 35);
+    trinketT2Loot->addValidType(ItemType::Trinket);
+
+    //? Creating chest object
+    Chest *chestTrinket2 = new Chest("Trinket Chest [T2]", Rarities::uncommon, 50, loadedTextures["WeaponChest01"], trinketT2Loot);
+    chestTrinket2->setTier(2);
+    shop->addItem(chestTrinket2);
 
     return shop;
 }
@@ -268,16 +335,12 @@ int main(int argc, char *argv[])
     Player *player = new Player("Player", 100.0, 100.0);
 
     Inventory *playerInv = player->getInv();
-    playerInv->setPos(10, 10, renderer);
-
-    //* DEBUGING PURPOSES ONLY
-    Item *item = new Item("DlugiSkibidi", Rarities::rare, 100, loadedTextures["placeholder"]);
-    playerInv->addItem(item);
-    Item *item2 = new Weapon("Skibidi2", Rarities::rare, 100, loadedTextures["Sword01"], 100000);
-    playerInv->addItem(item2);
-    //* ----------------------
+    playerInv->setPos(20, 20, renderer);
+    playerInv->setWindowSize(windowWidth, windowHeight);
 
     Shop *shop = CreateShop(renderer, player);
+    shop->setPos(windowWidth - shop->getWidth() - 20, 20, renderer);
+    shop->setWindowSize(windowWidth, windowHeight);
 
     //? Arena stuff
 

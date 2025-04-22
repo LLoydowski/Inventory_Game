@@ -15,6 +15,7 @@ protected:
     bool favourite;
     SDL_Texture *texture;
     ItemType type = ItemType::Generic;
+    int tier;
 
 public:
     Item();
@@ -26,7 +27,7 @@ public:
 
     virtual Item *copy();
 
-    // Getters
+    //? Getters
     std::string getName();
 
     float getPrice();
@@ -35,8 +36,10 @@ public:
     SDL_Texture *getTexture();
     ItemType getType();
     virtual std::string getInfo();
+    int getTier();
 
-    // Setters
+    //? Setters
     void setFavourite(bool optoion);
     void setTexture(SDL_Texture *texture);
+    void setTier(int tier);
 };

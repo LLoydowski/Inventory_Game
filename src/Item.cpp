@@ -75,6 +75,10 @@ std::string Item::getInfo()
 
     return text;
 }
+int Item::getTier()
+{
+    return tier;
+}
 //? Setters
 
 void Item::setFavourite(bool optoion)
@@ -85,4 +89,9 @@ void Item::setFavourite(bool optoion)
 void Item::setTexture(SDL_Texture *texture)
 {
     this->texture = texture;
+}
+
+void Item::setTier(int tier)
+{
+    this->tier = tier;
 }
