@@ -62,11 +62,16 @@ void FightBar::display(SDL_Renderer *rend)
     mild->display(rend);
     center->display(rend);
     crosshair->display(rend);
-    this->updateCrosshair();
+    if (!wasHit)
+    {
+        this->updateCrosshair();
+    }
 }
 
 float FightBar::hit()
 {
+    wasHit = true;
+
     int center = posX + width / 2;
 
     // std::cout << "[FightBar] Center (+/- 5): " << center << "\n";

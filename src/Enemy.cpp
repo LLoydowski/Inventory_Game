@@ -11,6 +11,7 @@ void Enemy::generateRandomStats()
     float DEFmult = (float)(rand()) / (float)(RAND_MAX);
 
     this->HP = HPinterval.min + (HPmult * (HPinterval.max - HPinterval.min));
+    this->tempHP = HP;
     this->DMG = DMGinterval.min + (DMGmult * (DMGinterval.max - DMGinterval.min));
     this->DEF = DEFinterval.min + (DEFmult * (DEFinterval.max - DEFinterval.min));
 }
@@ -40,7 +41,7 @@ Enemy::Enemy(std::string name, Interval HPinterval, Interval DMGinterval, Interv
 }
 
 Enemy::Enemy(std::string name, float HP, float DMG, float DEF)
-    : name{name}, HP{HP}, DMG{DMG}, DEF{DEF}
+    : name{name}, HP{HP}, DMG{DMG}, DEF{DEF}, tempHP{HP}
 {
 }
 
@@ -71,4 +72,24 @@ void Enemy::setPos(int x, int y)
 std::string Enemy::getName()
 {
     return name;
+}
+
+float Enemy::getHP()
+{
+    return HP;
+}
+
+float Enemy::getTempHP()
+{
+    return tempHP;
+}
+
+float Enemy::getDMG()
+{
+    return DMG;
+}
+
+float Enemy::getDEF()
+{
+    return DEF;
 }

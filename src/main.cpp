@@ -171,7 +171,7 @@ void HandleLobbyLogic(SDL_Event &e, Inventory *playerInv, Shop *shop, UIButton *
     }
 }
 
-void HandleArenaLogic(SDL_Event &e, UIButton *goBackButton)
+void HandleArenaLogic(SDL_Event &e, UIButton *goBackButton, Arena *arena)
 {
     if (e.type == SDL_MOUSEBUTTONDOWN)
     {
@@ -182,6 +182,13 @@ void HandleArenaLogic(SDL_Event &e, UIButton *goBackButton)
             {
                 wasActionCalled = true;
                 goBackButton->callAction();
+            }
+        }
+        if (!wasActionCalled)
+        {
+            if (arena->handleClickEvents())
+            {
+                wasActionCalled = true;
             }
         }
     }
@@ -256,13 +263,24 @@ int main(int argc, char *argv[])
                 isRunning = false;
             }
 
-            if (player->getPlayerPosition() == PlayerPosition::Lobby)
+            if (e.type == SDL_KEYDOWN)
             {
-                HandleLobbyLogic(e, playerInv, shop, goToArenaButton);
+                if (player->getPlayerPosition() == PlayerPosition::Arena)
+                {
+                    arena->handleKeyboardEvents(e);
+                }
             }
-            else
+
+            if (e.type == SDL_MOUSEBUTTONDOWN)
             {
-                HandleArenaLogic(e, goBackButton);
+                if (player->getPlayerPosition() == PlayerPosition::Lobby)
+                {
+                    HandleLobbyLogic(e, playerInv, shop, goToArenaButton);
+                }
+                else
+                {
+                    HandleArenaLogic(e, goBackButton, arena);
+                }
             }
         }
 

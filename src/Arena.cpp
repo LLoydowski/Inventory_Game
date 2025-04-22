@@ -2,6 +2,17 @@
 #include <UIGroup.hpp>
 #include <SDL2/SDL_ttf.h>
 
+#include <sstream>
+#include <iomanip>
+
+void Arena::enableAttackMode()
+{
+    isInAttackMode = true;
+    attackButton->disable();
+
+    fightBar = new FightBar(20, windowHeight - 70, windowWidth - 40, 50);
+}
+
 Arena::Arena()
     : player{nullptr}, enemy{nullptr}, lvl{0}, tier{1}
 {
@@ -16,6 +27,12 @@ Arena::~Arena()
 {
     delete enemy;
     delete enemyInfo;
+    delete attackButton;
+
+    if (fightBar != nullptr)
+    {
+        delete fightBar;
+    }
 }
 
 void Arena::nextFight()
@@ -42,7 +59,45 @@ void Arena::generateEnemy()
 
     if (enemyInfo != nullptr)
     {
+        std::stringstream stream;
+
+        //? Setting enemy name in enemy info
         enemyInfo->getElement(1)->setText(enemy->getName(), font, rend);
+
+        //? Setting enemy HP in enemy info
+        stream.str("");
+        stream.clear();
+        stream << std::fixed << std::setprecision(1) << enemy->getTempHP();
+        std::string tempHPString = stream.str();
+
+        stream.str("");
+        stream.clear();
+        stream << std::fixed << std::setprecision(1) << enemy->getHP();
+        std::string HPString = stream.str();
+
+        std::string HPtext = "HP: " + tempHPString + " / " + HPString;
+
+        enemyInfo->getElement(2)->setText(HPtext, font, rend);
+
+        //? Setting enemy DMG in enemy info
+        stream.str("");
+        stream.clear();
+        stream << std::fixed << std::setprecision(1) << enemy->getDMG();
+        std::string DMGString = stream.str();
+
+        std::string DMGText = "DMG: " + DMGString;
+
+        enemyInfo->getElement(3)->setText(DMGText, font, rend);
+
+        //? Setting enemy DEF in enemy info
+        stream.str("");
+        stream.clear();
+        stream << std::fixed << std::setprecision(1) << enemy->getDEF();
+        std::string DEFString = stream.str();
+
+        std::string DEFText = "DEF: " + DEFString;
+
+        enemyInfo->getElement(4)->setText(DEFText, font, rend);
     }
 
     if (rend != nullptr)
@@ -58,14 +113,46 @@ void Arena::display()
     {
         enemy->display(rend);
     }
-    if (enemyInfo != nullptr)
+
+    if (!isInAttackMode)
     {
-        enemyInfo->display(rend);
+        if (enemyInfo != nullptr)
+        {
+            enemyInfo->display(rend);
+        }
+        if (attackButton != nullptr)
+        {
+            attackButton->display(rend);
+        }
     }
-    if (attackButton != nullptr)
+    else
     {
-        attackButton->display(rend);
+        fightBar->display(rend);
     }
+}
+
+bool Arena::handleKeyboardEvents(SDL_Event event)
+{
+    if (isInAttackMode)
+    {
+        if (event.key.keysym.sym == SDLK_SPACE)
+        {
+            fightBar->hit();
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Arena::handleClickEvents()
+{
+    if (attackButton->checkMouseCollision())
+    {
+        attackButton->callAction();
+        return true;
+    }
+
+    return false;
 }
 
 Enemy *Arena::getEnemy()
@@ -99,11 +186,28 @@ void Arena::calibrateWindowPos(int windowWidth, int windowHeight, SDL_Renderer *
 
     SDL_Color color = {200, 200, 200, 255};
 
+    int offsetY = 0;
+
     UIElement *background = new UIElement(250, 130, 0, 0, color, " ", font, rend);
     this->enemyInfo->addElement(background);
 
-    UIElement *enemyName = new UIElement(250, 30, 0, 0, color, "Test", font, rend);
+    UIElement *enemyName = new UIElement(250, 30, 0, offsetY, color, "Test", font, rend);
     this->enemyInfo->addElement(enemyName);
+    offsetY += 30;
+
+    UIElement *enemyHP = new UIElement(250, 30, 0, offsetY, color, "HP: X/Y", font, rend);
+    this->enemyInfo->addElement(enemyHP);
+    offsetY += 30;
+
+    UIElement *enemyDMG = new UIElement(250, 30, 0, offsetY, color, "DMG: X", font, rend);
+    this->enemyInfo->addElement(enemyDMG);
+    offsetY += 30;
+
+    UIElement *enemyDEF = new UIElement(250, 30, 0, offsetY, color, "DEF: X", font, rend);
+    this->enemyInfo->addElement(enemyDEF);
+    offsetY += 30;
 
     this->attackButton = new UIButton(130, 50, 20, windowHeight - 70, color, "Attack", font, rend);
+    attackButton->setAction([this]()
+                            { this->enableAttackMode(); });
 }

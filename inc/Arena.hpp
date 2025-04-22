@@ -3,6 +3,7 @@
 #include <Player.hpp>
 #include <Enemy.hpp>
 #include <UIGroup.hpp>
+#include <FightBar.hpp>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -14,14 +15,18 @@ private:
     Enemy *enemy = nullptr;
 
     int lvl, tier;
+    bool isInAttackMode = false;
 
     int windowWidth, windowHeight;
 
-    UIGroup *enemyInfo = nullptr;
     SDL_Renderer *rend = nullptr;
     TTF_Font *font = nullptr;
 
+    UIGroup *enemyInfo = nullptr;
     UIButton *attackButton = nullptr;
+    FightBar *fightBar = nullptr;
+
+    void enableAttackMode();
 
 public:
     Arena();
@@ -31,6 +36,8 @@ public:
     void nextFight();
     void generateEnemy();
     void display();
+    bool handleClickEvents();
+    bool handleKeyboardEvents(SDL_Event event);
 
     //? Getters
     Enemy *getEnemy();

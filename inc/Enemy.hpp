@@ -9,6 +9,7 @@ class Enemy
 private:
     std::string name;
     float HP, DMG, DEF;
+    float tempHP;
 
     SDL_Texture *texture = nullptr;
     int posX, posY;
@@ -33,4 +34,8 @@ public:
 
     //? Getters
     std::string getName();
+    float getHP();
+    float getTempHP();
+    float getDMG();
+    float getDEF();
 };

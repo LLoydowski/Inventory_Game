@@ -10,6 +10,8 @@ protected:
     SDL_Color hoverColor;
     std::function<void()> action;
 
+    bool enabled = true;
+
 public:
     UIButton();
     UIButton(int width, int height, int posX, int posY, SDL_Color color);
@@ -19,4 +21,7 @@ public:
     void callAction();
     bool checkMouseCollision();
     void setAction(std::function<void()> action);
+
+    void enable();
+    void disable();
 };

@@ -137,28 +137,39 @@ void UIButton::callAction()
 
 bool UIButton::checkMouseCollision()
 {
-    int mouseX, mouseY;
-    SDL_GetMouseState(&mouseX, &mouseY);
-
-    int realX = posX;
-    int realY = posY;
-
-    if (hasParent)
+    if (enabled)
     {
-        realX += parentX;
-        realY += parentY;
+        int mouseX, mouseY;
+        SDL_GetMouseState(&mouseX, &mouseY);
+
+        int realX = posX;
+        int realY = posY;
+
+        if (hasParent)
+        {
+            realX += parentX;
+            realY += parentY;
+        }
+
+        if ((mouseX >= realX && mouseX <= realX + width) && (mouseY >= realY && mouseY <= realY + height))
+        {
+            return true;
+        }
     }
-
-    if ((mouseX >= realX && mouseX <= realX + width) && (mouseY >= realY && mouseY <= realY + height))
-    {
-
-        return true;
-    }
-
     return false;
 }
 
 void UIButton::setAction(std::function<void()> action)
 {
     this->action = action;
+}
+
+void UIButton::enable()
+{
+    enabled = true;
+}
+
+void UIButton::disable()
+{
+    enabled = false;
 }

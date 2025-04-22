@@ -15,6 +15,8 @@ private:
     int crossSpeed = 5;
     int crossWidth = 5;
 
+    bool wasHit = false;
+
     int centerHitBox = 15;
     int mildHitBox = 150;
 
