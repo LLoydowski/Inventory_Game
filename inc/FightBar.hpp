@@ -16,10 +16,16 @@ private:
     int crossWidth = 5;
 
     int centerHitBox = 15;
+    int mildHitBox = 150;
 
     UIElement *background = nullptr;
     UIElement *crosshair = nullptr;
     UIElement *center = nullptr;
+    UIElement *mild = nullptr;
+
+    const float CENTER_HIT = 1.5;
+    const float MILD_HIT = 1;
+    const float BAD_HIT = 0.7;
 
     void updateCrosshair();
 
@@ -28,6 +34,6 @@ public:
     ~FightBar();
 
     void display(SDL_Renderer *rend);
-    void hit();
+    float hit();
     void setSpeed(int speed);
 };

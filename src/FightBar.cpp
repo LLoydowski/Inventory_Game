@@ -32,7 +32,8 @@ FightBar::FightBar(int posX, int posY, int width, int height)
     crossX = posX;
     background = new UIElement(width, height, posX, posY, {50, 50, 50, 1});
     crosshair = new UIElement(crossWidth, height, crossX - crossWidth / 2, posY, {255, 255, 255, 1});
-    center = new UIElement(centerHitBox * 2, height, posX + width / 2 - centerHitBox, posY, {100, 100, 100, 1});
+    mild = new UIElement(mildHitBox * 2, height, posX + width / 2 - mildHitBox, posY, {70, 70, 70, 1});
+    center = new UIElement(centerHitBox * 2, height, posX + width / 2 - centerHitBox, posY, {130, 130, 130, 1});
 }
 
 FightBar::~FightBar()
@@ -49,33 +50,48 @@ FightBar::~FightBar()
     {
         delete center;
     }
+    if (mild != nullptr)
+    {
+        delete mild;
+    }
 }
 
 void FightBar::display(SDL_Renderer *rend)
 {
     background->display(rend);
+    mild->display(rend);
     center->display(rend);
     crosshair->display(rend);
     this->updateCrosshair();
 }
 
-void FightBar::hit()
+float FightBar::hit()
 {
     int center = posX + width / 2;
 
-    std::cout << "[FightBar] Center (+/- 5): " << center << "\n";
-    std::cout << "[FightBar] Crosshair (+/- 5): " << crosshair->getX() << "\n";
+    // std::cout << "[FightBar] Center (+/- 5): " << center << "\n";
+    // std::cout << "[FightBar] Crosshair (+/- 5): " << crosshair->getX() << "\n";
 
-    bool leftConstrain = crosshair->getX() >= center - centerHitBox;
-    bool rightConstrain = crosshair->getX() <= center + centerHitBox;
+    bool centerLeftConstrain = crosshair->getX() >= center - centerHitBox;
+    bool centerRightConstrain = crosshair->getX() <= center + centerHitBox;
 
-    if (leftConstrain && rightConstrain)
+    bool mildLeftConstrain = crosshair->getX() >= center - mildHitBox;
+    bool mildRightConstrain = crosshair->getX() <= center + mildHitBox;
+
+    if (centerLeftConstrain && centerRightConstrain)
     {
-        std::cout << "[FightBar/hit] STATUS: HIT\n";
+        // std::cout << "[FightBar/hit] STATUS: HIT\n";
+        return CENTER_HIT;
+    }
+    else if (mildLeftConstrain && mildRightConstrain)
+    {
+        // std::cout << "[FightBar/hit] STATUS: kinda HIT\n";
+        return MILD_HIT;
     }
     else
     {
-        std::cout << "[FightBar/hit] STATUS: HITn't\n";
+        // std::cout << "[FightBar/hit] STATUS: HITn't\n";
+        return BAD_HIT;
     }
 }
 
