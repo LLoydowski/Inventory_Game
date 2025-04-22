@@ -6,7 +6,7 @@
 class Armor : public Item
 {
 private:
-    int defense;
+    float DEF;
 
 public:
     Armor();
@@ -15,10 +15,10 @@ public:
     ~Armor();
 
     // Getters
-    int getDefense() const;
+    float getDEF();
 
     // Setters
-    void setDefense(int defense);
+    void setDEF(float defense);
 
     void display() override;
 

@@ -714,6 +714,16 @@ Weapon *Inventory::getWeapon()
     return equipedWeapon;
 }
 
+Armor *Inventory::getArmor()
+{
+    return equipedArmor;
+}
+
+Trinket *Inventory::getTrinket()
+{
+    return equipedTrinket;
+}
+
 void Inventory::setMaxHP(float maxHP)
 {
     this->maxHP = maxHP;

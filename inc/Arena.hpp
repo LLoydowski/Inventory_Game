@@ -16,6 +16,7 @@ private:
 
     int lvl, tier;
     bool isInAttackMode = false;
+    bool lost = false;
 
     int windowWidth, windowHeight;
 
@@ -25,9 +26,14 @@ private:
     UIGroup *enemyInfo = nullptr;
     UIButton *attackButton = nullptr;
     UIElement *lvlText = nullptr;
+    UIElement *HPDisplay = nullptr;
     FightBar *fightBar = nullptr;
 
-    void enableAttackMode();
+    UIElement *lostText = nullptr;
+    UIButton *restartButton = nullptr;
+
+    void
+    enableAttackMode();
 
 public:
     Arena();

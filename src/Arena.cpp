@@ -15,12 +15,12 @@ void Arena::enableAttackMode()
 }
 
 Arena::Arena()
-    : player{nullptr}, enemy{nullptr}, lvl{0}, tier{1}
+    : player{nullptr}, enemy{nullptr}, lvl{-1}, tier{1}
 {
 }
 
 Arena::Arena(Player *player)
-    : player{player}, enemy{nullptr}, lvl{0}, tier{1}
+    : player{player}, enemy{nullptr}, lvl{-1}, tier{1}
 {
 }
 
@@ -30,6 +30,9 @@ Arena::~Arena()
     delete enemyInfo;
     delete attackButton;
     delete lvlText;
+    delete HPDisplay;
+    delete lostText;
+    delete restartButton;
 
     if (fightBar != nullptr)
     {
@@ -50,7 +53,7 @@ void Arena::nextFight()
     lvl++;
     generateEnemy();
 
-    std::string text = "LVL: " + std::to_string(lvl);
+    std::string text = "LVL: " + std::to_string(lvl + 1);
     text += " / TIER: " + std::to_string(tier);
 
     lvlText->setText(text, font, rend);
@@ -107,6 +110,26 @@ void Arena::generateEnemy()
         enemyInfo->getElement(4)->setText(DEFText, font, rend);
     }
 
+    if (HPDisplay != nullptr)
+    {
+        std::stringstream stream;
+
+        //? Setting player HP in HPDisplay
+        stream.str("");
+        stream.clear();
+        stream << std::fixed << std::setprecision(1) << player->getInv()->getHP();
+        std::string tempHPString = stream.str();
+
+        stream.str("");
+        stream.clear();
+        stream << std::fixed << std::setprecision(1) << player->getInv()->getMaxHP();
+        std::string maxHPString = stream.str();
+
+        std::string hpText = "HP: " + tempHPString + " / " + maxHPString;
+
+        HPDisplay->setText(hpText, font, rend);
+    }
+
     if (rend != nullptr)
     {
         enemy->setPos(windowWidth / 2, windowHeight / 2);
@@ -124,6 +147,10 @@ void Arena::display()
     {
         lvlText->display(rend);
     }
+    if (HPDisplay != nullptr)
+    {
+        HPDisplay->display(rend);
+    }
 
     if (!isInAttackMode)
     {
@@ -139,6 +166,12 @@ void Arena::display()
     else
     {
         fightBar->display(rend);
+    }
+
+    if (lostText != nullptr && lost)
+    {
+        lostText->display(rend);
+        restartButton->display(rend);
     }
 }
 
@@ -161,7 +194,8 @@ bool Arena::handleKeyboardEvents(SDL_Event event)
 
             float playerDMG = playerWeapon->getDamage();
 
-            float DMGDone = playerDMG * hitMultiplier;
+            float DMGDone = (playerDMG * hitMultiplier);
+            DMGDone = DMGDone - DMGDone * enemy->getDEF();
 
             enemy->dealDMG(DMGDone);
 
@@ -190,6 +224,42 @@ bool Arena::handleKeyboardEvents(SDL_Event event)
             if (enemy->getTempHP() <= 0)
             {
                 player->goToLobby();
+                inv->setHP(inv->getMaxHP());
+                inv->setGold(inv->getGold() + moneyOnTier[tier]);
+            }
+
+            //? Enemy turn
+
+            float playerHP = inv->getHP();
+
+            float enemyDMG = enemy->getDMG();
+
+            Armor *armor = inv->getArmor();
+            if (armor != nullptr)
+            {
+                enemyDMG = enemyDMG - enemyDMG * armor->getDEF();
+            }
+
+            inv->setHP(playerHP - enemyDMG);
+
+            //? Setting player HP in HPDisplay
+            stream.str("");
+            stream.clear();
+            stream << std::fixed << std::setprecision(1) << player->getInv()->getHP();
+            std::string playerTempHPString = stream.str();
+
+            stream.str("");
+            stream.clear();
+            stream << std::fixed << std::setprecision(1) << player->getInv()->getMaxHP();
+            std::string playerMaxHPString = stream.str();
+
+            std::string hpText = "HP: " + playerTempHPString + " / " + playerMaxHPString;
+
+            HPDisplay->setText(hpText, font, rend);
+
+            if (inv->getHP() <= 0)
+            {
+                lost = true;
             }
 
             return true;
@@ -200,10 +270,13 @@ bool Arena::handleKeyboardEvents(SDL_Event event)
 
 bool Arena::handleClickEvents()
 {
-    if (attackButton->checkMouseCollision())
+    if (!lost)
     {
-        attackButton->callAction();
-        return true;
+        if (attackButton->checkMouseCollision())
+        {
+            attackButton->callAction();
+            return true;
+        }
     }
 
     return false;
@@ -266,4 +339,10 @@ void Arena::calibrateWindowPos(int windowWidth, int windowHeight, SDL_Renderer *
                             { this->enableAttackMode(); });
 
     this->lvlText = new UIElement(250, 40, 20, 20, color, "LVL: 1 / TIER: 1", font, rend);
+
+    this->HPDisplay = new UIElement(250, 40, windowWidth - 270, 20, {50, 255, 50, 1}, "HP: X/Y", font, rend);
+
+    this->lostText = new UIElement(470, 100, windowWidth / 2 - 235, windowHeight / 2 - 50, {240, 100, 100, 1}, "You have lost!", font, rend);
+
+    this->restartButton = new UIButton(166, 60, windowWidth / 2 - 83, windowHeight / 2 + 70, {255, 50, 50, 1}, "Restart", font, rend);
 }

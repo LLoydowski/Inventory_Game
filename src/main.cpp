@@ -19,6 +19,12 @@
 #include <FightBar.hpp>
 
 std::map<std::string, SDL_Texture *> loadedTextures;
+std::map<int, int> moneyOnTier = {
+    {1, 10},
+    {2, 45},
+    {3, 85},
+    {4, 175},
+    {5, 425}};
 std::map<int, EnemyStats> enemyTiers = {
     {1, {15, 10, 0, 10, 5, 3}},
     {2, {35, 25, 5, 10, 5, 4}},
@@ -284,19 +290,11 @@ void HandleLobbyLogic(SDL_Event &e, Inventory *playerInv, Shop *shop, UIButton *
     }
 }
 
-void HandleArenaLogic(SDL_Event &e, UIButton *goBackButton, Arena *arena)
+void HandleArenaLogic(SDL_Event &e, Arena *arena)
 {
     if (e.type == SDL_MOUSEBUTTONDOWN)
     {
         bool wasActionCalled = false;
-        if (!wasActionCalled)
-        {
-            if (goBackButton->checkMouseCollision())
-            {
-                wasActionCalled = true;
-                goBackButton->callAction();
-            }
-        }
         if (!wasActionCalled)
         {
             if (arena->handleClickEvents())
@@ -338,6 +336,10 @@ int main(int argc, char *argv[])
     playerInv->setPos(20, 20, renderer);
     playerInv->setWindowSize(windowWidth, windowHeight);
 
+    //? Adding starter sword
+    Item *basicSword = new Weapon("Starter sword", Rarities::common, 0, loadedTextures["Sword01"], 1);
+    playerInv->addItem(basicSword);
+
     Shop *shop = CreateShop(renderer, player);
     shop->setPos(windowWidth - shop->getWidth() - 20, 20, renderer);
     shop->setWindowSize(windowWidth, windowHeight);
@@ -357,11 +359,6 @@ int main(int argc, char *argv[])
                 arena->nextFight();
             }
         });
-
-    //* DEBUG BUTTON
-    UIButton *goBackButton = new UIButton(200, 50, windowWidth / 2 - 100, 10, {0, 255, 0, 1}, "/Go Back/", font, renderer);
-    goBackButton->setAction([player]()
-                            { player->goToLobby(); });
 
     //? Game loop
     bool isRunning = true;
@@ -394,7 +391,7 @@ int main(int argc, char *argv[])
                 }
                 else
                 {
-                    HandleArenaLogic(e, goBackButton, arena);
+                    HandleArenaLogic(e, arena);
                 }
             }
         }
@@ -410,7 +407,6 @@ int main(int argc, char *argv[])
         }
         else
         {
-            goBackButton->display(renderer);
             arena->display();
         }
 

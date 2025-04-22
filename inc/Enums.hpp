@@ -65,6 +65,7 @@ enum class Direction
     Left
 };
 
+extern std::map<int, int> moneyOnTier;
 extern std::map<std::string, SDL_Texture *>
     loadedTextures;
 extern std::map<int, EnemyStats> enemyTiers;

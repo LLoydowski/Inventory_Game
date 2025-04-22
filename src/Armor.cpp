@@ -8,19 +8,19 @@
 #include <iomanip>
 
 Armor::Armor()
-    : Item(), defense(0)
+    : Item(), DEF(0)
 {
     this->type = ItemType::Armor;
 }
 
 Armor::Armor(std::string name, Rarities rarity, float price, int defense)
-    : Item(name, rarity, price), defense(defense)
+    : Item(name, rarity, price), DEF(defense)
 {
     this->type = ItemType::Armor;
 }
 
 Armor::Armor(std::string name, Rarities rarity, float price, SDL_Texture *texture, int defense)
-    : Item(name, rarity, price, texture), defense(defense)
+    : Item(name, rarity, price, texture), DEF(defense)
 {
     this->type = ItemType::Armor;
 }
@@ -30,27 +30,27 @@ Armor::~Armor()
 }
 
 // Getter
-int Armor::getDefense() const
+float Armor::getDEF()
 {
-    return defense;
+    return DEF;
 }
 
 // Setter
-void Armor::setDefense(int defense)
+void Armor::setDEF(float defense)
 {
-    this->defense = defense;
+    this->DEF = defense;
 }
 
 void Armor::display()
 {
     Item::display();
-    std::cout << "Defence: " << this->defense << std::endl;
+    std::cout << "Defence: " << this->DEF << std::endl;
 }
 
 std::string Armor::getInfo()
 {
     std::stringstream stream;
-    stream << std::fixed << std::setprecision(1) << this->defense;
+    stream << std::fixed << std::setprecision(1) << this->DEF;
     std::string defString = stream.str();
 
     std::string text = "Defense: +" + defString;
