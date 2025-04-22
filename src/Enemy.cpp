@@ -58,6 +58,11 @@ void Enemy::display(SDL_Renderer *rend)
     SDL_RenderCopy(rend, texture, NULL, &dest);
 }
 
+void Enemy::dealDMG(float dmg)
+{
+    this->tempHP -= dmg;
+}
+
 void Enemy::setTexture(SDL_Texture *texture)
 {
     this->texture = texture;

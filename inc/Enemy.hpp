@@ -27,6 +27,7 @@ public:
     Enemy(std::string name, float HP, float DMG, float DEF);
 
     void display(SDL_Renderer *rend);
+    void dealDMG(float dmg);
 
     //? Setters
     void setTexture(SDL_Texture *texture);

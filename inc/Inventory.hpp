@@ -24,9 +24,9 @@ protected:
     //? Logic Stuff
     int rows, cols;
     Item ***items;
-    Item *equipedWeapon;
-    Item *equipedArmor;
-    Item *equipedTrinket;
+    Weapon *equipedWeapon;
+    Armor *equipedArmor;
+    Trinket *equipedTrinket;
 
     bool isMoveMode = false;
     int moveOriginRow = -1;
@@ -97,6 +97,10 @@ public:
     float getMaxHP();
     float getHP();
     float getGold();
+
+    Weapon *getWeapon();
+    Armor *getArmor();
+    Trinket *getTrinket();
 
     void setMaxHP(float maxHP);
     void setHP(float HP);

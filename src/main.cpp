@@ -239,9 +239,15 @@ int main(int argc, char *argv[])
     arena->calibrateWindowPos(windowWidth, windowHeight, renderer, font);
 
     UIButton *goToArenaButton = new UIButton(200, 50, 50, 400, {255, 0, 0, 1}, "Go to Arena", font, renderer);
-    goToArenaButton->setAction([player, arena]()
-                               { player->goToArena();
-                                 arena->nextFight(); });
+    goToArenaButton->setAction(
+        [player, arena]()
+        {
+            if (player->getInv()->getWeapon() != nullptr)
+            {
+                player->goToArena();
+                arena->nextFight();
+            }
+        });
 
     //* DEBUG BUTTON
     UIButton *goBackButton = new UIButton(200, 50, windowWidth / 2 - 100, 10, {0, 255, 0, 1}, "/Go Back/", font, renderer);

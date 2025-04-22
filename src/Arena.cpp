@@ -1,6 +1,7 @@
 #include "Arena.hpp"
 #include <UIGroup.hpp>
 #include <SDL2/SDL_ttf.h>
+#include <Inventory.hpp>
 
 #include <sstream>
 #include <iomanip>
@@ -137,7 +138,45 @@ bool Arena::handleKeyboardEvents(SDL_Event event)
     {
         if (event.key.keysym.sym == SDLK_SPACE)
         {
-            fightBar->hit();
+            float hitMultiplier = fightBar->hit();
+
+            Inventory *inv = player->getInv();
+            Weapon *playerWeapon = inv->getWeapon();
+
+            if (playerWeapon == nullptr)
+            {
+                std::cout << "[Arena/handleKeyboardEvents] The weapon is missing.\n";
+                return false;
+            }
+
+            float playerDMG = playerWeapon->getDamage();
+
+            float DMGDone = playerDMG * hitMultiplier;
+
+            enemy->dealDMG(DMGDone);
+
+            std::stringstream stream;
+
+            stream.str("");
+            stream.clear();
+            stream << std::fixed << std::setprecision(1) << enemy->getTempHP();
+            std::string tempHPString = stream.str();
+
+            stream.str("");
+            stream.clear();
+            stream << std::fixed << std::setprecision(1) << enemy->getHP();
+            std::string HPString = stream.str();
+
+            std::string HPtext = "HP: " + tempHPString + " / " + HPString;
+
+            enemyInfo->getElement(2)->setText(HPtext, font, rend);
+
+            isInAttackMode = false;
+            attackButton->enable();
+
+            delete fightBar;
+            fightBar = nullptr;
+
             return true;
         }
     }

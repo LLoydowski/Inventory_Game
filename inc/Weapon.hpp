@@ -6,7 +6,7 @@
 class Weapon : public Item
 {
 private:
-    int damage;
+    float DMG;
 
 public:
     Weapon();
@@ -15,10 +15,10 @@ public:
     ~Weapon();
 
     // Getters
-    int getDamage() const;
+    float getDamage();
 
     // Setters
-    void setDamage(int damage);
+    void setDamage(float damage);
 
     void display() override;
 

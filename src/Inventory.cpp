@@ -693,6 +693,11 @@ float Inventory::getGold()
     return gold;
 }
 
+Weapon *Inventory::getWeapon()
+{
+    return equipedWeapon;
+}
+
 void Inventory::setMaxHP(float maxHP)
 {
     this->maxHP = maxHP;
