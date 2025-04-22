@@ -318,23 +318,26 @@ void Game::Init()
     shop->setPos(windowWidth - shop->getWidth() - 20, 20, renderer);
     shop->setWindowSize(windowWidth, windowHeight);
 
+    std::string tierText = "LVL: " + std::to_string(player->getLvl()) + " / TIER: " + std::to_string(player->getTier());
+    tierDisplay = new UIElement(shop->getWidth(), 35, shop->getPosX(), shop->getPosY() + shop->getHeight() + 20, {153, 154, 158, SDL_ALPHA_OPAQUE}, tierText, font, renderer);
+
     //? Arena stuff
 
     arena = new Arena(player);
     arena->calibrateWindowPos(windowWidth, windowHeight, renderer, font);
+    arena->setLobbyTierText(tierDisplay);
 
-    goToArenaButton = new UIButton(200, 50, 50, 400, {255, 0, 0, 1}, "Go to Arena", font, renderer);
+    goToArenaButton = new UIButton(200, 50, 20, windowHeight - 70, {255, 0, 0, 1}, "Go to Arena", font, renderer);
     goToArenaButton->setAction(
         [this]()
         {
             if (player->getInv()->getWeapon() != nullptr)
             {
+                player->getInv()->setTempHP(player->getInv()->getHP());
                 player->goToArena();
                 arena->nextFight();
             }
         });
-
-    //? Game loop
 }
 
 void Game::HandleEvents(SDL_Event e)
@@ -342,7 +345,6 @@ void Game::HandleEvents(SDL_Event e)
     if (this->arena->doRestart())
     {
         this->CleanUp();
-        SDL_Delay(300);
         this->Init();
     }
     if (e.type == SDL_KEYDOWN)
@@ -376,6 +378,7 @@ void Game::Draw()
         player->getInv()->displaySDL(renderer);
         shop->displaySDL(renderer);
         goToArenaButton->display(renderer);
+        tierDisplay->display(renderer);
     }
     else
     {
@@ -391,4 +394,5 @@ void Game::CleanUp()
     delete shop;
     delete goToArenaButton;
     delete arena;
+    delete tierDisplay;
 }

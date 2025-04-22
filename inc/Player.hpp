@@ -11,6 +11,7 @@ private:
     const int INVENTORY_COLS = 4;
 
     int tier = 1;
+    int lvl = 1;
 
     std::string name;
     Inventory *inventory;
@@ -28,9 +29,11 @@ public:
     Inventory *getInv();
     PlayerPosition getPlayerPosition();
     int getTier();
+    int getLvl();
 
     //? Setters
     void goToArena();
     void goToLobby();
     void setTier(int tier);
+    void setLvl(int lvl);
 };

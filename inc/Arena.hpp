@@ -29,6 +29,7 @@ private:
     UIElement *lvlText = nullptr;
     UIElement *HPDisplay = nullptr;
     FightBar *fightBar = nullptr;
+    UIElement *LobbyTierText = nullptr;
 
     UIElement *lostText = nullptr;
     UIButton *restartButton = nullptr;
@@ -53,6 +54,7 @@ public:
 
     //? Setters
     void setPlayer(Player *player);
+    void setLobbyTierText(UIElement *element);
     void setEnemy(Enemy *enemy);
     void calibrateWindowPos(int windowWidth, int windowHeight, SDL_Renderer *rend, TTF_Font *font);
 };

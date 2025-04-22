@@ -32,7 +32,7 @@ protected:
     int moveOriginRow = -1;
     int moveOriginCol = -1;
 
-    float maxHP, HP, gold;
+    float HP, tempHP, gold;
 
     //? UI Stuff
     SDL_Renderer *rend;
@@ -99,13 +99,15 @@ public:
     int getRows();
     int getWidth();
     int getHeight();
+    int getPosX();
+    int getPosY();
 
-    void setMaxHP(float maxHP);
-    void setHP(float HP);
+    void setHP(float maxHP);
+    void setTempHP(float HP);
     void setGold(float gold);
 
-    float getMaxHP();
     float getHP();
+    float getTempHP();
     float getGold();
 
     Weapon *getWeapon();

@@ -5,6 +5,7 @@
 
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 
 void Arena::enableAttackMode()
 {
@@ -47,11 +48,12 @@ void Arena::nextFight()
         lvl = 0;
         tier++;
         generateEnemy();
-        return;
     }
-
-    lvl++;
-    generateEnemy();
+    else
+    {
+        lvl++;
+        generateEnemy();
+    }
 
     std::string text = "LVL: " + std::to_string(lvl + 1);
     text += " / TIER: " + std::to_string(tier);
@@ -117,12 +119,12 @@ void Arena::generateEnemy()
         //? Setting player HP in HPDisplay
         stream.str("");
         stream.clear();
-        stream << std::fixed << std::setprecision(1) << player->getInv()->getHP();
+        stream << std::fixed << std::setprecision(1) << player->getInv()->getTempHP();
         std::string tempHPString = stream.str();
 
         stream.str("");
         stream.clear();
-        stream << std::fixed << std::setprecision(1) << player->getInv()->getMaxHP();
+        stream << std::fixed << std::setprecision(1) << player->getInv()->getHP();
         std::string maxHPString = stream.str();
 
         std::string hpText = "HP: " + tempHPString + " / " + maxHPString;
@@ -195,7 +197,7 @@ bool Arena::handleKeyboardEvents(SDL_Event event)
             float playerDMG = playerWeapon->getDamage();
 
             float DMGDone = (playerDMG * hitMultiplier);
-            DMGDone = DMGDone - DMGDone * enemy->getDEF();
+            DMGDone = DMGDone - DMGDone * (enemy->getDEF() / 100.0f);
 
             enemy->dealDMG(DMGDone);
 
@@ -221,45 +223,70 @@ bool Arena::handleKeyboardEvents(SDL_Event event)
             delete fightBar;
             fightBar = nullptr;
 
-            if (enemy->getTempHP() <= 0)
-            {
-                player->goToLobby();
-                inv->setHP(inv->getMaxHP());
-                inv->setGold(inv->getGold() + moneyOnTier[tier]);
-            }
-
             //? Enemy turn
 
-            float playerHP = inv->getHP();
+            float playerHP = inv->getTempHP();
 
             float enemyDMG = enemy->getDMG();
 
             Armor *armor = inv->getArmor();
             if (armor != nullptr)
             {
-                enemyDMG = enemyDMG - enemyDMG * armor->getDEF();
+                enemyDMG = enemyDMG - enemyDMG * (armor->getDEF() / 100.0f);
             }
 
-            inv->setHP(playerHP - enemyDMG);
+            inv->setTempHP(playerHP - enemyDMG);
 
             //? Setting player HP in HPDisplay
             stream.str("");
             stream.clear();
-            stream << std::fixed << std::setprecision(1) << player->getInv()->getHP();
+            stream << std::fixed << std::setprecision(1) << player->getInv()->getTempHP();
             std::string playerTempHPString = stream.str();
 
             stream.str("");
             stream.clear();
-            stream << std::fixed << std::setprecision(1) << player->getInv()->getMaxHP();
+            stream << std::fixed << std::setprecision(1) << player->getInv()->getHP();
             std::string playerMaxHPString = stream.str();
 
             std::string hpText = "HP: " + playerTempHPString + " / " + playerMaxHPString;
 
             HPDisplay->setText(hpText, font, rend);
 
-            if (inv->getHP() <= 0)
+            if (enemy->getTempHP() <= 0)
+            {
+                player->goToLobby();
+
+                float playerMaxHP = inv->getHP();
+
+                if (inv->getTrinket())
+                {
+                    playerMaxHP += inv->getTrinket()->getAdditionalHP();
+                }
+
+                inv->setGold(inv->getGold() + moneyOnTier[tier]);
+
+                player->setLvl(lvl + 2);
+                if (lvl == 4)
+                {
+                    player->setTier(tier + 1);
+                    player->setLvl(1);
+                }
+
+                if (LobbyTierText != nullptr)
+                {
+                    std::string tierText = "LVL: " + std::to_string(player->getLvl()) + " / TIER: " + std::to_string(player->getTier());
+                    LobbyTierText->setText(tierText, font, rend);
+                }
+
+                inv->generateUIElements();
+
+                return true;
+            }
+
+            if (inv->getTempHP() <= 0)
             {
                 lost = true;
+                return true;
             }
 
             return true;
@@ -313,6 +340,11 @@ void Arena::setPlayer(Player *player)
 void Arena::setEnemy(Enemy *enemy)
 {
     this->enemy = enemy;
+}
+
+void Arena::setLobbyTierText(UIElement *element)
+{
+    this->LobbyTierText = element;
 }
 
 void Arena::calibrateWindowPos(int windowWidth, int windowHeight, SDL_Renderer *rend, TTF_Font *font)

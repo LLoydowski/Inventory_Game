@@ -9,8 +9,8 @@ Player::Player() : name{"Guest"}
 Player::Player(std::string name, float maxHP, float gold) : name{name}
 {
     inventory = new Inventory(INVENTORY_ROWS, INVENTORY_COLS);
-    inventory->setMaxHP(maxHP);
     inventory->setHP(maxHP);
+    inventory->setTempHP(maxHP);
     inventory->setGold(gold);
 }
 Player::~Player()
@@ -38,6 +38,11 @@ void Player::setTier(int tier)
     this->tier = tier;
 }
 
+void Player::setLvl(int lvl)
+{
+    this->lvl = lvl;
+}
+
 PlayerPosition Player::getPlayerPosition()
 {
     return pos;
@@ -46,6 +51,11 @@ PlayerPosition Player::getPlayerPosition()
 int Player::getTier()
 {
     return tier;
+}
+
+int Player::getLvl()
+{
+    return lvl;
 }
 
 bool Player::hasFreeSlot()

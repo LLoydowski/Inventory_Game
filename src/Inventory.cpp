@@ -258,7 +258,7 @@ void Inventory::disableMoveMode()
 }
 
 Inventory::Inventory(int rows, int cols)
-    : rows{rows}, cols{cols}, equipedWeapon{nullptr}, equipedArmor{nullptr}, equipedTrinket{nullptr}, maxHP{100}, HP{100}, gold{20}
+    : rows{rows}, cols{cols}, equipedWeapon{nullptr}, equipedArmor{nullptr}, equipedTrinket{nullptr}, HP{100}, tempHP{100}, gold{20}
 {
 
     // Generating item 2D array
@@ -620,6 +620,7 @@ void Inventory::equipItem(Armor *armor)
 void Inventory::equipItem(Trinket *trinket)
 {
     equipedTrinket = trinket;
+    this->HP += trinket->getAdditionalHP();
     this->removeMenu();
 }
 
@@ -640,6 +641,7 @@ void Inventory::unequipItem(ItemType parameter)
         equipedArmor = nullptr;
         break;
     case ItemType::Trinket:
+        this->HP -= equipedTrinket->getAdditionalHP();
         equipedTrinket = nullptr;
         break;
     }
@@ -680,6 +682,21 @@ int Inventory::getWidth()
     return invWidth;
 }
 
+int Inventory::getHeight()
+{
+    return invHeight;
+}
+
+int Inventory::getPosX()
+{
+    return posX;
+}
+
+int Inventory::getPosY()
+{
+    return posY;
+}
+
 void Inventory::setPos(int posX, int posY, SDL_Renderer *rend)
 {
     this->posX = posX;
@@ -694,14 +711,14 @@ void Inventory::setWindowSize(int x, int y)
     this->windowHeight = y;
 }
 
-float Inventory::getMaxHP()
-{
-    return maxHP;
-}
-
 float Inventory::getHP()
 {
     return HP;
+}
+
+float Inventory::getTempHP()
+{
+    return tempHP;
 }
 
 float Inventory::getGold()
@@ -724,25 +741,25 @@ Trinket *Inventory::getTrinket()
     return equipedTrinket;
 }
 
-void Inventory::setMaxHP(float maxHP)
+void Inventory::setHP(float maxHP)
 {
-    this->maxHP = maxHP;
+    this->HP = maxHP;
 }
 
-void Inventory::setHP(float HP)
+void Inventory::setTempHP(float tempHP)
 {
-    if (HP > this->maxHP)
+    if (tempHP > this->HP)
     {
-        this->HP = maxHP;
+        this->tempHP = tempHP;
         return;
     }
-    else if (HP < 0)
+    else if (tempHP < 0)
     {
-        this->HP = 0;
+        this->tempHP = 0;
         return;
     }
 
-    this->HP = HP;
+    this->tempHP = tempHP;
 }
 
 void Inventory::setGold(float gold)
