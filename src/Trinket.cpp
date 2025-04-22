@@ -19,8 +19,8 @@ Trinket::Trinket(std::string name, Rarities rarity, float price, float HP)
 }
 
 // Konstruktor z teksturą
-Trinket::Trinket(std::string name, Rarities rarity, float price, SDL_Texture *texture)
-    : Item(name, rarity, price, texture)
+Trinket::Trinket(std::string name, Rarities rarity, float price, SDL_Texture *texture, float HP)
+    : Item(name, rarity, price, texture), HP{HP}
 {
     this->type = ItemType::Trinket;
 }

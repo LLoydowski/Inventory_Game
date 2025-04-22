@@ -24,6 +24,7 @@ private:
 
     UIGroup *enemyInfo = nullptr;
     UIButton *attackButton = nullptr;
+    UIElement *lvlText = nullptr;
     FightBar *fightBar = nullptr;
 
     void enableAttackMode();

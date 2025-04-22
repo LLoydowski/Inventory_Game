@@ -29,6 +29,7 @@ Arena::~Arena()
     delete enemy;
     delete enemyInfo;
     delete attackButton;
+    delete lvlText;
 
     if (fightBar != nullptr)
     {
@@ -38,7 +39,7 @@ Arena::~Arena()
 
 void Arena::nextFight()
 {
-    if (lvl != 5)
+    if (lvl == 4)
     {
         lvl = 0;
         tier++;
@@ -48,6 +49,11 @@ void Arena::nextFight()
 
     lvl++;
     generateEnemy();
+
+    std::string text = "LVL: " + std::to_string(lvl);
+    text += " / TIER: " + std::to_string(tier);
+
+    lvlText->setText(text, font, rend);
 }
 
 void Arena::generateEnemy()
@@ -114,6 +120,10 @@ void Arena::display()
     {
         enemy->display(rend);
     }
+    if (lvlText != nullptr)
+    {
+        lvlText->display(rend);
+    }
 
     if (!isInAttackMode)
     {
@@ -176,6 +186,11 @@ bool Arena::handleKeyboardEvents(SDL_Event event)
 
             delete fightBar;
             fightBar = nullptr;
+
+            if (enemy->getTempHP() <= 0)
+            {
+                player->goToLobby();
+            }
 
             return true;
         }
@@ -249,4 +264,6 @@ void Arena::calibrateWindowPos(int windowWidth, int windowHeight, SDL_Renderer *
     this->attackButton = new UIButton(130, 50, 20, windowHeight - 70, color, "Attack", font, rend);
     attackButton->setAction([this]()
                             { this->enableAttackMode(); });
+
+    this->lvlText = new UIElement(250, 40, 20, 20, color, "LVL: 1 / TIER: 1", font, rend);
 }

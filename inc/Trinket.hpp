@@ -11,7 +11,7 @@ private:
 public:
     Trinket();
     Trinket(std::string name, Rarities rarity, float price, float HP);
-    Trinket(std::string name, Rarities rarity, float price, SDL_Texture *texture);
+    Trinket(std::string name, Rarities rarity, float price, SDL_Texture *texture, float HP);
     ~Trinket();
     float getAdditionalHP();
 

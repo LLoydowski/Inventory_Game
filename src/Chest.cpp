@@ -34,7 +34,7 @@ Chest::Chest(std::string name, Rarities rarity, float price, SDL_Texture *textur
 
 Item *Chest::openChest()
 {
-    GeneratedStats stats = lootTable->generate(); //! <- Error here
+    GeneratedStats stats = lootTable->generate();
     Item *item = nullptr;
 
     if (stats.itemType == ItemType::Weapon)
@@ -43,11 +43,11 @@ Item *Chest::openChest()
     }
     else if (stats.itemType == ItemType::Armor)
     {
-        item = new Armor("Armor", stats.rarity, 0, stats.additionalDEF);
+        item = new Armor("Armor", stats.rarity, 0, loadedTextures["Armor01"], stats.additionalDEF);
     }
     else if (stats.itemType == ItemType::Trinket)
     {
-        item = new Trinket("Ammulet", stats.rarity, 0, stats.additionalHP);
+        item = new Trinket("Ammulet", stats.rarity, 0, loadedTextures["Trinket01"], stats.additionalHP);
     }
 
     return item;

@@ -82,15 +82,6 @@ void LoadTextures(SDL_Renderer *rend)
     }
     loadedTextures["placeholder"] = placeholderTexture;
 
-    SDL_Texture *sword01Texture = NULL;
-    SDL_Surface *sword01Surf = IMG_Load("gfx/Sword01.png");
-    if (sword01Surf)
-    {
-        sword01Texture = SDL_CreateTextureFromSurface(rend, sword01Surf);
-        SDL_FreeSurface(sword01Surf);
-    }
-    loadedTextures["Sword01"] = sword01Texture;
-
     SDL_Texture *weaponChestT1Texture = NULL;
     SDL_Surface *weaponChestT1Surf = IMG_Load("gfx/chest.png");
     if (weaponChestT1Surf)
@@ -99,6 +90,33 @@ void LoadTextures(SDL_Renderer *rend)
         SDL_FreeSurface(weaponChestT1Surf);
     }
     loadedTextures["WeaponChest01"] = weaponChestT1Texture;
+
+    SDL_Texture *sword01Texture = NULL;
+    SDL_Surface *sword01Surf = IMG_Load("gfx/sword/Sword01.png");
+    if (sword01Surf)
+    {
+        sword01Texture = SDL_CreateTextureFromSurface(rend, sword01Surf);
+        SDL_FreeSurface(sword01Surf);
+    }
+    loadedTextures["Sword01"] = sword01Texture;
+
+    SDL_Texture *armor01Texture = NULL;
+    SDL_Surface *armor01Surf = IMG_Load("gfx/armor/Armor01.png");
+    if (armor01Surf)
+    {
+        armor01Texture = SDL_CreateTextureFromSurface(rend, armor01Surf);
+        SDL_FreeSurface(armor01Surf);
+    }
+    loadedTextures["Armor01"] = armor01Texture;
+
+    SDL_Texture *trinket01Texture = NULL;
+    SDL_Surface *trinket01Surf = IMG_Load("gfx/trinket/Trinket01.png");
+    if (trinket01Surf)
+    {
+        trinket01Texture = SDL_CreateTextureFromSurface(rend, trinket01Surf);
+        SDL_FreeSurface(trinket01Surf);
+    }
+    loadedTextures["Trinket01"] = trinket01Texture;
 }
 
 void RemoveTextures()
@@ -120,14 +138,42 @@ Shop *CreateShop(SDL_Renderer *rend, Player *plr)
     shop->setPos(500, 0, rend);
     shop->setPlayerUsingShop(plr);
 
+    //* T1
+
+    //! Weapon
+
     //? Creating loot table for T1 Weapon Chest
     LootTable *weaponT1Loot = new LootTable();
-    weaponT1Loot->setDMG(1, 10);
+    weaponT1Loot->setDMG(10, 30);
     weaponT1Loot->addValidType(ItemType::Weapon);
 
     //? Creating chest object
     Chest *chestWeapon1 = new Chest("Weapon Chest [T1]", Rarities::common, 10, loadedTextures["WeaponChest01"], weaponT1Loot);
     shop->addItem(chestWeapon1);
+
+    //! Armor
+
+    //? Creating loot table for T1 Armor Chest
+    LootTable *armorT1Loot = new LootTable();
+    armorT1Loot->setDEF(5, 10);
+    armorT1Loot->addValidType(ItemType::Armor);
+
+    //? Creating chest object
+    Chest *chestArmor1 = new Chest("Armor Chest [T1]", Rarities::common, 10, loadedTextures["WeaponChest01"], armorT1Loot);
+    shop->addItem(chestArmor1);
+
+    //! Trinket
+
+    //? Creating loot table for T1 Armor Chest
+    LootTable *trinketT1Loot = new LootTable();
+    trinketT1Loot->setHP(10, 20);
+    trinketT1Loot->addValidType(ItemType::Trinket);
+
+    //? Creating chest object
+    Chest *chestTrinket1 = new Chest("Trinket Chest [T1]", Rarities::common, 10, loadedTextures["WeaponChest01"], trinketT1Loot);
+    shop->addItem(chestTrinket1);
+
+    //* T1
 
     return shop;
 }
