@@ -61,7 +61,7 @@ bool InitializeSDL(int windowWidth, int windowHeight, SDL_Window *&window, SDL_R
         return false;
     }
 
-    font = TTF_OpenFont("font/OpenSans.ttf", 24);
+    font = TTF_OpenFont("font/OpenSans.ttf", 54);
     if (font == nullptr)
     {
         std::cerr << "TTF_OpenFont Error: " << TTF_GetError() << std::endl;
@@ -226,6 +226,8 @@ int main(int argc, char *argv[])
 
     Shop *shop = CreateShop(renderer, player);
 
+    //? Arena stuff
+
     Arena *arena = new Arena(player);
     arena->calibrateWindowPos(windowWidth, windowHeight, renderer, font);
 
@@ -238,8 +240,6 @@ int main(int argc, char *argv[])
     UIButton *goBackButton = new UIButton(200, 50, windowWidth / 2 - 100, 10, {0, 255, 0, 1}, "/Go Back/", font, renderer);
     goBackButton->setAction([player]()
                             { player->goToLobby(); });
-
-    FightBar *fb = new FightBar(0, windowHeight - 50, windowWidth, 50);
 
     //? Game loop
     bool isRunning = true;
@@ -254,14 +254,6 @@ int main(int argc, char *argv[])
             if (e.type == SDL_QUIT)
             {
                 isRunning = false;
-            }
-            if (e.type == SDL_KEYDOWN)
-            {
-                SDL_Keycode key = e.key.keysym.sym;
-                if (key == SDLK_SPACE)
-                {
-                    fb->hit();
-                }
             }
 
             if (player->getPlayerPosition() == PlayerPosition::Lobby)
@@ -289,8 +281,6 @@ int main(int argc, char *argv[])
             arena->display();
         }
 
-        fb->display(renderer);
-
         SDL_RenderPresent(renderer);
 
         frameTime = SDL_GetTicks() - frameStart;
@@ -305,7 +295,6 @@ int main(int argc, char *argv[])
     delete shop;
     delete goToArenaButton;
     delete arena;
-    delete fb;
 
     RemoveTextures();
 

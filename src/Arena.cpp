@@ -38,19 +38,33 @@ void Arena::generateEnemy()
     float DMG = enemyTiers[tier].DMG + (enemyTiers[tier].bDMG * lvl);
     float DEF = enemyTiers[tier].DEF + (enemyTiers[tier].bDEF * lvl);
 
-    enemy = new Enemy("Zombie", HP, DMG, DEF);
+    enemy = new Enemy("Skibidi", HP, DMG, DEF);
 
     if (enemyInfo != nullptr)
     {
         enemyInfo->getElement(1)->setText(enemy->getName(), font, rend);
     }
+
+    if (rend != nullptr)
+    {
+        enemy->setPos(windowWidth / 2, windowHeight / 2);
+        enemy->setTexture(loadedTextures["placeholder"]);
+    }
 }
 
 void Arena::display()
 {
+    if (enemy != nullptr)
+    {
+        enemy->display(rend);
+    }
     if (enemyInfo != nullptr)
     {
         enemyInfo->display(rend);
+    }
+    if (attackButton != nullptr)
+    {
+        attackButton->display(rend);
     }
 }
 
@@ -80,6 +94,9 @@ void Arena::calibrateWindowPos(int windowWidth, int windowHeight, SDL_Renderer *
     this->enemyInfo = new UIGroup(windowWidth - 270, windowHeight - 150);
     this->font = font;
 
+    this->windowWidth = windowWidth;
+    this->windowHeight = windowHeight;
+
     SDL_Color color = {200, 200, 200, 255};
 
     UIElement *background = new UIElement(250, 130, 0, 0, color, " ", font, rend);
@@ -87,4 +104,6 @@ void Arena::calibrateWindowPos(int windowWidth, int windowHeight, SDL_Renderer *
 
     UIElement *enemyName = new UIElement(250, 30, 0, 0, color, "Test", font, rend);
     this->enemyInfo->addElement(enemyName);
+
+    this->attackButton = new UIButton(130, 50, 20, windowHeight - 70, color, "Attack", font, rend);
 }

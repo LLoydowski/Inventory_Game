@@ -15,9 +15,13 @@ private:
 
     int lvl, tier;
 
+    int windowWidth, windowHeight;
+
     UIGroup *enemyInfo = nullptr;
     SDL_Renderer *rend = nullptr;
     TTF_Font *font = nullptr;
+
+    UIButton *attackButton = nullptr;
 
 public:
     Arena();
@@ -29,8 +33,7 @@ public:
     void display();
 
     //? Getters
-    Enemy *
-    getEnemy();
+    Enemy *getEnemy();
     Player *getPlayer();
 
     //? Setters
