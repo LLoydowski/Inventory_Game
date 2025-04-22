@@ -268,6 +268,11 @@ bool Arena::handleKeyboardEvents(SDL_Event event)
     return false;
 }
 
+bool Arena::doRestart()
+{
+    return willRestart;
+}
+
 bool Arena::handleClickEvents()
 {
     if (!lost)
@@ -275,6 +280,14 @@ bool Arena::handleClickEvents()
         if (attackButton->checkMouseCollision())
         {
             attackButton->callAction();
+            return true;
+        }
+    }
+    else
+    {
+        if (restartButton->checkMouseCollision())
+        {
+            restartButton->callAction();
             return true;
         }
     }
@@ -345,4 +358,9 @@ void Arena::calibrateWindowPos(int windowWidth, int windowHeight, SDL_Renderer *
     this->lostText = new UIElement(470, 100, windowWidth / 2 - 235, windowHeight / 2 - 50, {240, 100, 100, 1}, "You have lost!", font, rend);
 
     this->restartButton = new UIButton(166, 60, windowWidth / 2 - 83, windowHeight / 2 + 70, {255, 50, 50, 1}, "Restart", font, rend);
+    this->restartButton->setAction(
+        [this]()
+        {
+            this->willRestart = true;
+        });
 }

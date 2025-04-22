@@ -68,13 +68,13 @@ bool UIElement::generateTexture(TTF_Font *font, SDL_Renderer *rend)
 
     if (text == "")
     {
-        std::cout << "Text cnnot be empty" << std::endl;
+        std::cout << "[UIElement/generateTexture] Text cnnot be empty" << std::endl;
         return false;
     }
 
     if (font == nullptr)
     {
-        std::cout << "Font is nullptr. Cannot render text." << std::endl;
+        std::cout << "[UIElement/generateTexture] Font is nullptr. Cannot render text." << std::endl;
         return false;
     }
 
@@ -87,14 +87,14 @@ bool UIElement::generateTexture(TTF_Font *font, SDL_Renderer *rend)
     SDL_Surface *surface = TTF_RenderUTF8_Blended(font, text.c_str(), color);
     if (surface == nullptr)
     {
-        std::cout << "Failed to render text surface: " << TTF_GetError() << std::endl;
+        std::cout << "[UIElement/generateTexture] Failed to render text surface: " << TTF_GetError() << std::endl;
         return false;
     }
 
     textTexture = SDL_CreateTextureFromSurface(rend, surface);
     if (textTexture == nullptr)
     {
-        std::cout << "Failed to create text texture: " << SDL_GetError() << std::endl;
+        std::cout << "[UIElement/generateTexture] Failed to create text texture: " << SDL_GetError() << " | For element with text: " << text << std::endl;
     }
 
     SDL_FreeSurface(surface);

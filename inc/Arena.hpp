@@ -17,6 +17,7 @@ private:
     int lvl, tier;
     bool isInAttackMode = false;
     bool lost = false;
+    bool willRestart = false;
 
     int windowWidth, windowHeight;
 
@@ -32,8 +33,7 @@ private:
     UIElement *lostText = nullptr;
     UIButton *restartButton = nullptr;
 
-    void
-    enableAttackMode();
+    void enableAttackMode();
 
 public:
     Arena();
@@ -45,6 +45,7 @@ public:
     void display();
     bool handleClickEvents();
     bool handleKeyboardEvents(SDL_Event event);
+    bool doRestart();
 
     //? Getters
     Enemy *getEnemy();
