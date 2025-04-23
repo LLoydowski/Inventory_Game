@@ -158,3 +158,8 @@ void UIElement::setX(int x)
 {
     this->posX = x;
 }
+
+void UIElement::setY(int y)
+{
+    this->posY = y;
+}

@@ -153,6 +153,9 @@ bool UIButton::checkMouseCollision()
 
         if ((mouseX >= realX && mouseX <= realX + width) && (mouseY >= realY && mouseY <= realY + height))
         {
+            // std::cout << "[UIButton/checkMouseCollision] MouseX: " << mouseX << " MouseY: " << mouseY;
+            // std::cout << " PosX: " << posX << " PosY: " << posY;
+            // std::cout << " Width: " << width << " Height: " << height << std::endl;
             return true;
         }
     }

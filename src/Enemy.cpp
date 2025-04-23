@@ -47,14 +47,14 @@ Enemy::Enemy(std::string name, float HP, float DMG, float DEF)
 
 void Enemy::display(SDL_Renderer *rend)
 {
-    int texWidth, texHeight;
+    // int texWidth, texHeight;
 
-    SDL_QueryTexture(texture, NULL, NULL, &texWidth, &texHeight);
+    // SDL_QueryTexture(texture, NULL, NULL, &texWidth, &texHeight);
 
-    int displayX = posX - (texWidth / 2);
-    int displayY = posY - (texHeight / 2);
+    int displayX = posX - (width / 2);
+    int displayY = posY - (height / 2);
 
-    SDL_Rect dest = {displayX, displayY, texWidth, texHeight};
+    SDL_Rect dest = {displayX, displayY, width, height};
     SDL_RenderCopy(rend, texture, NULL, &dest);
 }
 
@@ -72,6 +72,12 @@ void Enemy::setPos(int x, int y)
 {
     this->posX = x;
     this->posY = y;
+}
+
+void Enemy::setSize(int width, int height)
+{
+    this->width = width;
+    this->height = height;
 }
 
 std::string Enemy::getName()

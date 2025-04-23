@@ -28,7 +28,8 @@ enum class Rarities
     common,
     uncommon,
     rare,
-    epic
+    epic,
+    legendary
 };
 
 enum class Statistic
@@ -69,3 +70,5 @@ extern std::map<int, int> moneyOnTier;
 extern std::map<std::string, SDL_Texture *>
     loadedTextures;
 extern std::map<int, EnemyStats> enemyTiers;
+extern std::map<int, std::string> enemyNames;
+extern std::map<int, std::string> enemyTexturesID;

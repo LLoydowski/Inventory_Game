@@ -35,6 +35,7 @@ private:
     Arena *arena = nullptr;
     UIButton *goToArenaButton = nullptr;
     UIElement *tierDisplay = nullptr;
+    UIGroup *playerStats = nullptr;
 
     bool InitializeSDL(int windowWidth, int windowHeight, SDL_Window *&window, SDL_Renderer *&renderer, TTF_Font *&font);
     void LoadTextures(SDL_Renderer *rend);

@@ -8,6 +8,8 @@
 #include <Game.hpp>
 
 std::map<std::string, SDL_Texture *> loadedTextures;
+std::map<int, std::string> enemyNames = {
+    {1, "Slime"}, {2, "Goblin"}, {3, "Golden Snake"}, {4, "Puppet Master"}, {5, "ROBOTRON X-400"}};
 std::map<int, int> moneyOnTier = {
     {1, 10},
     {2, 45},

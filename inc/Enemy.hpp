@@ -13,6 +13,7 @@ private:
 
     SDL_Texture *texture = nullptr;
     int posX, posY;
+    int width, height;
 
     Interval HPinterval = {15, 30};
     Interval DMGinterval = {1, 5};
@@ -32,6 +33,7 @@ public:
     //? Setters
     void setTexture(SDL_Texture *texture);
     void setPos(int x, int y);
+    void setSize(int width, int height);
 
     //? Getters
     std::string getName();

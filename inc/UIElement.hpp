@@ -44,4 +44,5 @@ public:
     void setParentPos(int posX, int posY);
     void setSize(int width, int height);
     void setX(int x);
+    void setY(int y);
 };

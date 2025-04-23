@@ -17,6 +17,7 @@ private:
     int lvl, tier;
     bool isInAttackMode = false;
     bool lost = false;
+    bool won = false;
     bool willRestart = false;
 
     int windowWidth, windowHeight;
@@ -33,6 +34,8 @@ private:
 
     UIElement *lostText = nullptr;
     UIButton *restartButton = nullptr;
+
+    UIElement *wonText = nullptr;
 
     void enableAttackMode();
 

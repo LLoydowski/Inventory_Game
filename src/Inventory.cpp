@@ -699,6 +699,27 @@ int Inventory::getPosY()
 
 void Inventory::setPos(int posX, int posY, SDL_Renderer *rend)
 {
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            if (this->UIInventorySlots[i][j] != nullptr)
+            {
+
+                int oldX, oldY;
+                oldX = this->UIInventorySlots[i][j]->getX();
+                oldY = this->UIInventorySlots[i][j]->getY();
+
+                int newX, newY;
+                newX = oldX - this->posX + posX;
+                newY = oldY - this->posY + posY;
+
+                this->UIInventorySlots[i][j]->setX(newX);
+                this->UIInventorySlots[i][j]->setY(newY);
+            }
+        }
+    }
+
     this->posX = posX;
     this->posY = posY;
     this->rend = rend;

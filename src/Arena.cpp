@@ -67,7 +67,12 @@ void Arena::generateEnemy()
     float DMG = enemyTiers[tier].DMG + (enemyTiers[tier].bDMG * lvl);
     float DEF = enemyTiers[tier].DEF + (enemyTiers[tier].bDEF * lvl);
 
-    enemy = new Enemy("Skibidi", HP, DMG, DEF);
+    std::string name = enemyNames[tier];
+
+    enemy = new Enemy(name, HP, DMG, DEF);
+    enemy->setTexture(loadedTextures["Mob0" + std::to_string(tier)]);
+    enemy->setSize(windowWidth / 3, windowWidth / 3);
+    enemy->setPos(windowWidth / 2, windowHeight / 2);
 
     if (enemyInfo != nullptr)
     {
@@ -131,12 +136,6 @@ void Arena::generateEnemy()
 
         HPDisplay->setText(hpText, font, rend);
     }
-
-    if (rend != nullptr)
-    {
-        enemy->setPos(windowWidth / 2, windowHeight / 2);
-        enemy->setTexture(loadedTextures["placeholder"]);
-    }
 }
 
 void Arena::display()
@@ -170,9 +169,14 @@ void Arena::display()
         fightBar->display(rend);
     }
 
-    if (lostText != nullptr && lost)
+    if (lost)
     {
         lostText->display(rend);
+        restartButton->display(rend);
+    }
+    if (won)
+    {
+        wonText->display(rend);
         restartButton->display(rend);
     }
 }
@@ -254,33 +258,40 @@ bool Arena::handleKeyboardEvents(SDL_Event event)
 
             if (enemy->getTempHP() <= 0)
             {
-                player->goToLobby();
-
-                float playerMaxHP = inv->getHP();
-
-                if (inv->getTrinket())
+                if (tier == 5 && lvl == 4)
                 {
-                    playerMaxHP += inv->getTrinket()->getAdditionalHP();
+                    won = true;
                 }
-
-                inv->setGold(inv->getGold() + moneyOnTier[tier]);
-
-                player->setLvl(lvl + 2);
-                if (lvl == 4)
+                else
                 {
-                    player->setTier(tier + 1);
-                    player->setLvl(1);
+                    player->goToLobby();
+
+                    float playerMaxHP = inv->getHP();
+
+                    if (inv->getTrinket())
+                    {
+                        playerMaxHP += inv->getTrinket()->getAdditionalHP();
+                    }
+
+                    inv->setGold(inv->getGold() + moneyOnTier[tier]);
+
+                    player->setLvl(lvl + 2);
+                    if (lvl == 4)
+                    {
+                        player->setTier(tier + 1);
+                        player->setLvl(1);
+                    }
+
+                    if (LobbyTierText != nullptr)
+                    {
+                        std::string tierText = "LVL: " + std::to_string(player->getLvl()) + " / TIER: " + std::to_string(player->getTier());
+                        LobbyTierText->setText(tierText, font, rend);
+                    }
+
+                    inv->generateUIElements();
+
+                    return true;
                 }
-
-                if (LobbyTierText != nullptr)
-                {
-                    std::string tierText = "LVL: " + std::to_string(player->getLvl()) + " / TIER: " + std::to_string(player->getTier());
-                    LobbyTierText->setText(tierText, font, rend);
-                }
-
-                inv->generateUIElements();
-
-                return true;
             }
 
             if (inv->getTempHP() <= 0)
@@ -302,7 +313,7 @@ bool Arena::doRestart()
 
 bool Arena::handleClickEvents()
 {
-    if (!lost)
+    if (!lost && !won)
     {
         if (attackButton->checkMouseCollision())
         {
@@ -387,7 +398,7 @@ void Arena::calibrateWindowPos(int windowWidth, int windowHeight, SDL_Renderer *
 
     this->HPDisplay = new UIElement(250, 40, windowWidth - 270, 20, {50, 255, 50, 1}, "HP: X/Y", font, rend);
 
-    this->lostText = new UIElement(470, 100, windowWidth / 2 - 235, windowHeight / 2 - 50, {240, 100, 100, 1}, "You have lost!", font, rend);
+    this->lostText = new UIElement(490, 100, windowWidth / 2 - 245, windowHeight / 2 - 50, {240, 100, 100, 1}, "You have lost!", font, rend);
 
     this->restartButton = new UIButton(166, 60, windowWidth / 2 - 83, windowHeight / 2 + 70, {255, 50, 50, 1}, "Restart", font, rend);
     this->restartButton->setAction(
@@ -395,4 +406,6 @@ void Arena::calibrateWindowPos(int windowWidth, int windowHeight, SDL_Renderer *
         {
             this->willRestart = true;
         });
+
+    this->wonText = new UIElement(490, 100, windowWidth / 2 - 245, windowHeight / 2 - 50, {255, 255, 255, 1}, "You have won!", font, rend);
 }
