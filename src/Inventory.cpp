@@ -609,6 +609,7 @@ bool Inventory::toggleFavourite(int row, int col)
 
 void Inventory::equipItem(Weapon *weapon)
 {
+
     equipedWeapon = weapon;
     this->removeMenu();
 }
@@ -619,6 +620,10 @@ void Inventory::equipItem(Armor *armor)
 }
 void Inventory::equipItem(Trinket *trinket)
 {
+    if (equipedTrinket != nullptr)
+    {
+        this->unequipItem(ItemType::Trinket);
+    }
     equipedTrinket = trinket;
     this->HP += trinket->getAdditionalHP();
     this->removeMenu();
