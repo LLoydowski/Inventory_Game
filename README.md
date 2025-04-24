@@ -1,4 +1,4 @@
-# /Game Name/
+# Inventory game
 
 #### Made by Jan Baszczyński, Marcin Gromadzki
 
@@ -22,3 +22,7 @@
     2. `./bin/InventoryGame` on Linux / Mac
 7. Run the executable
 
+
+---
+
+https://docs.google.com/document/d/1ET87Mw0CRTJK0Q7J2z_XJJlZpQpkcCajo_YfuYAsTuI/edit?pli=1&tab=t.0
